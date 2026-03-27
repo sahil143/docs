@@ -21,7 +21,7 @@ runtime:
     failure_level: warn
 site:
   title: Konflux Documentation
-  url: https://konflux-ci.dev/docs
+  url: https://sahil143.github.io/docs
   robots: allow
 content:
   sources:
