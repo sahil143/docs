@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>OpenShift CI :: Konflux Documentation</title>
+    <link rel="canonical" href="https://sahil143.github.io/docs/testing/integration/third-parties/openshift-ci/">
+    <link rel="prev" href="../rapidast/">
+    <link rel="next" href="../../../../metadata/">
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../../_/css/main.css">
+<link rel="stylesheet" href="../../../../_/css/main.css">
+<link rel="stylesheet" href="../../../../_/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="../../../../_/img/favicon.ico" type="image/x-icon">
+<script>var uiRootPath = '../../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <button class="navbar-burger" data-target="topbar-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <img src="../../../../_/img/logo.svg" class="navbar-logo" alt="Konflux logo">
+            <a href="https://sahil143.github.io/docs/">Documentation</a>
+          </div>
+        </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+              <div class="button"><a href="https://konflux-ci.dev/" target="_blank">Home</a></div>
+              <div class="button"><a href="https://github.com/konflux-ci/docs/issues/new?body=Page:%20/testing/integration/third-parties/openshift-ci/" target="_blank">Raise an
+                  issue</a></div>
+        <div class="navbar-item search hide-for-print">
+          <div id="search-field" class="field">
+            <input id="search-input" type="text" placeholder="Search the docs">
+            <label class="filter checkbox">
+              <input type="checkbox" data-facet-filter="component:ROOT"> In this project
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../../../">Konflux-CI</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../../../">Why Konflux?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../../getting-started/">Getting started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../share-with-community/">Share Tenant with Community</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../../building/">Building</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Getting started</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../../building/creating/">Creating applications and components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../../building/creating-github/">Onboarding a component from GitHub with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../../building/creating-gitlab/">Onboarding a component from GitLab with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../../building/creating-forgejo/">Onboarding a component from Forgejo with the CLI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/deleting/">Deleting applications and components</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/running/">Running build pipelines</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build configuration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/customizing-the-build/">Customizing the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/configuration-as-code/">Configuration as code</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/reconfiguring-build-pipeline/">Reconfiguring the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/imagerepository/">Customizing ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/labels-and-annotations/">Using labels and annotations</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/build-with-args/">Passing buildah arguments</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Secrets</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../../building/secrets/">Creating secrets for your builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../../building/secrets/creating-task-input-secrets/">Creating task input secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../../building/secrets/creating-registry-pull-secrets/">Creating registry pull secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../../building/secrets/creating-scm-secrets/">Creating source control management secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../../building/secrets/referencing-secrets-in-containerfile/">Referencing Secrets in a Containerfile</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../../building/secrets/secrets-from-external-vaults/">Secrets from external vaults</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build optimization</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/hermetic-builds/">Enabling hermetic builds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/caching-proxy/">Enabling caching proxy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/prefetching-dependencies/">Prefetching package manager dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/using-trusted-artifacts/">Using trusted artifacts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/redundant-rebuilds/">Preventing redundant rebuilds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/overriding-compute-resources/">Overriding compute resources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Image management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/accessing-private-images/">Accessing private image repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/custom-tags/">Using custom tags</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/build-binaries/">Building binaries</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/pulp-access/">Getting access to Pulp storage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Advanced</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/component-nudges/">Defining component relationships</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/scheduled-builds/">Scheduled builds with CronJobs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/activation-keys-subscription/">Using Red Hat subscription content</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../building/apply-task-migrations/">Applying task migrations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../">Testing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../build/">Build-time tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../build/snyk/">Enabling Snyk</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../">Integration tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adding/">Adding an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../creating/">Creating a custom integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../editing/">Editing integration tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../debugging/">Debugging an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../rerunning/">Rerunning an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../canceling/">Canceling an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../choosing-contexts/">Choosing when to run certain Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../disable-integration-comment/">Disabling Integration Test Comments</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../accessing-private-repositories/">Accessing Private Repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../periodic-integration-tests/">Triggering Periodic Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../standardized-outputs/">Standardized outputs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../logs-to-quay/">Export Pipeline Logs to Quay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../snapshots/">Snapshots</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../snapshots/working-with-snapshots/">Working with Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../snapshots/override-snapshots/">Creating an override snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../snapshots/group-snapshots/">Creating a group snapshot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Third Parties</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../jenkins/">Testing with Jenkins</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../testing-farm/">Testing with Testing Farm</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../rapidast/">Testing with RapiDAST</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="4">
+    <a class="nav-link" href="./">Testing with Openshift CI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../../metadata/">Inspecting provenance and attestations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../metadata/discover/">Discovering the associated metadata</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../metadata/sboms/">Inspecting SBOMs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../metadata/attestations/">Inspecting artifact attestations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../metadata/scan-results/">Inspecting artifact scan results</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../../compliance/">Compliance</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../compliance/customizing-policy/">Customizing Policy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../compliance/policy-evaluations/">Policy Evaluations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../../releasing/">Releasing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../releasing/create-release-plan/">Creating a release plan</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../releasing/create-release-plan-admission/">Creating a release plan admission</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../releasing/create-release/">Creating a release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../releasing/retrigger-release/">Re-trigger a release manually</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../releasing/tenant-release-pipelines/">Tenant Release Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../releasing/adjusting-timeouts-resources/">Adjusting timeouts and resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../releasing/using-collectors/">Using collectors</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../../mintmaker/user/">Dependency Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../mintmaker/user/">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../mintmaker/user/#configuration">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../mintmaker/user/#available-managers">Available managers</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../mintmaker/user/#scheduling">Scheduling</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../mintmaker/user/#advanced-topics">Advanced topics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../mintmaker/security-updates/">Security updates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../mintmaker/rpm-lockfile/">RPM lockfiles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../mintmaker/default-config/">Default configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../mintmaker/support/">Support matrix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../../patterns/">How-to guides</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../patterns/git-submodules/">Building upstream project with git submodules</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../patterns/running-user-scripts-on-the-build-pipeline/">Running user scripts on the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../../patterns/managing-pipeline-changes/">Evolving build pipeline management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../../patterns/centralize-pipeline-definitions/">Centralizing Tekton pipeline definitions in your repository</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../../patterns/keep-remote-pipelines-up-to-date/">Remote pipeline definitions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Application management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../patterns/managing-multiple-versions/">Managing multiple software versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../patterns/managing-monorepo-applications/">Managing monorepo Applications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../patterns/maintaining-references-before-release/">Maintaining valid image references before a release</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Release and testing patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../patterns/testing-releasing-single-component/">Testing and releasing a single Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../patterns/gitops-for-manual-releases/">GitOps for Releases</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../patterns/managing-security-fix/">Managing a security fix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Integrations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../patterns/github-merge-queues/">GitHub merge queues</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../patterns/slack-notifications/">Slack Webhook Notifications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../patterns/mapping-tags-to-labels/">Maintaining parity between tags and labels</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">End-to-end guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../end-to-end/building-olm/">Building an OLM operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../end-to-end/building-tekton-tasks/">Building Tekton tasks</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Installation</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../installing/">Installing Konflux</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../installing/enabling-builds/">Enabling build pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../installing/github-app/">GitHub App</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Troubleshooting</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../troubleshooting/builds/">Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../troubleshooting/releases/">Releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../troubleshooting/registries/">Registry Issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../troubleshooting/service-accounts/">Service Account Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../../../glossary/">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../../reference/">Reference</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../../reference/sample-repositories/">Sample repositories</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../../reference/kube-apis/">Konflux Kubernetes APIs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-application">Application</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-component">Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-snapshot">Snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/conforma/#k8s-api-github-com-conforma-crds-api-v1alpha1-enterprisecontractpolicy">EnterpriseContractPolicy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/image-controller/#k8s-api-github-com-konflux-ci-image-controller-api-v1alpha1-imagerepository">ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/integration-service/#k8s-api-github-com-konflux-ci-integration-service-api-v1alpha1-integrationtestscenario">IntegrationTestScenario</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-release">Release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplan">ReleasePlan</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplanadmission">ReleasePlanAdmission</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseserviceconfig">ReleaseServiceConfig</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/mintmaker/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-dependencyupdatecheck">DependencyUpdateCheck</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-project">Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstream">ProjectDevelopmentStream</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstreamtemplate">ProjectDevelopmentStreamTemplate</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Konflux-CI</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../../../">Konflux-CI</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../../" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../../../">Konflux-CI</a></li>
+    <li><a href="../../../">Testing</a></li>
+    <li><a href="../../">Integration tests</a></li>
+    <li>Third Parties</li>
+    <li><a href="./">Testing with Openshift CI</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="file:///Users/sbudhwar/workspace/github/konflux/docs/./modules/testing/pages/integration/third-parties/openshift-ci.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">OpenShift CI</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The OpenShift CI platform provides two ways through which a Konflux pipeline can interact with it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="run-a-prowjob"><a class="anchor" href="#run-a-prowjob"></a>Run a ProwJob</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The most straightforward way is to run a test that has already been defined in OpenShift CI.
+To learn how to <a href="../../adding/" class="xref page">add a custom integration test</a> that would run a CI job in Konflux, see <a href="https://github.com/openshift/konflux-tasks">github.com/openshift/konflux-tasks</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="provision-an-ephemeral-cluster"><a class="anchor" href="#provision-an-ephemeral-cluster"></a>Provision an Ephemeral Cluster</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The provisioning task is designed to create an OpenShift cluster for running future Konflux tests on. You will need to have familiarity with how OpenShift CI platform works (see <a href="https://docs.ci.openshift.org/docs/">https://docs.ci.openshift.org</a>) since many components from that domain are involved: ProwJobs, <code>ci-operator</code>, release payloads and more.<br>
+This guide will try to give for granted as few concepts as possible and, when it exists, provides a link to the original documentation.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Although it&#8217;s not strictly mandatory, having past experience in how to setup and troubleshoot OpenShift CI jobs might be
+helpful to better understand these paragraphs.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Provisioning a cluster (an ephemeral cluster) consists of executing two
+tasks in Konflux: <code>provision-ephemeral-cluster</code> and <code>deprovision-ephemeral-cluster</code>
+(see <a href="https://github.com/openshift/konflux-tasks/tree/main/tasks">https://github.com/openshift/konflux-tasks/tasks</a>).</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+When a provision task is present in a test pipeline, a deprovision task MUST also be used. It is RECOMMENDED to have <code>deprovision-ephemeral-cluster</code> running within the <code>finally</code> stanza of a pipeline to ensure that it always runs.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1
+kind: PipelineRun
+spec:
+  pipelineSpec:
+    tasks:
+    - name: provision-ephemeral-cluster
+      taskRef:
+        resolver: git
+        params:
+        - name: url
+          value: https://github.com/openshift/konflux-tasks
+        - name: revision
+          value: main
+        - name: pathInRepo
+          value: tasks/provision-ephemeral-cluster/0.1/provision-ephemeral-cluster.yaml
+
+    finally:
+    - name: deprovision-ephemeral-cluster
+      taskRef:
+        resolver: git
+        params:
+        - name: url
+          value: https://github.com/openshift/konflux-tasks
+        - name: revision
+          value: main
+        - name: pathInRepo
+          value: tasks/provision-ephemeral-cluster/0.1/deprovision-ephemeral-cluster.yaml</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task-provision-ephemeral-cluster"><a class="anchor" href="#task-provision-ephemeral-cluster"></a>Task <code>provision-ephemeral-cluster</code></h3>
+<div class="paragraph">
+<p>The ultimate goal of this task is to create a valid <code>ci-operator</code> configuration (see <a href="https://docs.ci.openshift.org/docs/architecture/ci-operator/">docs.ci.openshift.org/docs/architecture/ci-operator</a>) that contains all the information
+needed to spin up an ephemeral cluster, run it in a ProwJob and, finally, retrieve a kubeconfig.
+The task takes several parameters that maps directly to their <code>ci-operator</code> configuration counterparts.<br>
+What follow is a list of the most important ones (for a complete list see <a href="https://github.com/openshift/konflux-tasks/blob/main/tasks/provision-ephemeral-cluster/0.1/README.md">https://github.com/openshift/konflux-tasks/tasks/provision-ephemeral-cluster/0.1/README.md</a>):</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Task Parameter</th>
+<th class="tableblock halign-left valign-top">ci-operator stanza</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">OpenShift CI Docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>params[*].name.releases</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>releases</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Release payload(s) that are going to be used to install OpenShift on the cluster</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ci.openshift.org/docs/architecture/ci-operator/#testing-with-an-ephemeral-openshift-release">Testing with OCP releases</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>params[*].name.workflow</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tests[0].steps[0].workflow</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The OpenShift CI workflow that prepares the cloud infrastructure and creates the ephemeral cluster</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ci.openshift.org/docs/architecture/step-registry/#workflow">What is a workflow</a> and <a href="https://steps.ci.openshift.org/#workflows">Workflows Catalog</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>params[*].name.clusterProfile</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tests[0].steps[0].cluster_profile</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The cluster profile that holds what&#8217;s needed (ex.: credentials) to access the cloud infrastructure in which we provision the ephemeral cluster</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ci.openshift.org/docs/architecture/step-registry/">Multi-Stage Tests and the Test Step Registry</a> and <a href="https://docs.ci.openshift.org/docs/how-tos/adding-a-cluster-profile/">How to add a new Cluster Profile</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>params[*].name.env</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tests[0].steps[0].env</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Environment variables to pass to the workflow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ci.openshift.org/docs/architecture/step-registry/">Multi-Stage Tests and the Test Step Registry</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>params[*].name.clusterClaim</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tests[0].cluster_claim</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Claim a cluster from the Hosted Management cluster rather than provision a new one from scratch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ci.openshift.org/docs/architecture/ci-operator/#testing-with-a-cluster-from-a-cluster-pool">Testing With a Cluster From a Cluster Pool</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="provision-an-ephemeral-cluster-from-a-release-payload"><a class="anchor" href="#provision-an-ephemeral-cluster-from-a-release-payload"></a>Provision an Ephemeral Cluster from a release payload</h4>
+<div class="paragraph">
+<p>We want to start an ephemeral cluster built from the bleeding edge CI integration stream:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Choose an appropriate workflow from the <a href="https://steps.ci.openshift.org/#workflows">OpenShift CI step registry</a></p>
+</li>
+<li>
+<p>Create a new cluster profile if you don&#8217;t have one: <a href="https://docs.ci.openshift.org/docs/how-tos/adding-a-cluster-profile/">docs.ci.openshift.org/docs/how-tos/adding-a-cluster-profile</a></p>
+</li>
+<li>
+<p>Use the <code>provision-ephemeral-cluster</code> task in your pipeline:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">tasks:
+- name: provision-ephemeral-cluster
+  params:
+  - name: ownerName
+    value: $(context.pipelineRun.name) # Internal usage only, use always this value here
+  - name: ownerUid
+    value: $(context.pipelineRun.uid) # Internal usage only, use always this value here
+  - name: prEventPayload
+    value: '{{ body }}' # Internal usage only, use always this value here
+  - name: prEventHeaders
+    value: '{{ headers }}' # Internal usage only, use always this value here
+  - name: workflow
+    value: ipi-aws
+  - name: clusterProfile
+    value: aws-3
+  - name: releases
+    value: |
+      {
+        "initial": {
+          "integration": {
+            "name": "4.21",
+            "namespace": "ocp"
+          }
+        },
+        "latest": {
+          "integration": {
+            "include_built_images": true,
+            "name": "4.21",
+            "namespace": "ocp"
+          }
+        }
+      }
+  taskRef:
+    resolver: git
+    params:
+    - name: url
+      value: https://github.com/openshift/konflux-tasks
+    - name: revision
+      value: main
+    - name: pathInRepo
+      value: tasks/provision-ephemeral-cluster/0.1/provision-ephemeral-cluster.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The resulting <code>ci-operator</code> configuration is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">build_root:
+  image_stream_tag:
+    name: release
+    namespace: openshift
+    tag: rhel-9-release-golang-1.24-openshift-4.20
+releases:
+  initial:
+    integration:
+      name: "4.21"
+      namespace: ocp
+  latest:
+    integration:
+      name: "4.21"
+      namespace: ocp
+resources:
+  '*':
+    limits:
+      memory: 400Mi
+    requests:
+      cpu: 200m
+tests:
+- as: cluster-provisioning
+  steps:
+    cluster_profile: aws-3
+    test:
+    - as: wait-test-complete
+      commands: |
+        # Omitted, internals that are unnecessary for this discussion
+      from: cli
+      resources:
+        limits:
+          memory: 100Mi
+        requests:
+          cpu: 10m
+    workflow: ipi-aws</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You don&#8217;t have full control over the <code>tests[]</code> stanza. Regardless of what parameters we pass, there is always
+one test <code>as: cluster-provisioning</code> generated.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As stated before, each parameter passed to the task maps to a <code>ci-operator</code> stanza, whereas others (see <code>resources</code> and <code>build_root</code>) are
+assigned to default values when not set.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="claim-an-ephemeral-cluster-from-hypershift"><a class="anchor" href="#claim-an-ephemeral-cluster-from-hypershift"></a>Claim an Ephemeral Cluster from Hypershift</h4>
+<div class="paragraph">
+<p>We want to claim a cluster from Hypershift (see <a href="https://docs.ci.openshift.org/docs/architecture/ci-operator/#testing-with-a-cluster-from-hypershift">Testing with a Cluster from Hypershift</a>):</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+This is a pilot feature, the support from the infrastructure is limited.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Choose <code>hypershift-hostedcluster-workflow</code> workflow from the <a href="https://steps.ci.openshift.org/#workflows">OpenShift CI step registry</a></p>
+</li>
+<li>
+<p>Define and pass the <code>latest</code> release payload on the <code>releases</code> parameter.</p>
+</li>
+<li>
+<p>Use the <code>provision-ephemeral-cluster</code> task in your pipeline:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">tasks:
+- name: provision-ephemeral-cluster
+  params:
+  - name: ownerName
+    value: $(context.pipelineRun.name) # Internal usage only, use always this value here
+  - name: ownerUid
+    value: $(context.pipelineRun.uid) # Internal usage only, use always this value here
+  - name: prEventPayload
+    value: '{{ body }}' # Internal usage only, use always this value here
+  - name: prEventHeaders
+    value: '{{ headers }}' # Internal usage only, use always this value here
+  - name: workflow
+    value: hypershift-hostedcluster-workflow
+  - name: releases
+    value: |
+      {"latest":{"release":{"channel":"stable","version":"4.12","architecture":"multi"}}}
+  taskRef:
+    resolver: git
+    params:
+    - name: url
+      value: https://github.com/openshift/konflux-tasks
+    - name: revision
+      value: main
+    - name: pathInRepo
+      value: tasks/provision-ephemeral-cluster/0.1/provision-ephemeral-cluster.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The resulting <code>ci-operator</code> configuration is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">build_root:
+  image_stream_tag:
+    name: release
+    namespace: openshift
+    tag: rhel-9-release-golang-1.24-openshift-4.20
+base_images:
+  # This image is used internally and gets injected by default
+  cli:
+    name: "4.22"
+    namespace: ocp
+    tag: cli
+releases:
+  latest:
+    channel: stable
+    version: "4.12"
+    architecture: multi
+resources:
+  '*':
+    limits:
+      memory: 400Mi
+    requests:
+      cpu: 200m
+tests:
+- as: cluster-provisioning
+  steps:
+    test:
+    - as: wait-test-complete
+      commands: |
+        # Omitted, internals that are unnecessary for this discussion
+      from: cli
+      resources:
+        limits:
+          memory: 100Mi
+        requests:
+          cpu: 10m
+    workflow: hypershift-hostedcluster-workflow</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="claim-an-ephemeral-cluster-from-the-hosted-management-cluster"><a class="anchor" href="#claim-an-ephemeral-cluster-from-the-hosted-management-cluster"></a>Claim an Ephemeral Cluster from the Hosted Management cluster</h4>
+<div class="paragraph">
+<p>We want to claim a cluster from the Hosted Management cluster (see <a href="https://docs.ci.openshift.org/docs/architecture/ci-operator/#testing-with-a-cluster-from-a-cluster-pool">Testing with a Cluster from a Cluster Pool</a>):</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Choose <code>generic-claim</code> workflow from the <a href="https://steps.ci.openshift.org/#workflows">OpenShift CI step registry</a></p>
+</li>
+<li>
+<p>Create a new cluster pool if you don&#8217;t have one: <a href="https://docs.ci.openshift.org/docs/how-tos/cluster-claim/">docs.ci.openshift.org/docs/how-tos/cluster-claim/</a></p>
+</li>
+<li>
+<p>Use the <code>provision-ephemeral-cluster</code> task in your pipeline:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">tasks:
+- name: provision-ephemeral-cluster
+  params:
+  - name: ownerName
+    value: $(context.pipelineRun.name) # Internal usage only, use always this value here
+  - name: ownerUid
+    value: $(context.pipelineRun.uid) # Internal usage only, use always this value here
+  - name: prEventPayload
+    value: '{{ body }}' # Internal usage only, use always this value here
+  - name: prEventHeaders
+    value: '{{ headers }}' # Internal usage only, use always this value here
+  - name: workflow
+    value: generic-claim
+  - name: clusterClaim
+    value: |
+      {
+        "architecture": "amd64",
+        "as": "unused",
+        "cloud": "aws",
+        "labels": {
+          "region": "us-east-1"
+        },
+        "owner": "openshift-ci",
+        "product": "ocp",
+        "timeout": "1h0m0s",
+        "version": "4.19"
+      }
+  taskRef:
+    resolver: git
+    params:
+    - name: url
+      value: https://github.com/openshift/konflux-tasks
+    - name: revision
+      value: main
+    - name: pathInRepo
+      value: tasks/provision-ephemeral-cluster/0.1/provision-ephemeral-cluster.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The resulting <code>ci-operator</code> configuration is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">build_root:
+  image_stream_tag:
+    name: release
+    namespace: openshift
+    tag: rhel-9-release-golang-1.24-openshift-4.20
+base_images:
+  # This image is used internally and gets injected by default
+  cli:
+    name: "4.22"
+    namespace: ocp
+    tag: cli
+resources:
+  '*':
+    limits:
+      memory: 400Mi
+    requests:
+      cpu: 200m
+tests:
+- as: cluster-provisioning
+  steps:
+    test:
+    - as: wait-test-complete
+      cluster_claim:
+        architecture: amd64
+        as: unused
+        cloud: aws
+        labels:
+          region: us-east-1
+        owner: openshift-ci
+        product: ocp
+        timeout: 1h0m0s
+        version: "4.22"
+      commands: |
+        # Omitted, internals that are unnecessary for this discussion
+      from: cli
+      resources:
+        limits:
+          memory: 100Mi
+        requests:
+          cpu: 10m
+    workflow: generic-claim</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="consuming-tasks-provision-ephemeral-cluster-results"><a class="anchor" href="#consuming-tasks-provision-ephemeral-cluster-results"></a>Consuming <code>tasks.provision-ephemeral-cluster.results</code></h4>
+<div class="paragraph">
+<p>Upon completion, the provisioning task always provides a kubeconfig having admin privileges over the ephemeral cluster.<br>
+What follow is an example on how to use the aforementioned results:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">tasks:
+- name: run-test
+  runAfter:
+  - provision-ephemeral-cluster
+  params:
+  - name: clusterCredentialsSecretRef
+    value: $(tasks.provision-ephemeral-cluster.results.secretRef)
+  taskSpec:
+    params:
+    - name: clusterCredentialsSecretRef
+      type: string
+      description: "The secret that holds the cluster credentials"
+    steps:
+    - name: run-test
+      image: registry.redhat.io/openshift4/ose-cli:4.13@sha256:73df37794ffff7de1101016c23dc623e4990810390ebdabcbbfa065214352c7c
+      env:
+      - name: KUBECONFIG_VALUE
+        valueFrom:
+          secretKeyRef:
+            name: $(params.clusterCredentialsSecretRef)
+            key: kubeconfig
+      script: |
+        #!/usr/bin/env bash
+        set -eo pipefail
+
+        KUBECONFIG="$(mktemp kubeconfig.XXXXX)"
+        trap 'rm -f "$KUBECONFIG"' EXIT
+
+        echo "$KUBECONFIG_VALUE" &gt;"$KUBECONFIG"
+        export KUBECONFIG
+        oc whoami</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="how-to-keep-track-of-the-provisioning-status"><a class="anchor" href="#how-to-keep-track-of-the-provisioning-status"></a><a id="keep-track-provisioning"></a>How to keep track of the provisioning status</h4>
+<div class="paragraph">
+<p>While it is running, the task outputs, as soon as it becomes available, the ProwJob&#8217;s status link through which a user can
+monitor the ongoing provisioning procedures.<br>
+This is how a ProwJob status link looks like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">https://prow.ci.openshift.org/view/gs/test-platform-results/logs/branch-ci-openshift-service-mesh-proxy-release-1.27-copy-artifacts-gcs/1972650688026513408</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="faq"><a class="anchor" href="#faq"></a>FAQ</h4>
+<div class="paragraph">
+<p><strong>Q:</strong> The workflow <code>foobar</code> needs a specific image defined as a <code>base_images</code> on the <code>ci-operator</code> configuration. How can you add that?<br>
+<br>
+<strong>A:</strong> The <code>provision-ephemeral-cluster</code> task accepts the <code>baseImages</code> parameter as well.<br>
+You could pass that parameter as follow:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">tasks:
+- name: provision-ephemeral-cluster
+  params:
+  - name: baseImages
+    value: |
+      {"base":{"name":"4.10","namespace":"ocp","tag":"base"}}
+  taskRef:
+    resolver: git
+    params:
+    - name: url
+      value: https://github.com/openshift/konflux-tasks
+    - name: revision
+      value: main
+    - name: pathInRepo
+      value: tasks/provision-ephemeral-cluster/0.1/provision-ephemeral-cluster.yaml</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="examples"><a class="anchor" href="#examples"></a>Examples</h4>
+<div class="paragraph">
+<p><a href="https://github.com/openshift/konflux-tasks/blob/feed2bb08a32455ae1a996c201560201b6a6c35b/examples/ephemeral-cluster">Here</a> some examples of how to provision or claim an ephemeral cluster.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task-deprovision-ephemeral-cluster"><a class="anchor" href="#task-deprovision-ephemeral-cluster"></a>Task <code>deprovision-ephemeral-cluster</code></h3>
+<div class="paragraph">
+<p>The deprovisioning task must always be defined in a <code>finally</code> block to make sure it runs in any case after the provisioning task has run, either successfully or unsuccessfully.<br>
+The parameters it accepts are directly produced by the provisioning task&#8217;s results (for a complete list see <a href="https://github.com/openshift/konflux-tasks/blob/e94be2a9e5932876b8b290bda868dd18cc9bed15/tasks/deprovision-ephemeral-cluster/0.1/README.md">https://github.com/openshift/konflux-tasks/tasks/deprovision-ephemeral-cluster/0.1/README.md</a>):</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+deprovision-ephemeral-cluster has to run in any case. Make sure it is defined within the <code>finally</code> block.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">finally:
+- name: deprovision-ephemeral-cluster
+  taskRef:
+    resolver: git
+    params:
+    - name: url
+      value: https://github.com/openshift/konflux-tasks
+    - name: revision
+      value: main
+    - name: pathInRepo
+      value: tasks/deprovision-ephemeral-cluster/0.1/deprovision-ephemeral-cluster.yaml
+  params:
+  - name: testPlatformClusterClaimName
+    value: $(tasks.provision-ephemeral-cluster.results.testPlatformClusterClaimName)
+  - name: testPlatformClusterClaimNamespace
+    value: $(tasks.provision-ephemeral-cluster.results.testPlatformClusterClaimNamespace)</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="how-to-keep-track-of-the-deprovision-status"><a class="anchor" href="#how-to-keep-track-of-the-deprovision-status"></a>How to keep track of the deprovision status</h4>
+<div class="paragraph">
+<p>Refer to <a href="#keep-track-provisioning">How to keep track of the provisioning status</a> since the ProwJob that
+provision and deprovision an ephemeral cluster is always the same.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="examples-2"><a class="anchor" href="#examples-2"></a>Examples</h4>
+<div class="paragraph">
+<p><a href="https://github.com/openshift/konflux-tasks/blob/feed2bb08a32455ae1a996c201560201b6a6c35b/examples/ephemeral-cluster">Here</a> some examples of how to deprovision an ephemeral cluster.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../rapidast/">Testing with RapiDAST</a></span>
+  <span class="next"><a href="../../../../metadata/">Inspecting provenance and attestations</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer" style="text-align: center;">
+   <a href="https://github.com/konflux-ci/docs" target="_blank">Source on GitHub</a>
+   | <a href="https://github.com/konflux-ci/community?tab=readme-ov-file#welcome-to-the-konflux-community" target="_blank">Join the community</a>
+   | <a href="https://github.com/konflux-ci/.github/blob/main/SECURITY.md" target="_blank">Report a security issue</a>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+<script src="../../../../_/js/vendor/lunr.js"></script>
+<script src="../../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../../.." data-snippet-length="100" data-stylesheet="../../../../_/css/search.css"></script>
+<script async src="../../../../search-index.js"></script>
+  </body>
+</html>

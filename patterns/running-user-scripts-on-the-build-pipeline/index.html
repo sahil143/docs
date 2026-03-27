@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Running user scripts on the build pipeline :: Konflux Documentation</title>
+    <link rel="canonical" href="https://sahil143.github.io/docs/patterns/running-user-scripts-on-the-build-pipeline/">
+    <link rel="prev" href="../git-submodules/">
+    <link rel="next" href="../managing-pipeline-changes/">
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <button class="navbar-burger" data-target="topbar-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <img src="../../_/img/logo.svg" class="navbar-logo" alt="Konflux logo">
+            <a href="https://sahil143.github.io/docs/">Documentation</a>
+          </div>
+        </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+              <div class="button"><a href="https://konflux-ci.dev/" target="_blank">Home</a></div>
+              <div class="button"><a href="https://github.com/konflux-ci/docs/issues/new?body=Page:%20/patterns/running-user-scripts-on-the-build-pipeline/" target="_blank">Raise an
+                  issue</a></div>
+        <div class="navbar-item search hide-for-print">
+          <div id="search-field" class="field">
+            <input id="search-input" type="text" placeholder="Search the docs">
+            <label class="filter checkbox">
+              <input type="checkbox" data-facet-filter="component:ROOT"> In this project
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../">Konflux-CI</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../">Why Konflux?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../getting-started/">Getting started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../share-with-community/">Share Tenant with Community</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../building/">Building</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Getting started</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../building/creating/">Creating applications and components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/creating-github/">Onboarding a component from GitHub with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/creating-gitlab/">Onboarding a component from GitLab with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/creating-forgejo/">Onboarding a component from Forgejo with the CLI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/deleting/">Deleting applications and components</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/running/">Running build pipelines</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build configuration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/customizing-the-build/">Customizing the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/configuration-as-code/">Configuration as code</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/reconfiguring-build-pipeline/">Reconfiguring the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/imagerepository/">Customizing ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/labels-and-annotations/">Using labels and annotations</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/build-with-args/">Passing buildah arguments</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Secrets</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../building/secrets/">Creating secrets for your builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/creating-task-input-secrets/">Creating task input secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/creating-registry-pull-secrets/">Creating registry pull secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/creating-scm-secrets/">Creating source control management secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/referencing-secrets-in-containerfile/">Referencing Secrets in a Containerfile</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/secrets-from-external-vaults/">Secrets from external vaults</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build optimization</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/hermetic-builds/">Enabling hermetic builds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/caching-proxy/">Enabling caching proxy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/prefetching-dependencies/">Prefetching package manager dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/using-trusted-artifacts/">Using trusted artifacts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/redundant-rebuilds/">Preventing redundant rebuilds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/overriding-compute-resources/">Overriding compute resources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Image management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/accessing-private-images/">Accessing private image repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/custom-tags/">Using custom tags</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/build-binaries/">Building binaries</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/pulp-access/">Getting access to Pulp storage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Advanced</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/component-nudges/">Defining component relationships</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/scheduled-builds/">Scheduled builds with CronJobs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/activation-keys-subscription/">Using Red Hat subscription content</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/apply-task-migrations/">Applying task migrations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/">Testing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/build/">Build-time tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/build/snyk/">Enabling Snyk</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/">Integration tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/adding/">Adding an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/creating/">Creating a custom integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/editing/">Editing integration tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/debugging/">Debugging an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/rerunning/">Rerunning an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/canceling/">Canceling an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/choosing-contexts/">Choosing when to run certain Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/disable-integration-comment/">Disabling Integration Test Comments</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/accessing-private-repositories/">Accessing Private Repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/periodic-integration-tests/">Triggering Periodic Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/standardized-outputs/">Standardized outputs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/logs-to-quay/">Export Pipeline Logs to Quay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/snapshots/">Snapshots</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/working-with-snapshots/">Working with Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/override-snapshots/">Creating an override snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/group-snapshots/">Creating a group snapshot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Third Parties</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/jenkins/">Testing with Jenkins</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/testing-farm/">Testing with Testing Farm</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/rapidast/">Testing with RapiDAST</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/openshift-ci/">Testing with Openshift CI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../metadata/">Inspecting provenance and attestations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/discover/">Discovering the associated metadata</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/sboms/">Inspecting SBOMs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/attestations/">Inspecting artifact attestations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/scan-results/">Inspecting artifact scan results</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../compliance/">Compliance</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/customizing-policy/">Customizing Policy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/policy-evaluations/">Policy Evaluations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../releasing/">Releasing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan/">Creating a release plan</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan-admission/">Creating a release plan admission</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release/">Creating a release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/retrigger-release/">Re-trigger a release manually</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/tenant-release-pipelines/">Tenant Release Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/adjusting-timeouts-resources/">Adjusting timeouts and resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/using-collectors/">Using collectors</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../mintmaker/user/">Dependency Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#configuration">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#available-managers">Available managers</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#scheduling">Scheduling</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#advanced-topics">Advanced topics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/security-updates/">Security updates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/rpm-lockfile/">RPM lockfiles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/default-config/">Default configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/support/">Support matrix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../">How-to guides</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../git-submodules/">Building upstream project with git submodules</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="./">Running user scripts on the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../managing-pipeline-changes/">Evolving build pipeline management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../centralize-pipeline-definitions/">Centralizing Tekton pipeline definitions in your repository</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../keep-remote-pipelines-up-to-date/">Remote pipeline definitions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Application management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../managing-multiple-versions/">Managing multiple software versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../managing-monorepo-applications/">Managing monorepo Applications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../maintaining-references-before-release/">Maintaining valid image references before a release</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Release and testing patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing-releasing-single-component/">Testing and releasing a single Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../gitops-for-manual-releases/">GitOps for Releases</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../managing-security-fix/">Managing a security fix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Integrations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../github-merge-queues/">GitHub merge queues</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../slack-notifications/">Slack Webhook Notifications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../mapping-tags-to-labels/">Maintaining parity between tags and labels</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">End-to-end guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-olm/">Building an OLM operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-tekton-tasks/">Building Tekton tasks</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Installation</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/">Installing Konflux</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/enabling-builds/">Enabling build pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/github-app/">GitHub App</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Troubleshooting</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/builds/">Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/releases/">Releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/registries/">Registry Issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/service-accounts/">Service Account Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../glossary/">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/">Reference</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../reference/sample-repositories/">Sample repositories</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/kube-apis/">Konflux Kubernetes APIs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-application">Application</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-component">Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-snapshot">Snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/conforma/#k8s-api-github-com-conforma-crds-api-v1alpha1-enterprisecontractpolicy">EnterpriseContractPolicy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/image-controller/#k8s-api-github-com-konflux-ci-image-controller-api-v1alpha1-imagerepository">ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/integration-service/#k8s-api-github-com-konflux-ci-integration-service-api-v1alpha1-integrationtestscenario">IntegrationTestScenario</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-release">Release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplan">ReleasePlan</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplanadmission">ReleasePlanAdmission</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseserviceconfig">ReleaseServiceConfig</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/mintmaker/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-dependencyupdatecheck">DependencyUpdateCheck</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-project">Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstream">ProjectDevelopmentStream</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstreamtemplate">ProjectDevelopmentStreamTemplate</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Konflux-CI</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../">Konflux-CI</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../">Konflux-CI</a></li>
+    <li><a href="../">How-to guides</a></li>
+    <li>Build patterns</li>
+    <li><a href="./">Running user scripts on the build pipeline</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="file:///Users/sbudhwar/workspace/github/konflux/docs/./modules/patterns/pages/running-user-scripts-on-the-build-pipeline.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Running user scripts on the build pipeline</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document contains instructions for how to extend the build pipeline of a component to run a script before building the component container.</p>
+</div>
+<div class="paragraph">
+<p>Although multi-stages builds cover most of the cases where we want to modify the source content before building the final image there are use cases where we need to run a script before building the container, such as the cases where the <code>Containerfile</code> itself is created by an external tool.</p>
+</div>
+<div class="paragraph">
+<p>We can extend the build pipeline with the <code>run-script-oci-ta</code> task to integrate the execution of those tools for these use cases.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="prerequisites"><a class="anchor" href="#prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>You already have a component onboarded to Konflux using <a href="../../building/using-trusted-artifacts/" class="xref page">trusted artifacts</a> variants of the build pipeline.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>There is no non <code>oci-ta</code> variant of this task nor plans to introduce it. The prerequisite listed above is a hard requirement.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The script to run and all its dependencies are part of the source git repository or the container image the task will use to run the script.</p>
+</li>
+<li>
+<p>You are already familiar with the procedure to <a href="../../building/customizing-the-build/" class="xref page">customize the build pipeline</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="procedure"><a class="anchor" href="#procedure"></a>Procedure</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="extend-the-build-pipeline-with-an-additional-task-between-prefetch-dependencies-and-build-images-tasks"><a class="anchor" href="#extend-the-build-pipeline-with-an-additional-task-between-prefetch-dependencies-and-build-images-tasks"></a>Extend the build pipeline with an additional task between <code>prefetch-dependencies</code> and <code>build-images</code> tasks</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-diff hljs" data-lang="diff">   pipelineSpec:
+     description: |
+       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
+@@ -203,6 +203,33 @@ spec:
+         workspace: git-auth
+       - name: netrc
+         workspace: netrc
++    - name: run-script
++      params:
++        - name: ociStorage
++          value: $(params.output-image).script
++        - name: ociArtifactExpiresAfter
++          value: $(params.image-expires-after)
++        - name: SCRIPT_RUNNER_IMAGE <i class="conum" data-value="1"></i><b>(1)</b>
++          value: quay.io/my-script-runner-image:latest@sha256:digest
++        - name: SCRIPT
++          value: my-script <i class="conum" data-value="2"></i><b>(2)</b>
++        - name: HERMETIC
++          value: $(params.hermetic)
++        - name: SOURCE_ARTIFACT
++          value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
++      runAfter:
++      - prefetch-dependencies
++      taskRef:
++        params:
++        - name: name
++          value: run-script-oci-ta
++        - name: bundle
++          value: quay.io/konflux-ci/tekton-catalog/task-run-script-oci-ta:0.1@sha256:c0f627069353ebd6d1ed03c8657e281eaf11be63706ea38cc53caf16cf4ffd65
++        - name: kind
++          value: task
++        resolver: bundles</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Use <code>SCRIPT_RUNNER_IMAGE</code> parameter to specify the container image you want to use to run the script. The image must already ship all the dependencies and additional tools required to run the script. This image is governed by the same <a href="https://conforma.dev/">Conforma</a> policies as parent images.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Use <code>SCRIPT</code> parameter to specify the script to run. This can be a command using an absolute path on the container image (<code>make build</code>), a command using the relative path of a script on the source repository (<code>./my-script.sh build</code>) or an inline <code>sh</code> script. Refer to <a href="https://github.com/konflux-ci/build-definitions/blob/main/task/run-script-oci-ta/0.1/README.md">the task documentation</a> for more examples.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="modify-build-images-task"><a class="anchor" href="#modify-build-images-task"></a>Modify build-images task</h3>
+<div class="paragraph">
+<p>You need to modify <code>build-images</code> task to consume the output trusted artifact of the <code>run-script</code> task and inject the <code>SCRIPT_RUNNER_IMAGE</code> into the sbom file, and run the build images task after the <code>run-script</code> one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-diff hljs" data-lang="diff">  - name: build-images <i class="conum" data-value="1"></i><b>(1)</b>
+    params:
+    ... <i class="conum" data-value="2"></i><b>(2)</b>
+       - name: SOURCE_ARTIFACT
+-        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
++        value: $(tasks.run-script.results.SCRIPT_ARTIFACT)
++      - name: ADDITIONAL_BASE_IMAGES
++        value:
++          - $(tasks.run-script.results.SCRIPT_RUNNER_IMAGE_REFERENCE)
+       runAfter:
+-      - prefetch-dependencies
++      - run-script</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The name of the task differs between multi-arch (build-images) and single-arch  (build-container) pipeline.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The non related parameters had been redacted from this snippet for readability. Do not remove them.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="modify-push-dockerfile-task-if-necessary"><a class="anchor" href="#modify-push-dockerfile-task-if-necessary"></a>Modify push-dockerfile task if necessary</h3>
+<div class="paragraph">
+<p>When the script is the tool generating the <code>Containerfile</code>, you need to modify <code>push-dockerfile</code> task to consume the output trusted artifact from <code>run-script</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-diff hljs" data-lang="diff">  - name: push-dockerfile
+    params:
+    ... <i class="conum" data-value="1"></i><b>(1)</b>
+       - name: CONTEXT
+         value: $(params.path-context)
+       - name: SOURCE_ARTIFACT
+-        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
++        value: $(tasks.run-script.results.SCRIPT_ARTIFACT)
+       runAfter:
+       - build-image-index
+       taskRef:</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The non related parameters had been redacted from this snippet for readability. Do not remove them.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="specific-use-case-examples"><a class="anchor" href="#specific-use-case-examples"></a>Specific use case examples</h3>
+<div class="sect3">
+<h4 id="ansible-builder-to-build-ansible-execution-environments"><a class="anchor" href="#ansible-builder-to-build-ansible-execution-environments"></a>ansible-builder to build Ansible Execution Environments</h4>
+<div class="paragraph">
+<p>A <a href="https://github.com/Zokormazo/konflux-execution-environment-example/pull/2/files">sample repository</a> has been prepared to show how to use this task to build Ansible Execution Environments.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="example-script-of-adding-run-script-to-pipelines"><a class="anchor" href="#example-script-of-adding-run-script-to-pipelines"></a>Example script of adding run-script to pipelines</h3>
+<div class="paragraph">
+<p>Use this script with <a href="https://github.com/konflux-ci/pipeline-migration-tool/">pipeline-migration-tool</a> to add <code>run-script</code> task and all the related changes to pipelines.</p>
+</div>
+<div class="paragraph">
+<p><code>yq</code> is a prerequisite to run this script.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pipeline_files=(.tekton/pull-request.yaml) <i class="conum" data-value="1"></i><b>(1)</b>
+build_task=build-container <i class="conum" data-value="2"></i><b>(2)</b>
+for pipeline_file in ${pipeline_files[@]}
+do
+    pmt add-task \
+    --run-after prefetch-dependencies \
+    --bundle-ref quay.io/konflux-ci/tekton-catalog/task-run-script-oci-ta:0.1@sha256:c0f627069353ebd6d1ed03c8657e281eaf11be63706ea38cc53caf16cf4ffd65 \
+    --param 'ociStorage=$(params.output-image).script' \
+    --param 'ociArtifactExpiresAfter=$(params.image-expires-after)' \
+    --param 'SCRIPT_RUNNER_IMAGE=quay.io/my-script-runner-image:latest@sha256:digest' \
+    --param 'SCRIPT=my-script' \
+    --param 'HERMETIC=$(params.hermetic)' \
+    --param 'SOURCE_ARTIFACT=$(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)' \
+    run-script \
+    "$pipeline_file"
+
+    pmt modify -f "$pipeline_file" task "$build_task" remove-param SOURCE_ARTIFACT
+    pmt modify -f "$pipeline_file" task "$build_task" add-param \
+        SOURCE_ARTIFACT \
+        "\$(tasks.run-script.results.SCRIPT_ARTIFACT)"
+
+    pmt modify -f "$pipeline_file" task "$build_task" add-param \
+        --type array \
+        ADDITIONAL_BASE_IMAGES \
+        "\$(tasks.run-script.results.SCRIPT_RUNNER_IMAGE_REFERENCE)"
+
+    yaml_path=$(yq "
+        .spec.pipelineSpec.tasks[]
+        | select(.name == \"${build_task}\")
+        | .runAfter[] | select(. == \"prefetch-dependencies\")
+        | path
+    " "$pipeline_file")
+    pmt modify -f "$pipeline_file" generic replace "$yaml_path" run-script
+
+    pmt modify -f "$pipeline_file" task push-dockerfile remove-param SOURCE_ARTIFACT
+    pmt modify -f "$pipeline_file" task push-dockerfile add-param \
+        SOURCE_ARTIFACT \
+        "\$(tasks.run-script.results.SCRIPT_ARTIFACT)"
+done</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Replace with your Pipeline/PipelineRun YAML files.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Choose the appropriate task name <code>build-images</code> or <code>build-container</code>, as described previously.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../git-submodules/">Building upstream project with git submodules</a></span>
+  <span class="next"><a href="../managing-pipeline-changes/">Evolving build pipeline management</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer" style="text-align: center;">
+   <a href="https://github.com/konflux-ci/docs" target="_blank">Source on GitHub</a>
+   | <a href="https://github.com/konflux-ci/community?tab=readme-ov-file#welcome-to-the-konflux-community" target="_blank">Join the community</a>
+   | <a href="https://github.com/konflux-ci/.github/blob/main/SECURITY.md" target="_blank">Report a security issue</a>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>

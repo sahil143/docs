@@ -1,0 +1,2019 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dependency Management :: Konflux Documentation</title>
+    <link rel="canonical" href="https://sahil143.github.io/docs/mintmaker/user/">
+    <link rel="prev" href="../../releasing/using-collectors/">
+    <link rel="next" href="../security-updates/">
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <button class="navbar-burger" data-target="topbar-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <img src="../../_/img/logo.svg" class="navbar-logo" alt="Konflux logo">
+            <a href="https://sahil143.github.io/docs/">Documentation</a>
+          </div>
+        </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+              <div class="button"><a href="https://konflux-ci.dev/" target="_blank">Home</a></div>
+              <div class="button"><a href="https://github.com/konflux-ci/docs/issues/new?body=Page:%20/mintmaker/user/" target="_blank">Raise an
+                  issue</a></div>
+        <div class="navbar-item search hide-for-print">
+          <div id="search-field" class="field">
+            <input id="search-input" type="text" placeholder="Search the docs">
+            <label class="filter checkbox">
+              <input type="checkbox" data-facet-filter="component:ROOT"> In this project
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../">Konflux-CI</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../">Why Konflux?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../getting-started/">Getting started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../share-with-community/">Share Tenant with Community</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../building/">Building</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Getting started</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../building/creating/">Creating applications and components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/creating-github/">Onboarding a component from GitHub with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/creating-gitlab/">Onboarding a component from GitLab with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/creating-forgejo/">Onboarding a component from Forgejo with the CLI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/deleting/">Deleting applications and components</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/running/">Running build pipelines</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build configuration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/customizing-the-build/">Customizing the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/configuration-as-code/">Configuration as code</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/reconfiguring-build-pipeline/">Reconfiguring the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/imagerepository/">Customizing ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/labels-and-annotations/">Using labels and annotations</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/build-with-args/">Passing buildah arguments</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Secrets</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../building/secrets/">Creating secrets for your builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/creating-task-input-secrets/">Creating task input secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/creating-registry-pull-secrets/">Creating registry pull secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/creating-scm-secrets/">Creating source control management secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/referencing-secrets-in-containerfile/">Referencing Secrets in a Containerfile</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/secrets-from-external-vaults/">Secrets from external vaults</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build optimization</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/hermetic-builds/">Enabling hermetic builds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/caching-proxy/">Enabling caching proxy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/prefetching-dependencies/">Prefetching package manager dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/using-trusted-artifacts/">Using trusted artifacts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/redundant-rebuilds/">Preventing redundant rebuilds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/overriding-compute-resources/">Overriding compute resources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Image management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/accessing-private-images/">Accessing private image repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/custom-tags/">Using custom tags</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/build-binaries/">Building binaries</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/pulp-access/">Getting access to Pulp storage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Advanced</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/component-nudges/">Defining component relationships</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/scheduled-builds/">Scheduled builds with CronJobs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/activation-keys-subscription/">Using Red Hat subscription content</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/apply-task-migrations/">Applying task migrations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/">Testing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/build/">Build-time tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/build/snyk/">Enabling Snyk</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/">Integration tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/adding/">Adding an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/creating/">Creating a custom integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/editing/">Editing integration tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/debugging/">Debugging an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/rerunning/">Rerunning an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/canceling/">Canceling an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/choosing-contexts/">Choosing when to run certain Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/disable-integration-comment/">Disabling Integration Test Comments</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/accessing-private-repositories/">Accessing Private Repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/periodic-integration-tests/">Triggering Periodic Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/standardized-outputs/">Standardized outputs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/logs-to-quay/">Export Pipeline Logs to Quay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/snapshots/">Snapshots</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/working-with-snapshots/">Working with Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/override-snapshots/">Creating an override snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/group-snapshots/">Creating a group snapshot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Third Parties</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/jenkins/">Testing with Jenkins</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/testing-farm/">Testing with Testing Farm</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/rapidast/">Testing with RapiDAST</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/openshift-ci/">Testing with Openshift CI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../metadata/">Inspecting provenance and attestations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/discover/">Discovering the associated metadata</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/sboms/">Inspecting SBOMs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/attestations/">Inspecting artifact attestations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/scan-results/">Inspecting artifact scan results</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../compliance/">Compliance</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/customizing-policy/">Customizing Policy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/policy-evaluations/">Policy Evaluations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../releasing/">Releasing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan/">Creating a release plan</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan-admission/">Creating a release plan admission</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release/">Creating a release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/retrigger-release/">Re-trigger a release manually</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/tenant-release-pipelines/">Tenant Release Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/adjusting-timeouts-resources/">Adjusting timeouts and resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/using-collectors/">Using collectors</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="./">Dependency Management</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="./">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#configuration">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#available-managers">Available managers</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#scheduling">Scheduling</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#advanced-topics">Advanced topics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security-updates/">Security updates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../rpm-lockfile/">RPM lockfiles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../default-config/">Default configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../support/">Support matrix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../patterns/">How-to guides</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/git-submodules/">Building upstream project with git submodules</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/running-user-scripts-on-the-build-pipeline/">Running user scripts on the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../patterns/managing-pipeline-changes/">Evolving build pipeline management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../patterns/centralize-pipeline-definitions/">Centralizing Tekton pipeline definitions in your repository</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../patterns/keep-remote-pipelines-up-to-date/">Remote pipeline definitions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Application management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-multiple-versions/">Managing multiple software versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-monorepo-applications/">Managing monorepo Applications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/maintaining-references-before-release/">Maintaining valid image references before a release</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Release and testing patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/testing-releasing-single-component/">Testing and releasing a single Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/gitops-for-manual-releases/">GitOps for Releases</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-security-fix/">Managing a security fix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Integrations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/github-merge-queues/">GitHub merge queues</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/slack-notifications/">Slack Webhook Notifications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/mapping-tags-to-labels/">Maintaining parity between tags and labels</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">End-to-end guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-olm/">Building an OLM operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-tekton-tasks/">Building Tekton tasks</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Installation</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/">Installing Konflux</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/enabling-builds/">Enabling build pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/github-app/">GitHub App</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Troubleshooting</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/builds/">Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/releases/">Releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/registries/">Registry Issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/service-accounts/">Service Account Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../glossary/">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/">Reference</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../reference/sample-repositories/">Sample repositories</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/kube-apis/">Konflux Kubernetes APIs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-application">Application</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-component">Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-snapshot">Snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/conforma/#k8s-api-github-com-conforma-crds-api-v1alpha1-enterprisecontractpolicy">EnterpriseContractPolicy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/image-controller/#k8s-api-github-com-konflux-ci-image-controller-api-v1alpha1-imagerepository">ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/integration-service/#k8s-api-github-com-konflux-ci-integration-service-api-v1alpha1-integrationtestscenario">IntegrationTestScenario</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-release">Release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplan">ReleasePlan</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplanadmission">ReleasePlanAdmission</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseserviceconfig">ReleaseServiceConfig</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/mintmaker/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-dependencyupdatecheck">DependencyUpdateCheck</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-project">Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstream">ProjectDevelopmentStream</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstreamtemplate">ProjectDevelopmentStreamTemplate</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Konflux-CI</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../">Konflux-CI</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../">Konflux-CI</a></li>
+    <li><a href="./">Dependency Management</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="file:///Users/sbudhwar/workspace/github/konflux/docs/./modules/mintmaker/pages/user.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Dependency Management</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>MintMaker is a service built on top of <a href="https://docs.renovatebot.com/">Renovate</a>. It includes the <a href="../rpm-lockfile/" class="xref page">RPM lockfile extension</a> and integration with <a href="https://konflux-ci.dev/">Konflux CI</a>.</p>
+</div>
+<div class="paragraph">
+<p>Renovate is a tool that automates dependency updates in your repository. Its goal
+is to make dependency management easier and a continued practice. That way, your
+project will always have the latest fixes for bugs and security issues.</p>
+</div>
+<div class="paragraph">
+<p>In this documentation, when we mention something about Renovate, it will be a
+general statement. Therefore it will also apply to MintMaker, since it runs an
+underlying Renovate service. However, when we say something about
+MintMaker, it is a specific statement that might not apply to other Renovate
+instances.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="security"><a class="anchor" href="#security"></a>Security</h2>
+<div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Always verify that the PRs/MRs for dependency updates are created by verified Konflux accounts.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="github"><a class="anchor" href="#github"></a>GitHub</h3>
+<div class="paragraph">
+<p>All MintMaker PRs are created using the <a href="https://github.com/apps/red-hat-konflux">red-hat-konflux</a> GitHub app. All commits should contain this signature:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-plain hljs" data-lang="plain">Signed-off-by: red-hat-konflux &lt;126015336+red-hat-konflux[bot]@users.noreply.github.com&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and should be signed with GPG key <code>B5690EEEBB952194</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/gpg-signature-github.png" alt="Image showing a valid GPG signature" height="auto">
+</div>
+</div>
+<div class="paragraph">
+<p>On Konflux staging, the account uses the <a href="https://github.com/apps/konflux-staging">konflux-staging</a> app and a different email:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-plain hljs" data-lang="plain">Signed-off-by: konflux-staging &lt;124796549+konflux-staging[bot]@users.noreply.github.com&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>while the GPG key is the same.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gitlab"><a class="anchor" href="#gitlab"></a>GitLab</h3>
+<div class="paragraph">
+<p>On GitLab the account used is different for each project or group. The account
+name is <code>konflux</code>, but the email used is in the following format:</p>
+</div>
+<div class="paragraph">
+<p>For projects: <code>project_&lt;project ID&gt;_bot_&lt;32 hex characters&gt;@noreply.gitlab.com</code></p>
+</div>
+<div class="paragraph">
+<p>For groups: <code>group_&lt;group ID&gt;_bot_&lt;32 hex characters&gt;@noreply.gitlab.com</code></p>
+</div>
+<div class="paragraph">
+<p>The project ID or group ID must come from your project or group when
+<a href="../../building/secrets/creating-scm-secrets/" class="xref page">setting up the secrets</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When updating the GitLab Access Token used by Renovate, the bot&#8217;s auto-generated user email will change. If any previous Merge Requests (MRs) from the old bot email were not successfully merged, Renovate may incorrectly assume a human is working on that branch and will skip future updates. To prevent this, ensure all existing Renovate Merge Requests are merged or delete any branches created by Renovate where the MR was not successfully merged.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="registry-credentials"><a class="anchor" href="#registry-credentials"></a>Registry credentials</h3>
+<div class="paragraph">
+<p>Renovate requires registry credentials to update container images from private registries. Users must provide these credentials via secrets and link them to the component-specific service account in their user namespace.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you have already provided registry credentials for building, MintMaker will automatically reuse them.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you aren&#8217;t receiving updates for an image from an authenticated registry, ensure that a secret with the registry credentials has been created and linked to the appropriate component-specific service account. You can find instructions for creating and linking these secrets <a href="../../building/secrets/creating-registry-pull-secrets/" class="xref page">here</a>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The secret type must be <code>kubernetes.io/dockerconfigjson</code>. MintMaker will ignore any other secret types.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Renovate is a very configurable tool. Since every project has its unique
+needs, it is fundamental to take advantage of that flexibility to make MintMaker
+work in the best possible manner.</p>
+</div>
+<div class="paragraph">
+<p>The MintMaker team provides <a href="../default-config/" class="xref page">a base set of configurations</a> that provide a sensible
+starting point. It enables users to have a good experience out of the box.</p>
+</div>
+<div class="sect2">
+<h3 id="create-your-custom-configuration"><a class="anchor" href="#create-your-custom-configuration"></a>Create your custom configuration</h3>
+<div class="paragraph">
+<p>The base configuration can be found <a href="https://github.com/konflux-ci/mintmaker/blob/main/config/renovate/renovate.json">here</a>.
+This config file is applied to all repositories onboarded in Konflux and serves
+as our global Renovate configuration.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Do not copy the base configuration to your own project. Always start with an empty configuration file as described below.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+While this link points to the latest global configuration, our deployment
+may use a configuration from a specific commit. However, in most cases, there
+won&#8217;t be any conflicts between the deployed version and the latest version. For
+reference purposes, you can refer to the latest version of the configuration.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Individual repositories can override this config to tweak Renovate&#8217;s behavior to
+their needs by adding a <code>renovate.json</code> file in the top level directory (or any
+of the locations listed at the top of <a href="https://docs.renovatebot.com/configuration-options/">this page</a>
+are also supported, for simplicity, this document always refers to <code>renovate.json</code>)
+of the repository&#8217;s <strong>default branch</strong>.
+All available configuration options can be found in
+<a href="https://docs.renovatebot.com/configuration-options/">Renovate documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>When customizing your configs, use the following base template to build on:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration-validation"><a class="anchor" href="#configuration-validation"></a>Configuration validation</h3>
+<div class="paragraph">
+<p>The customized <code>renovate.json</code> file can be validated with this <a href="https://github.com/konflux-ci/renovate-config-validator-action">GitHub Action</a>. Note that the validator only checks
+syntax validity and adherence to the configuration schema and it cannot verify
+that, for example, a file matching pattern will actually match any files in your repository.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration-presets"><a class="anchor" href="#configuration-presets"></a>Configuration presets</h3>
+<div class="paragraph">
+<p>Before diving deeper into all the possible configuarion options, consider using
+one of MintMaker&#8217;s <a href="https://github.com/konflux-ci/mintmaker-presets">prepared presets</a>. Presets provide predefined options that can
+be added to the <code>extends</code> field in your renovate.json, as suggested below.
+Multiple presets can be combined as needed.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "extends": ["github&gt;konflux-ci/mintmaker-presets:&lt;preset name&gt;"]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following table describes presets available at current time. In addition to
+MintMaker presets, you can also explore options from the <a href="https://docs.renovatebot.com/presets-default/">official Renovate documentation</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Preset name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cve-automerge-all*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automerge all CVE fixes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cve-automerge-critical*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automerge CVE fixes with Critical severity</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cve-automerge-high*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automerge CVE fixes with High severity or higher</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cve-automerge-moderate*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automerge CVE fixes with Moderate severity or higher</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">disable-minor-updates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disable major and minor semantic version updates</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">group-python-requirements</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Group <code>requirement.txt</code> updates into a single PR</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">group-python-poetry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Group Poetry updates into a single PR</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">update-fedora-to-stable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Suggest only stable Fedora releases (based on <a href="https://endoflife.date/fedora">endoflife.date</a>)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Below is an example <code>renovate.json</code> that disables major version updates and groups python
+<code>requirements.txt</code> updates into a single pull/merge request:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "extends": [
+    ":disableMajorUpdates",
+    "github&gt;konflux-ci/mintmaker-presets:group-python-requirements"
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+*These presets will not enable automerge for RPM security updates. The instructions for enabling automerge for RPMs can be found <a href="../rpm-lockfile/#how-to-enable-automerge-for-rpm-security-updates" class="xref page">here</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="overriding-manager-specific-configuration"><a class="anchor" href="#overriding-manager-specific-configuration"></a>Overriding manager specific configuration</h3>
+<div class="paragraph">
+<p>To override a single manager&#8217;s configuration, you need to follow the same pattern
+used in the base config, for example to override the grouping of <code>tekton</code> manager:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "tekton": {
+    "packageRules": [
+      {
+        "matchPackageNames": [],
+        ...
+      }
+    ]
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you were to define the <code>packageRules</code> outside of the <code>tekton</code> option,
+your rules wouldn&#8217;t take any effect, because <code>tekton</code> &#8594; <code>packageRules</code> is more specific.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="available-managers"><a class="anchor" href="#available-managers"></a>Available managers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Renovate is based around the concept of package managers. Package managers
+are tools that manage dependencies in a certain category, programming language or configuration file. While some managers work
+"out of the box", for others (e.g. Kubernetes or <code>regex</code> manager) you need to
+specify the details in the <code>renovate.json</code> configuration file. You can refer
+to a specific manager in the
+<a href="https://docs.renovatebot.com/modules/manager/">Renovate manager section</a>.</p>
+</div>
+<div class="paragraph">
+<p>We are working on enabling every manager available in Renovate. The list of currently
+enabled managers is available below.</p>
+</div>
+<div class="sect2">
+<h3 id="list-of-currently-supported-managers"><a class="anchor" href="#list-of-currently-supported-managers"></a>List of currently supported managers</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Category</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Enabled Managers</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Ansible</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><del><code>ansible</code>, <code>ansible-galaxy</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Batect</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><del><code>batect</code>, <code>batect-wrapper</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Bazel</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><del><code>bazel</code>, <code>bazel-module</code>, <code>bazelisk</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>C and C++</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><del><code>conan</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Continuous Delivery</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tekton</code>, <code>argocd</code>, <code>fleet</code>, <code>flux</code>, <code>helmfile</code>,
+<code>helmsman</code>, <del><code>cdnurl</code>, <code>html</code>, <code>glasskube</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Continuous Integration</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tekton</code>, <del><code>azure-pipelines</code>,
+<code>bitbucket-pipelines</code>, <code>bitrise</code>, <code>buildkite</code>, <code>circleci</code>, <code>cloudbuild</code>,
+<code>droneci</code>, <code>github-actions</code></del>, <code>gitlabci</code>, <code>gitlabci-include</code>, <del><code>jenkins</code>,
+<code>travis</code>, <code>velaci</code>, <code>woodpecker</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Custom Managers</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>regex</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dart</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><del><code>pub</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Docker</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dockerfile</code>, <del><code>devcontainer</code>,
+<code>docker-compose</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>.NET</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><del><code>cake</code>, <code>nuget</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Elixir</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><del><code>mix</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Go</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gomod</code>, <code>ocb</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Helm</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>helm-requirements</code>, <code>helm-values</code>, <code>helmfile</code>, <code>helmsman</code>,
+<code>helmv3</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Infrastructure as Code</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><del><code>ansible</code>, <code>ansible-galaxy</code>,
+<code>bicep</code>, <code>crossplane</code>, <code>puppet</code></del>, <code>terraform</code>, <code>terragrunt</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Java</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deps-edn</code>, <code>gradle</code>, <code>gradle-wrapper</code>,
+<code>kotlin-script</code>, <code>leiningen</code>, <code>maven</code>, <code>maven-wrapper</code>, <code>sbt</code>,
+<code>scalafmt</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>JavaScript</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bun</code>, <code>meteor</code>, <code>nodenv</code>, <code>npm</code>, <code>nvm</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Kubernetes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>argocd</code>, <code>crossplane</code>, <code>fleet</code>, <code>flux</code>, <code>glasskube</code>,
+<code>helm-requirements</code>, <code>helm-values</code>, <code>helmfile</code>, <code>helmsman</code>, <code>helmv3</code>,
+<code>jsonnet-bundler</code>, <code>kubernetes</code>, <code>kustomize</code>,
+<del><code>glasskube</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Node.js</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>nodenv</code>, <code>nvm</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Perl</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><del><code>cpanfile</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>PHP</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><del><code>composer</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Python</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pep621</code> <sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>, <code>pip-compile</code>, <code>pip_requirements</code>,
+<code>pip_setup</code>, <code>pipenv</code>, <code>poetry</code>, <code>pyenv</code>, <code>runtime-version</code>,
+<code>setup-cfg</code>, <code>pep723</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>RPM</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rpm-lockfile</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Ruby</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bundler</code>, <code>puppet</code>, <code>ruby-version</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Rust</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cargo</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Swift</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><del><code>cocoapods</code>, <code>mint</code>, <code>swift</code></del></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Terraform</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>terraform</code>, <code>terraform-version</code>,
+<code>terragrunt</code>, <code>terragrunt-version</code>, <code>tflint-plugin</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>N/A</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>asdf</code>, <code>fvm</code>, <code>git-submodules</code>, <code>hermit</code>, <code>homebrew</code>, <del><code>nix</code></del>,
+<code>osgi</code>, <code>pre-commit</code>, <code>vendir</code>, <del><code>copier</code>, <code>gleam</code>,
+<code>mise</code></del></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Managers with a strikethrough are supported by Renovate, but not currently enabled or
+officially supported in MintMaker. You can enable them customizing your <code>renovate.json</code>. However, the MintMaker team cannot guarantee any level of functionality and will not provide support for these managers.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Detailed compatibility/support matrix for certain managers can be found
+<a href="../support/" class="xref page">here</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+The <code>pip-compile</code> manager will currently update dependencies using Python 3.12
+(even if the user applies <a href="https://docs.renovatebot.com/language-constraints-and-upgrading/#applying-constraints-through-config">constraints</a>
+in the configuration). Our Renovate instance relies on tools installed in the container image and cannot
+dynamically upgrade or downgrade the pip-compile version at current time.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>enabledManagers</code> configuration option in Renovate is not extendable between global
+and repository-level configurations. When enabling additional managers in your repository&#8217;s
+<code>renovate.json</code>, you need to specify a complete list of <strong>all</strong> desired managers.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="scheduling"><a class="anchor" href="#scheduling"></a>Scheduling</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>MintMaker has a base schedule which runs every 4 hours, starting at 00:00 UTC (i.e. 04:00, 08:00, 12:00, &#8230;&#8203;).
+While you can configure some aspects of your renovate schedule (see below), you cannot influence MintMaker to run any more frequently than this base schedule.</p>
+</div>
+<div class="paragraph">
+<p>All enabled managers run according to this base schedule, except the Tekton manager which has a manager-specific schedule and runs on Saturdays after 5 AM UTC.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Schedule (UTC)</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Managers</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">at any time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">managers except tekton</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">saturday after 5 AM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tekton</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="overriding-the-default-schedule"><a class="anchor" href="#overriding-the-default-schedule"></a>Overriding the default schedule</h3>
+<div class="paragraph">
+<p>While you cannot override the base renovate schedule (every 4 hours), you can override when different managers are scheduled for your repository by modifying the <a href="https://docs.renovatebot.com/key-concepts/scheduling/"><code>schedule</code></a> config option.</p>
+</div>
+<div class="paragraph">
+<p><strong>Top-level schedule</strong>: Apply the schedule globally in your repository for all managers by using <code>schedule</code> in the top level of the config file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "schedule": ["* * * * 0,6"]
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+MintMaker&#8217;s global Renovate configuration includes a manager-specific schedule for the Tekton manager as described above. This manager-specific schedules take precedence over the top-level "schedule" setting from your repo&#8217;s Renovate config file. To use your preferred schedule for the Tekton manager, you must explicitly override this manager-specific schedule.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Manager-specific schedule</strong>: Configure schedules for specific managers:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "tekton": {
+    "schedule": ["* * * * 0,6"]
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you have multiple manager-specific schedules to configure or override, you can add a package rule like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "matchManagers": ["gomod", "tekton"],
+      "schedule": ["* * * * 0,6"]
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="custom-container-files"><a class="anchor" href="#custom-container-files"></a>Custom container files</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Renovate&#8217;s <a href="https://docs.renovatebot.com/modules/manager/dockerfile/">manager for container files</a> has a specific rule to match files:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">(^|/|\.)([Dd]ocker|[Cc]ontainer)file$
+(^|/)([Dd]ocker|[Cc]ontainer)file[^/]*$</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If your container/Docker file has a different name, you will need to extend the match rule, which can be done following <a href="https://docs.renovatebot.com/modules/manager/#file-matching">these instructions</a>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>fileMatch</code> configuration is mergeable, meaning that when
+setting new values in the repository config, they will not override the default
+config. Instead the new values will be merged together with the existing rules.</p>
+</div>
+<div class="paragraph">
+<p>For example, you can add a section like this in your <code>renovate.json</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "dockerfile": {
+    "fileMatch": [
+        "path/to/containerfile1",
+        "path/to/containerfile2"
+    ]
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ignoring-certain-dependencies"><a class="anchor" href="#ignoring-certain-dependencies"></a>Ignoring certain dependencies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you don&#8217;t want updates to certain dependencies, but don&#8217;t want to disable
+the whole manager, you can use the <a href="https://docs.renovatebot.com/configuration-options/#ignoredeps"><code>ignoreDeps</code></a> option:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "ignoreDeps": [
+    "registry.redhat.io/openshift4/ose-operator-registry",
+    "registry.redhat.io/openshift4/ose-operator-registry-rhel9",
+    "brew.registry.redhat.io/rh-osbs/openshift-ose-operator-registry-rhel9"
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="advanced-topics"><a class="anchor" href="#advanced-topics"></a>Advanced topics</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="offboarding-a-repository"><a class="anchor" href="#offboarding-a-repository"></a>Offboarding a repository</h3>
+<div class="paragraph">
+<p>If you intend to disable MintMaker for your repository, please follow
+this guide.</p>
+</div>
+<div class="sect3">
+<h4 id="prerequisites"><a class="anchor" href="#prerequisites"></a>Prerequisites</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Ensure you have CLI access to the Konflux cluster where your component is created.</p>
+</li>
+<li>
+<p>Ensure you have necessary permission to annotate a component.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="steps"><a class="anchor" href="#steps"></a>Steps</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Determine the Konflux component you want to off-board from MintMaker.</p>
+</li>
+<li>
+<p>Use the <code>kubectl</code> or <code>oc</code> command to add the annotation <code>mintmaker.appstudio.redhat.com/disabled: "true"</code> to the component.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc -n &lt;namespace&gt; annotate component/&lt;component-name&gt; mintmaker.appstudio.redhat.com/disabled=true</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This annotation disables MintMaker at the component level (a specific repository and branch combination).
+When a repository or branch has multiple components, you must annotate each component individually to disable MintMaker for the entire branch or repository.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="how-to-limit-the-number-of-prsmrs"><a class="anchor" href="#how-to-limit-the-number-of-prsmrs"></a>How to limit the number of PRs/MRs</h3>
+<div class="paragraph">
+<p>If you find that you are receiving too many PRs/MRs from MintMaker, there are configuration
+options available to limit the number of open requests or the rate at which they are created.
+Below are the available options that you can set per repository in your <code>renovate.json</code>.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.renovatebot.com/configuration-options/#prconcurrentlimit"><code>prConcurrentLimit</code></a>: This option sets a limit on the number of open PRs/MRs that Renovate will
+create concurrently. The default is 20.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.renovatebot.com/configuration-options/#branchconcurrentlimit"><code>branchConcurrentLimit</code></a>: This option sets a limit on the maximum number of branches that can be
+created concurrently by Renovate. This option will reduce the time taken to rebase every update from Renovate. The default is unlimited.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.renovatebot.com/configuration-options/#prhourlylimit"><code>prHourlyLimit</code></a>: This option controls the number of PRs that Renovate will create per hour.
+<code>prHourlyLimit</code> helps to limit the rate of opening new PRs. The default is 2.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.renovatebot.com/configuration-options/#schedule"><code>schedule</code></a>: Defines specific times when Renovate is allowed to create branches and PRs. This can
+help prevent PRs from being created during busy periods.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example combining these options:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "prConcurrentLimit": 5,
+  "branchConcurrentLimit": 0,
+  "prHourlyLimit": 2,
+  "schedule": ["after 10pm and before 6am on every weekday"]
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Since MintMaker disables <code>pruneStaleBranches</code>, it is <strong>not recommended</strong>
+to modify <code>branchConcurrentLimit</code> in any way. The accumulation of old branches
+could lead to no new PRs/MRs getting created.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="how-to-stop-prsmrs-from-being-updated-outside-of-schedule"><a class="anchor" href="#how-to-stop-prsmrs-from-being-updated-outside-of-schedule"></a>How to stop PRs/MRs from being updated outside of schedule</h3>
+<div class="paragraph">
+<p>If you set up a schedule for your repository via the <a href="https://docs.renovatebot.com/configuration-options/#schedule"><code>schedule</code></a> config, it&#8217;s possible that MintMaker will still update PRs/MRs outside of the allowed times.</p>
+</div>
+<div class="paragraph">
+<p>The <code>schedule</code> config manages branch creation, but will not stop updates to PRs/MRs from branches that are already created. If you want to prevent this behavior, use
+<a href="https://docs.renovatebot.com/configuration-options/#updatenotscheduled"><code>updateNotScheduled</code></a> option, which when set to <code>false</code> will disallow for updates in existing PRs/MRs outside of the schedule:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "updateNotScheduled": false
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The default value of <code>updateNotScheduled</code> is <code>true</code>, which leads to this behavior that might seem unexpected at first.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="automerge"><a class="anchor" href="#automerge"></a>Automerge</h3>
+<div class="paragraph">
+<p>It is possible to configure Renovate to merge updates automatically for specific
+dependencies. You can find the documentation on this topic <a href="https://docs.renovatebot.com/key-concepts/automerge/">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>When enabled for a given PR/MR, the automerge will happen provided two conditions are met:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the repository CI pipeline ran successfully, and</p>
+</li>
+<li>
+<p>the PR/MR branch is up-to-date with the base branch.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Because of the need for the CI pipeline to succeed, you should expect that the
+merge will only happen on the next MintMaker run.</p>
+</div>
+<div class="paragraph">
+<p>This following timeline exemplifies the events leading to an automerge in a repository:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Time</th>
+<th class="tableblock halign-left valign-top">Event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>[10:00am]</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MintMaker run 1 starts</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>[10:01am]</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PR for dependency <code>xyz</code> is filed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>[10:02am]</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CI pipeline is started</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>[10:05am]</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CI pipeline finishes successfully</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>[10:10am]</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MintMaker run 1 is finished</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>[12:00am]</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MintMaker run 2 starts</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>[12:01am]</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PR for dependency <code>xyz</code> is detected</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>[12:02am]</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PR for dependency <code>xyz</code> is automerged</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You can also enable automerge without the need of CI tests passing, by
+setting <a href="https://docs.renovatebot.com/configuration-options/#ignoretests"><code>ignoreTests</code></a> to <code>true</code>.</p>
+</div>
+<div class="paragraph">
+<p>Because of the need for the PR/MR branch being up-to-date with the base branch,
+automerging multiple branches at once does not work.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Automerging can be risky. Since the merges will happen without anyone
+looking at the code, they have a higher risk of introducing regression.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>It is <em>very important</em> to have a good test coverage in place, to mitigate that
+risk.</p>
+</div>
+<div class="paragraph">
+<p>You can set automerge only for a certain type of updates. For example, updates
+to patch and minor updates of certain packages.</p>
+</div>
+<div class="paragraph">
+<p>For example, to enable automerge for non-major updates on all dependencies, you
+can add the following to <code>renovate.json</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "description": "Automerge non-major updates",
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>alternatively, to enable non-major updates only for specific packages, you can use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "description": "Automerge non-major updates on depA and depB",
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["depA", "depB"],
+      "automerge": true
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See Renovate&#8217;s <a href="https://docs.renovatebot.com/key-concepts/automerge/#configuration-examples">docs</a>
+on this topic for further examples. They show how to set automerge for specific
+dependency groups, types, etc.</p>
+</div>
+<div class="paragraph">
+<p>Finally, to check if automerge is cofigured for a given PR/MR, you can look for
+the annotation "Automerge: Enabled" in the PR/MR body.</p>
+</div>
+<div class="sect3">
+<h4 id="bypassing-approvals"><a class="anchor" href="#bypassing-approvals"></a>Bypassing approvals</h4>
+<div class="paragraph">
+<p>In order to allow Renovate to automatically merge PRs with dependency updates
+in repositories that normally require code reviews before merging,
+you can configure a bypass rule just for Renovate, by navigating to
+<strong>Settings</strong> &#8594; <strong>Rules</strong> &#8594; <strong>Rulesets</strong> and adding <strong>Red Hat Konflux</strong> app
+to a bypass list, like so:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/approval-bypass.png" alt="Image showing how to add a bypass rule for Red Hat Konflux app" height="auto">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="automerge-using-openshift-ciprow"><a class="anchor" href="#automerge-using-openshift-ciprow"></a>Automerge using OpenShift CI/Prow</h4>
+<div class="paragraph">
+<p>Since the Red Hat Konflux app is a trusted app for the OpenShift CI bot, you can
+configure Renovate to automatically add approval labels by using the following config:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "addLabels": [
+    "/approve",
+    "/lgtm"
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also combine <a href="https://docs.renovatebot.com/configuration-options/#addlabels"><code>addLabels</code></a> with any <a href="https://docs.renovatebot.com/configuration-options/#packagerules"><code>packageRules</code></a> combination.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="automerge-for-rpm-lockfile-updates"><a class="anchor" href="#automerge-for-rpm-lockfile-updates"></a>Automerge for RPM lockfile updates</h4>
+<div class="paragraph">
+<p>Enabling automerge for RPM updates involves specific configurations, which are covered in this section. MintMaker can create two types of RPM updates: regular and <a href="../security-updates/" class="xref page">security</a>.</p>
+</div>
+<div class="paragraph">
+<p>To enable automerge exclusively for RPM security updates based on the severity of the fixed CVEs, add the <code>rpmVulnerabilityAutomerge</code> top-level setting to your Renovate configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "rpmVulnerabilityAutomerge": "ALL" | "MEDIUM" | "HIGH" | "CRITICAL"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This setting accepts one of four values. Security updates are automerged if the severity of <strong>all</strong> fixed CVEs meets or exceeds the configured threshold. Setting this to <code>"ALL"</code> automerges every RPM security update, regardless of severity.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can also use one of MintMaker&#8217;s <a href="https://github.com/konflux-ci/mintmaker-presets">prepared presets</a>. These presets automatically add the <code>rpmVulnerabilityAutomerge</code> setting to your config while also enabling automerge for other vulnerability updates.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you want to automerge all RPM updates (both regular and security), you must ensure that your config file enables automerge for either the <code>rpm-lockfile</code> manager specifically, or for all lockfile refresh operations.</p>
+</div>
+<div class="paragraph">
+<p>To enable automerge exclusively for the <code>rpm-lockfile</code> manager, you can use the manager-specific directive:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "rpm-lockfile": {
+    "automerge": true
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can enable automerge for all lockfile refreshes by configuring the <code>lockFileMaintenance</code> directive:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "lockFileMaintenance": {
+    "automerge": true
+  }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Package rules using the <a href="https://docs.renovatebot.com/configuration-options/#matchpackagenames"><code>matchPackageNames</code></a> matcher do not apply to lockfile refreshes. If you want to enable automerge for RPM updates using <a href="https://docs.renovatebot.com/configuration-options/#packagerules"><code>packageRules</code></a>, you must create a rule that uses a different matcher (e.g., <a href="https://docs.renovatebot.com/configuration-options/#matchmanagers"><code>matchManagers</code></a> or <a href="https://docs.renovatebot.com/configuration-options/#matchupdatetypes"><code>matchUpdateTypes</code></a>).
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you enable general automerge for all RPM updates (by configuring <code>rpm-lockfile</code> or <code>lockFileMaintenance</code>), the <code>rpmVulnerabilityAutomerge</code> setting will be ignored.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="inherited-config"><a class="anchor" href="#inherited-config"></a>Inherited config</h3>
+<div class="paragraph">
+<p>Renovate supports the use of an <a href="https://docs.renovatebot.com/config-overview/#inherited-config">Inherited config</a>.
+The Inherited config file is used to apply the same Renovate settings to all repositories in an organization/group.
+This functionality is useful if your organization contains many repositories that should use the same
+or similar Renovate configuration.</p>
+</div>
+<div class="paragraph">
+<p>If you want to use the inherited config, it must be located in the repository <code>&lt;organization&gt;/renovate-config</code> and
+the file must be named <code>org-inherited-config.json</code>. The file can contain any
+<a href="https://docs.renovatebot.com/configuration-options/">configuration options</a> that you want to apply to all repositories in an organization.</p>
+</div>
+<div class="paragraph">
+<p>Please note the applied order of Renovate config files:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Default config</p>
+</li>
+<li>
+<p>Global config</p>
+</li>
+<li>
+<p>Inherited config</p>
+</li>
+<li>
+<p>Repository config</p>
+</li>
+<li>
+<p>Resolved presets referenced in config</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Configurations applied later will overwrite prior values. This means that inherited config can be used to modify
+MintMaker&#8217;s default behavior. Similarly, repository config overwrites inherited config, so organization-wide settings can
+be changed on a per repository basis. If you want to learn more about how Renovate applies configuration, take a look
+at the <a href="https://docs.renovatebot.com/config-overview/">Renovate configuration overview</a>.</p>
+</div>
+<div class="paragraph">
+<p>Please note that the use of inherited config is optional and its absence will not result in an error.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="specify-the-registry-in-your-from-line"><a class="anchor" href="#specify-the-registry-in-your-from-line"></a>Specify the registry in your FROM line</h3>
+<div class="paragraph">
+<p>Let&#8217;s imagine that your <code>Containerfile</code> or <code>Dockerfile</code> has the following FROM line:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">FROM ubi9/ubi:9.4-1123</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case, the ubi9 image is pulled from the client&#8217;s default registry, which might be <code>docker.io</code>, for example.
+This might lead to errors, such as MintMaker being unable to update your <code>Containerfile</code> or <code>Dockerfile</code>
+due to missing credentials for accessing that registry. In order to avoid this issue, specify the registry explicitly, such as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">FROM registry.access.redhat.com/ubi9/ubi:9.4-1123</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+docker.io registry is not supported by MintMaker by default.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enable-container-image-tag-versioning"><a class="anchor" href="#enable-container-image-tag-versioning"></a>Enable container image tag versioning</h3>
+<div class="paragraph">
+<p>It is recommended to specify the base images using a digest, like so:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">FROM registry.redhat.io/ubi8/ubi-minimal:latest@sha256:cf095e5668919ba1b4ace3888107684ad9d587b1830d3eb56973e6a54f456e67</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However, if you prefer to use image tags as versions, Renovate might not be able to update them by default.
+To enable the tag updates, use the following config for all container images:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">{
+  "dockerfile": {
+    "versioning": "redhat"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or just for specific images using the <a href="https://docs.renovatebot.com/configuration-options/#packagerules">packageRules</a> option:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">{
+  "packageRules": [
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["registry.redhat.io/ubi8/ubi-minimal"],
+      "versioning": "redhat"
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or take a look at the <a href="https://docs.renovatebot.com/presets-workarounds/#workaroundssupportredhatimageversion">workarounds:supportRedHatImageVersion</a> preset for other available options.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cleanup"><a class="anchor" href="#cleanup"></a>Cleanup</h3>
+<div class="paragraph">
+<p>Renovate creates a branch for each update, but these branches will not be removed,
+because MintMaker disables the <code>pruneStaleBranches</code> option. It is not recommended
+to enable this option, however alternative options exist.</p>
+</div>
+<div class="sect3">
+<h4 id="automatic-deletion-of-branches-on-github"><a class="anchor" href="#automatic-deletion-of-branches-on-github"></a>Automatic deletion of branches on GitHub</h4>
+<div class="paragraph">
+<p>You can enable the option to <strong>Automatically delete head branches</strong> as described
+in <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-the-automatic-deletion-of-branches">this GitHub documentation page</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="caching"><a class="anchor" href="#caching"></a>Caching</h3>
+<div class="paragraph">
+<p>By default Renovate is set up to cache most of the requests for fetching dependency updates.
+The cache TTL is set to 4 hours to mirror the <a href="#scheduling">MintMaker schedule</a>.</p>
+</div>
+<div class="paragraph">
+<p>This means that if a dependency is updated upstream, you might not get the latest
+update immediately, but with a delay of up to 8 hours (worst case).</p>
+</div>
+<div class="paragraph">
+<p>Another caveat is if you update a dependency manually, you might later receive
+a PR that will try to downgrade the dependency, because the version value is still
+cached. In this case it is recommended either not to update dependencies manually,
+or to wait for another MintMaker cycle when the cache should be refreshed.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="potential-issues-with-basebranchpatterns-configuration"><a class="anchor" href="#potential-issues-with-basebranchpatterns-configuration"></a>Potential issues with baseBranchPatterns configuration</h3>
+<div class="paragraph">
+<p>Renovate has a configuration option named <a href="https://docs.renovatebot.com/configuration-options/#basebranchpatterns"><code>baseBranchPatterns</code></a>
+(formerly known as <code>baseBranches</code>), which allows you to specify which branches Renovate should process.</p>
+</div>
+<div class="paragraph">
+<p>In Konflux, a component represents a specific repository and branch combination. MintMaker
+creates a separate Renovate job for each component. If duplicate repository+branch combinations
+exist, MintMaker will randomly select one component to process that combination. By default,
+each Renovate job processes only the branch associated with its component.</p>
+</div>
+<div class="paragraph">
+<p>However, when a repository has a <code>baseBranchPatterns</code> configuration, this setting takes effect
+and can cause the following issues:</p>
+</div>
+<div class="sect3">
+<h4 id="concurrent-job-conflicts"><a class="anchor" href="#concurrent-job-conflicts"></a>Concurrent job conflicts</h4>
+<div class="paragraph">
+<p>If a repository has two branches (<code>main</code> and <code>release-2.0</code>) that both have components in Konflux,
+and the <code>renovate.json</code> contains:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "baseBranchPatterns": ["main", "release-2.0"]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When MintMaker creates a Renovate job to process the <code>main</code> branch, it will actually process
+both <code>main</code> and <code>release-2.0</code> branches. Similarly, the separate Renovate job created for the
+<code>release-2.0</code> branch will also process both branches. If these two jobs run simultaneously,
+conflicts can occur leading to unexpected behavior.</p>
+</div>
+<div class="paragraph">
+<p>There are two workarounds for this issue:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Remove baseBranchPatterns</strong>: If all the branches you need to process have corresponding
+components in Konflux, and there are no special requirements, remove the <code>baseBranchPatterns</code>
+configuration.</p>
+</li>
+<li>
+<p><strong>Disable MintMaker for overlapping components</strong>: If you need to keep the <code>baseBranchPatterns</code>
+configuration, note that <code>baseBranchPatterns</code> restricts Renovate to process only the branches
+listed in it. If all the branches you want processed are covered by <code>baseBranchPatterns</code>,
+<a href="#offboarding-a-repository">disable MintMaker</a> for all but one component
+for this repository (since Renovate reads configuration from the default branch, only one active
+component is needed to process all branches listed in <code>baseBranchPatterns</code>). However, if you have
+components with branches that are not covered by <code>baseBranchPatterns</code> and you still want them
+to be processed, you should try removing <code>baseBranchPatterns</code> instead.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="stale-branches-not-being-cleaned-up"><a class="anchor" href="#stale-branches-not-being-cleaned-up"></a>Stale branches not being cleaned up</h4>
+<div class="paragraph">
+<p>MintMaker sets <code>additionalBranchPrefix</code> to <code>{{baseBranch}}/</code> by default, which includes
+the base branch name in the PR/MR source branch. This prevents conflicts when processing multiple
+branches, as each branch gets its own unique prefix (e.g., <code>konflux/mintmaker/main/some-package-1.x</code>).</p>
+</div>
+<div class="paragraph">
+<p>When you add <code>baseBranchPatterns</code> to your configuration, Renovate automatically adds another
+instance of the base branch name to the branch prefix. This results in duplicate base branch
+names in the source branch:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Before baseBranchPatterns</strong>: <code>konflux/mintmaker/main/some-package-1.x</code></p>
+</li>
+<li>
+<p><strong>After baseBranchPatterns</strong>: <code>konflux/mintmaker/main-main/some-package-1.x</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This change in naming convention means that any existing PRs/MRs and branches created before
+adding <code>baseBranchPatterns</code> will not be automatically closed or cleaned up by MintMaker. The old
+branches with a single base branch name are no longer recognized as belonging to the current
+base branch. You will need to manually close these old PRs/MRs and delete the stale branches.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>baseBranchPatterns</code> is not a prerequisite for using <a href="https://docs.renovatebot.com/configuration-options/#matchbasebranches"><code>matchBaseBranches</code></a>
+in packageRules. You can use <code>matchBaseBranches</code> to apply different rules to different branches
+without configuring <code>baseBranchPatterns</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. Includes PDM and uv
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../../releasing/using-collectors/">Using collectors</a></span>
+  <span class="next"><a href="../security-updates/">Security updates</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer" style="text-align: center;">
+   <a href="https://github.com/konflux-ci/docs" target="_blank">Source on GitHub</a>
+   | <a href="https://github.com/konflux-ci/community?tab=readme-ov-file#welcome-to-the-konflux-community" target="_blank">Join the community</a>
+   | <a href="https://github.com/konflux-ci/.github/blob/main/SECURITY.md" target="_blank">Report a security issue</a>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>

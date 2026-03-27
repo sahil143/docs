@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Enabling caching proxy for builds :: Konflux Documentation</title>
+    <link rel="canonical" href="https://sahil143.github.io/docs/building/caching-proxy/">
+    <link rel="prev" href="../hermetic-builds/">
+    <link rel="next" href="../prefetching-dependencies/">
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <button class="navbar-burger" data-target="topbar-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <img src="../../_/img/logo.svg" class="navbar-logo" alt="Konflux logo">
+            <a href="https://sahil143.github.io/docs/">Documentation</a>
+          </div>
+        </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+              <div class="button"><a href="https://konflux-ci.dev/" target="_blank">Home</a></div>
+              <div class="button"><a href="https://github.com/konflux-ci/docs/issues/new?body=Page:%20/building/caching-proxy/" target="_blank">Raise an
+                  issue</a></div>
+        <div class="navbar-item search hide-for-print">
+          <div id="search-field" class="field">
+            <input id="search-input" type="text" placeholder="Search the docs">
+            <label class="filter checkbox">
+              <input type="checkbox" data-facet-filter="component:ROOT"> In this project
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../">Konflux-CI</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../">Why Konflux?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../getting-started/">Getting started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../share-with-community/">Share Tenant with Community</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../">Building</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Getting started</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../creating/">Creating applications and components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../creating-github/">Onboarding a component from GitHub with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../creating-gitlab/">Onboarding a component from GitLab with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../creating-forgejo/">Onboarding a component from Forgejo with the CLI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../deleting/">Deleting applications and components</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../running/">Running build pipelines</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build configuration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../customizing-the-build/">Customizing the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../configuration-as-code/">Configuration as code</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reconfiguring-build-pipeline/">Reconfiguring the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../imagerepository/">Customizing ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../labels-and-annotations/">Using labels and annotations</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../build-with-args/">Passing buildah arguments</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Secrets</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../secrets/">Creating secrets for your builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/creating-task-input-secrets/">Creating task input secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/creating-registry-pull-secrets/">Creating registry pull secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/creating-scm-secrets/">Creating source control management secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/referencing-secrets-in-containerfile/">Referencing Secrets in a Containerfile</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/secrets-from-external-vaults/">Secrets from external vaults</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build optimization</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../hermetic-builds/">Enabling hermetic builds</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="./">Enabling caching proxy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../prefetching-dependencies/">Prefetching package manager dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../using-trusted-artifacts/">Using trusted artifacts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../redundant-rebuilds/">Preventing redundant rebuilds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../overriding-compute-resources/">Overriding compute resources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Image management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../accessing-private-images/">Accessing private image repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../custom-tags/">Using custom tags</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../build-binaries/">Building binaries</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../pulp-access/">Getting access to Pulp storage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Advanced</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../component-nudges/">Defining component relationships</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../scheduled-builds/">Scheduled builds with CronJobs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../activation-keys-subscription/">Using Red Hat subscription content</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apply-task-migrations/">Applying task migrations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/">Testing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/build/">Build-time tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/build/snyk/">Enabling Snyk</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/">Integration tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/adding/">Adding an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/creating/">Creating a custom integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/editing/">Editing integration tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/debugging/">Debugging an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/rerunning/">Rerunning an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/canceling/">Canceling an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/choosing-contexts/">Choosing when to run certain Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/disable-integration-comment/">Disabling Integration Test Comments</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/accessing-private-repositories/">Accessing Private Repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/periodic-integration-tests/">Triggering Periodic Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/standardized-outputs/">Standardized outputs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/logs-to-quay/">Export Pipeline Logs to Quay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/snapshots/">Snapshots</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/working-with-snapshots/">Working with Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/override-snapshots/">Creating an override snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/group-snapshots/">Creating a group snapshot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Third Parties</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/jenkins/">Testing with Jenkins</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/testing-farm/">Testing with Testing Farm</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/rapidast/">Testing with RapiDAST</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/openshift-ci/">Testing with Openshift CI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../metadata/">Inspecting provenance and attestations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/discover/">Discovering the associated metadata</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/sboms/">Inspecting SBOMs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/attestations/">Inspecting artifact attestations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/scan-results/">Inspecting artifact scan results</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../compliance/">Compliance</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/customizing-policy/">Customizing Policy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/policy-evaluations/">Policy Evaluations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../releasing/">Releasing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan/">Creating a release plan</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan-admission/">Creating a release plan admission</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release/">Creating a release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/retrigger-release/">Re-trigger a release manually</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/tenant-release-pipelines/">Tenant Release Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/adjusting-timeouts-resources/">Adjusting timeouts and resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/using-collectors/">Using collectors</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../mintmaker/user/">Dependency Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#configuration">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#available-managers">Available managers</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#scheduling">Scheduling</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#advanced-topics">Advanced topics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/security-updates/">Security updates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/rpm-lockfile/">RPM lockfiles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/default-config/">Default configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/support/">Support matrix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../patterns/">How-to guides</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/git-submodules/">Building upstream project with git submodules</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/running-user-scripts-on-the-build-pipeline/">Running user scripts on the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../patterns/managing-pipeline-changes/">Evolving build pipeline management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../patterns/centralize-pipeline-definitions/">Centralizing Tekton pipeline definitions in your repository</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../patterns/keep-remote-pipelines-up-to-date/">Remote pipeline definitions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Application management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-multiple-versions/">Managing multiple software versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-monorepo-applications/">Managing monorepo Applications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/maintaining-references-before-release/">Maintaining valid image references before a release</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Release and testing patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/testing-releasing-single-component/">Testing and releasing a single Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/gitops-for-manual-releases/">GitOps for Releases</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-security-fix/">Managing a security fix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Integrations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/github-merge-queues/">GitHub merge queues</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/slack-notifications/">Slack Webhook Notifications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/mapping-tags-to-labels/">Maintaining parity between tags and labels</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">End-to-end guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-olm/">Building an OLM operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-tekton-tasks/">Building Tekton tasks</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Installation</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/">Installing Konflux</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/enabling-builds/">Enabling build pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/github-app/">GitHub App</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Troubleshooting</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/builds/">Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/releases/">Releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/registries/">Registry Issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/service-accounts/">Service Account Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../glossary/">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/">Reference</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../reference/sample-repositories/">Sample repositories</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/kube-apis/">Konflux Kubernetes APIs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-application">Application</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-component">Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-snapshot">Snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/conforma/#k8s-api-github-com-conforma-crds-api-v1alpha1-enterprisecontractpolicy">EnterpriseContractPolicy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/image-controller/#k8s-api-github-com-konflux-ci-image-controller-api-v1alpha1-imagerepository">ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/integration-service/#k8s-api-github-com-konflux-ci-integration-service-api-v1alpha1-integrationtestscenario">IntegrationTestScenario</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-release">Release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplan">ReleasePlan</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplanadmission">ReleasePlanAdmission</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseserviceconfig">ReleaseServiceConfig</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/mintmaker/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-dependencyupdatecheck">DependencyUpdateCheck</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-project">Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstream">ProjectDevelopmentStream</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstreamtemplate">ProjectDevelopmentStreamTemplate</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Konflux-CI</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../">Konflux-CI</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../">Konflux-CI</a></li>
+    <li><a href="../">Building</a></li>
+    <li>Build optimization</li>
+    <li><a href="./">Enabling caching proxy</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="file:///Users/sbudhwar/workspace/github/konflux/docs/./modules/building/pages/caching-proxy.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Enabling caching proxy for builds</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Konflux supports HTTP proxy caching to improve build performance. When enabled, container build operations can use a Squid HTTP proxy to cache container image layers, reducing build times for subsequent builds.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The caching proxy caches only container image layers. It does not cache build dependencies such as RPM, pip, npm, or Maven packages.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="prerequisites"><a class="anchor" href="#prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The caching proxy requires Squid to be installed on the cluster. Cluster administrators can install Squid using the Helm chart from the <a href="https://github.com/konflux-ci/caching">caching repository</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="how-it-works"><a class="anchor" href="#how-it-works"></a>How it works</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The caching proxy feature uses two levels of configuration:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pipeline level</strong>: The <code>enable-cache-proxy</code> parameter controls whether a specific pipeline uses the caching proxy.</p>
+</li>
+<li>
+<p><strong>Cluster level</strong>: A <code>cluster-config</code> ConfigMap in the <code>konflux-info</code> namespace provides the proxy configuration and can disable proxy usage cluster-wide.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The pipeline&#8217;s <code>init</code> task reads the configuration and emits <code>HTTP_PROXY</code> and <code>NO_PROXY</code> values to be used by the <code>buildah</code> task.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-the-caching-proxy"><a class="anchor" href="#enabling-the-caching-proxy"></a>Enabling the caching proxy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The caching proxy is disabled by default. To enable the caching proxy for a component&#8217;s build pipeline, set the <code>enable-cache-proxy</code> pipeline parameter to <code>true</code>.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>In the PipelineRun YAML files in the <code>.tekton</code> directory, set the <code>enable-cache-proxy</code> parameter to <code>true</code> in the <code>spec.params</code> section:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
+  params:
+  - name: enable-cache-proxy
+    value: "true"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Commit your changes to the repository of the component.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cluster-level-configuration"><a class="anchor" href="#cluster-level-configuration"></a>Cluster-level configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The caching proxy behavior can be configured at the cluster level using a ConfigMap named <code>cluster-config</code> in the <code>konflux-info</code> namespace. This ConfigMap is globally readable from all namespaces in the cluster, but writable only by the infrastructure team.</p>
+</div>
+<div class="paragraph">
+<p>The ConfigMap supports the following keys:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>allow-cache-proxy</code></dt>
+<dd>
+<p>When set to <code>false</code>, disables the caching proxy for all pipelines in the cluster, regardless of individual pipeline settings. When set to <code>true</code> or unset, pipelines can use the proxy if they have <code>enable-cache-proxy</code> set to <code>true</code>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">data:
+  allow-cache-proxy: "true"</code></pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><code>http-proxy</code></dt>
+<dd>
+<p>The HTTP proxy URL to use for builds. If not set, defaults to <code>squid.caching.svc.cluster.local:3128</code>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">data:
+  http-proxy: "squid.caching.svc.cluster.local:3128"</code></pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><code>no-proxy</code></dt>
+<dd>
+<p>A comma-separated list of hosts that should bypass the proxy. If not set, the init task uses a default list of common container registries.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">data:
+  no-proxy: "quay.io,registry.redhat.io,docker.io"</code></pre>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="title">Example cluster-config ConfigMap</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-config
+  namespace: konflux-info
+data:
+  allow-cache-proxy: "true"
+  http-proxy: "squid.caching.svc.cluster.local:3128"
+  no-proxy: "quay.io,registry.redhat.io,docker.io"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration-precedence"><a class="anchor" href="#configuration-precedence"></a>Configuration precedence</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The caching proxy is enabled only when both of the following conditions are met:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The pipeline parameter <code>enable-cache-proxy</code> is set to <code>true</code>.</p>
+</li>
+<li>
+<p>The cluster-level <code>allow-cache-proxy</code> is either set to <code>true</code> or is unset.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If <code>allow-cache-proxy</code> is explicitly set to <code>false</code> at the cluster level, the proxy is disabled for all pipelines, even if individual pipelines have <code>enable-cache-proxy</code> set to <code>true</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="supported-registries"><a class="anchor" href="#supported-registries"></a>Supported registries</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The caching proxy supports the following container image registries:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>quay.io</code> and other registry proxies that use it as a backend (for example, <code>registry.access.redhat.com</code> and <code>registry.redhat.io</code>)</p>
+</li>
+<li>
+<p><code>docker.io</code></p>
+</li>
+<li>
+<p><code>nvcr.io</code></p>
+</li>
+<li>
+<p><code>registry.fedoraproject.org</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following registry hosts are not supported at this time:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcr.io</code></p>
+</li>
+<li>
+<p><code>*.pkg.dev</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="logging"><a class="anchor" href="#logging"></a>Logging</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>init</code> task logs the proxy configuration applied to the pipeline run and the reasoning for the applied settings. You can view these logs in the pipeline run&#8217;s <code>init</code> task output.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example log output when cache proxy is enabled</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">Fetching cluster-config from konflux-info namespace...
+Cache proxy enabled (cluster-enabled: true, task-enable: true)
+Setting HTTP_PROXY to squid.caching.svc.cluster.local:3128
+Setting NO_PROXY to quay.io,registry.redhat.io,docker.io</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example log output when cache proxy is disabled</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">Fetching cluster-config from konflux-info namespace...
+Cache proxy disabled (cluster-enabled: true, task-enable: false)
+Setting HTTP_PROXY to
+Setting NO_PROXY to</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the <code>cluster-config</code> ConfigMap is not found, the init task logs a warning and proceeds with default values:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">Warning: Failed to fetch cluster-config ConfigMap. Proceeding with defaults.</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="troubleshooting"><a class="anchor" href="#troubleshooting"></a>Troubleshooting</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If the caching proxy is not working after setting <code>enable-cache-proxy</code> to <code>true</code>, your pipeline YAML may be missing required configuration. The proxy feature requires a complete chain of parameter passing:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>enable-cache-proxy</code> pipeline parameter must be defined in the pipeline&#8217;s <code>params</code> section.</p>
+</li>
+<li>
+<p>The <code>init</code> task must receive the <code>enable-cache-proxy</code> parameter.</p>
+</li>
+<li>
+<p>The <code>init</code> task outputs <code>http-proxy</code> and <code>no-proxy</code> results.</p>
+</li>
+<li>
+<p>The <code>buildah</code> task (or variant) must receive <code>HTTP_PROXY</code> and <code>NO_PROXY</code> parameters that reference the <code>init</code> task results.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If any part of this chain is missing, the proxy will not work. MintMaker automatically applies these configurations through task migrations.</p>
+</div>
+<div class="sect2">
+<h3 id="checking-for-missing-configuration"><a class="anchor" href="#checking-for-missing-configuration"></a>Checking for missing configuration</h3>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Check your repository for any unmerged MintMaker pull requests that update the pipeline configuration.</p>
+</li>
+<li>
+<p>Merge any unmerged MintMaker PRs. The migration adds all required parameters automatically.</p>
+</li>
+<li>
+<p>If no MintMaker PR exists, manually add the missing configuration to your pipeline YAML:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Add the pipeline parameter <code>enable-cache-proxy</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
+  pipelineSpec:
+    params:
+      - name: enable-cache-proxy
+        default: "false"
+        description: Enable cache proxy configuration
+        type: string</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add the <code>enable-cache-proxy</code> parameter to the <code>init</code> task:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">tasks:
+  - name: init
+    params:
+      - name: enable-cache-proxy
+        value: $(params.enable-cache-proxy)
+    taskRef:
+      name: init
+      version: "0.2"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add the <code>HTTP_PROXY</code> and <code>NO_PROXY</code> parameters to the <code>buildah</code> task (or variant like <code>buildah-remote</code>, <code>buildah-oci-ta</code>) to receive proxy values from the <code>init</code> task results:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">- name: build-container
+  params:
+    - name: HTTP_PROXY
+      value: $(tasks.init.results.http-proxy)
+    - name: NO_PROXY
+      value: $(tasks.init.results.no-proxy)
+    # ... other params
+  taskRef:
+    name: buildah</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Verify that the caching proxy is working by checking the <code>init</code> and <code>buildah</code> task logs for the proxy configuration messages.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="verifying-proxy-configuration-in-logs"><a class="anchor" href="#verifying-proxy-configuration-in-logs"></a>Verifying proxy configuration in logs</h3>
+<div class="paragraph">
+<p>After enabling the caching proxy, check the task logs to confirm the configuration is applied correctly.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example <code>init</code> task log output when cache proxy is enabled</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">Fetching cluster-config from konflux-info namespace...
+Cache proxy enabled (cluster-enabled: true, task-enable: true)
+Setting HTTP_PROXY to squid.caching.svc.cluster.local:3128
+Setting NO_PROXY to quay.io,registry.redhat.io,docker.io</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example <code>buildah</code> task log output when cache proxy is enabled</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">[2026-01-27T10:15:30.123456789+00:00] Setting proxy to squid.caching.svc.cluster.local:3128
+[2026-01-27T10:15:30.123456789+00:00] Bypassing proxy for quay.io,registry.redhat.io,docker.io</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example <code>init</code> task log output when cache proxy is disabled</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">Fetching cluster-config from konflux-info namespace...
+Cache proxy disabled (cluster-enabled: true, task-enable: false)
+Setting HTTP_PROXY to
+Setting NO_PROXY to</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you see only "Unsetting proxy" messages without the preceding "Setting proxy" messages in the <code>buildah</code> task logs, the <code>HTTP_PROXY</code> and <code>NO_PROXY</code> parameters may not be correctly wired from the <code>init</code> task results.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../hermetic-builds/">Enabling hermetic builds</a></span>
+  <span class="next"><a href="../prefetching-dependencies/">Prefetching package manager dependencies</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer" style="text-align: center;">
+   <a href="https://github.com/konflux-ci/docs" target="_blank">Source on GitHub</a>
+   | <a href="https://github.com/konflux-ci/community?tab=readme-ov-file#welcome-to-the-konflux-community" target="_blank">Join the community</a>
+   | <a href="https://github.com/konflux-ci/.github/blob/main/SECURITY.md" target="_blank">Report a security issue</a>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>

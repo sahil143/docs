@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Managing multiple software versions :: Konflux Documentation</title>
+    <link rel="canonical" href="https://sahil143.github.io/docs/patterns/managing-multiple-versions/">
+    <link rel="prev" href="../keep-remote-pipelines-up-to-date/">
+    <link rel="next" href="../managing-monorepo-applications/">
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <button class="navbar-burger" data-target="topbar-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <img src="../../_/img/logo.svg" class="navbar-logo" alt="Konflux logo">
+            <a href="https://sahil143.github.io/docs/">Documentation</a>
+          </div>
+        </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+              <div class="button"><a href="https://konflux-ci.dev/" target="_blank">Home</a></div>
+              <div class="button"><a href="https://github.com/konflux-ci/docs/issues/new?body=Page:%20/patterns/managing-multiple-versions/" target="_blank">Raise an
+                  issue</a></div>
+        <div class="navbar-item search hide-for-print">
+          <div id="search-field" class="field">
+            <input id="search-input" type="text" placeholder="Search the docs">
+            <label class="filter checkbox">
+              <input type="checkbox" data-facet-filter="component:ROOT"> In this project
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../">Konflux-CI</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../">Why Konflux?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../getting-started/">Getting started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../share-with-community/">Share Tenant with Community</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../building/">Building</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Getting started</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../building/creating/">Creating applications and components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/creating-github/">Onboarding a component from GitHub with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/creating-gitlab/">Onboarding a component from GitLab with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/creating-forgejo/">Onboarding a component from Forgejo with the CLI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/deleting/">Deleting applications and components</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/running/">Running build pipelines</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build configuration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/customizing-the-build/">Customizing the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/configuration-as-code/">Configuration as code</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/reconfiguring-build-pipeline/">Reconfiguring the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/imagerepository/">Customizing ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/labels-and-annotations/">Using labels and annotations</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/build-with-args/">Passing buildah arguments</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Secrets</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../building/secrets/">Creating secrets for your builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/creating-task-input-secrets/">Creating task input secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/creating-registry-pull-secrets/">Creating registry pull secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/creating-scm-secrets/">Creating source control management secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/referencing-secrets-in-containerfile/">Referencing Secrets in a Containerfile</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../building/secrets/secrets-from-external-vaults/">Secrets from external vaults</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build optimization</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/hermetic-builds/">Enabling hermetic builds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/caching-proxy/">Enabling caching proxy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/prefetching-dependencies/">Prefetching package manager dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/using-trusted-artifacts/">Using trusted artifacts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/redundant-rebuilds/">Preventing redundant rebuilds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/overriding-compute-resources/">Overriding compute resources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Image management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/accessing-private-images/">Accessing private image repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/custom-tags/">Using custom tags</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/build-binaries/">Building binaries</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/pulp-access/">Getting access to Pulp storage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Advanced</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/component-nudges/">Defining component relationships</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/scheduled-builds/">Scheduled builds with CronJobs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/activation-keys-subscription/">Using Red Hat subscription content</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../building/apply-task-migrations/">Applying task migrations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/">Testing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/build/">Build-time tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/build/snyk/">Enabling Snyk</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/">Integration tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/adding/">Adding an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/creating/">Creating a custom integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/editing/">Editing integration tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/debugging/">Debugging an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/rerunning/">Rerunning an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/canceling/">Canceling an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/choosing-contexts/">Choosing when to run certain Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/disable-integration-comment/">Disabling Integration Test Comments</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/accessing-private-repositories/">Accessing Private Repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/periodic-integration-tests/">Triggering Periodic Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/standardized-outputs/">Standardized outputs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/logs-to-quay/">Export Pipeline Logs to Quay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/snapshots/">Snapshots</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/working-with-snapshots/">Working with Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/override-snapshots/">Creating an override snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/group-snapshots/">Creating a group snapshot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Third Parties</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/jenkins/">Testing with Jenkins</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/testing-farm/">Testing with Testing Farm</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/rapidast/">Testing with RapiDAST</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/openshift-ci/">Testing with Openshift CI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../metadata/">Inspecting provenance and attestations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/discover/">Discovering the associated metadata</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/sboms/">Inspecting SBOMs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/attestations/">Inspecting artifact attestations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/scan-results/">Inspecting artifact scan results</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../compliance/">Compliance</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/customizing-policy/">Customizing Policy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/policy-evaluations/">Policy Evaluations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../releasing/">Releasing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan/">Creating a release plan</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan-admission/">Creating a release plan admission</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release/">Creating a release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/retrigger-release/">Re-trigger a release manually</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/tenant-release-pipelines/">Tenant Release Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/adjusting-timeouts-resources/">Adjusting timeouts and resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/using-collectors/">Using collectors</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../mintmaker/user/">Dependency Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#configuration">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#available-managers">Available managers</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#scheduling">Scheduling</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#advanced-topics">Advanced topics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/security-updates/">Security updates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/rpm-lockfile/">RPM lockfiles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/default-config/">Default configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/support/">Support matrix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../">How-to guides</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../git-submodules/">Building upstream project with git submodules</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../running-user-scripts-on-the-build-pipeline/">Running user scripts on the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../managing-pipeline-changes/">Evolving build pipeline management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../centralize-pipeline-definitions/">Centralizing Tekton pipeline definitions in your repository</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../keep-remote-pipelines-up-to-date/">Remote pipeline definitions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Application management</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="./">Managing multiple software versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../managing-monorepo-applications/">Managing monorepo Applications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../maintaining-references-before-release/">Maintaining valid image references before a release</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Release and testing patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing-releasing-single-component/">Testing and releasing a single Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../gitops-for-manual-releases/">GitOps for Releases</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../managing-security-fix/">Managing a security fix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Integrations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../github-merge-queues/">GitHub merge queues</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../slack-notifications/">Slack Webhook Notifications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../mapping-tags-to-labels/">Maintaining parity between tags and labels</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">End-to-end guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-olm/">Building an OLM operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-tekton-tasks/">Building Tekton tasks</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Installation</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/">Installing Konflux</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/enabling-builds/">Enabling build pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/github-app/">GitHub App</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Troubleshooting</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/builds/">Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/releases/">Releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/registries/">Registry Issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/service-accounts/">Service Account Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../glossary/">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/">Reference</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../reference/sample-repositories/">Sample repositories</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/kube-apis/">Konflux Kubernetes APIs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-application">Application</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-component">Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-snapshot">Snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/conforma/#k8s-api-github-com-conforma-crds-api-v1alpha1-enterprisecontractpolicy">EnterpriseContractPolicy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/image-controller/#k8s-api-github-com-konflux-ci-image-controller-api-v1alpha1-imagerepository">ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/integration-service/#k8s-api-github-com-konflux-ci-integration-service-api-v1alpha1-integrationtestscenario">IntegrationTestScenario</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-release">Release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplan">ReleasePlan</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplanadmission">ReleasePlanAdmission</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseserviceconfig">ReleaseServiceConfig</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/mintmaker/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-dependencyupdatecheck">DependencyUpdateCheck</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-project">Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstream">ProjectDevelopmentStream</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstreamtemplate">ProjectDevelopmentStreamTemplate</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Konflux-CI</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../">Konflux-CI</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../">Konflux-CI</a></li>
+    <li><a href="../">How-to guides</a></li>
+    <li>Application management</li>
+    <li><a href="./">Managing multiple software versions</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="file:///Users/sbudhwar/workspace/github/konflux/docs/./modules/patterns/pages/managing-multiple-versions.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Managing multiple software versions</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Project Controller here is considered <strong>experimental</strong>. API and support may change in the future.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Software projects are often required to maintain multiple versions of the software in parallel in order to support different users of the software with different needs. As far as source code goes, the typical way to maintain multiple versions is by using different Git branches. Using branches in conjunction with Konflux can be somewhat tedious as a separate Component needs to be defined for each branch and a separate Application needs to be defined for each collection of components that need to be tested and released together. In addition multiple other resources such as <strong>ImageRepository</strong>, <strong>IntegrationTestScenario</strong>, and <strong>ReleasePlan</strong> need to be defined for each Component or Application to enable a full CI/CD process.</p>
+</div>
+<div class="paragraph">
+<p>The Konflux Project Controller seeks to streamline the process of managing multiple versions by introducing the following objects and concepts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A <strong>Project</strong> is used to describe a major piece of software that can be worked on by multiple teams over an extended period of time. A project may contain one or more development streams.</p>
+</li>
+<li>
+<p>A <strong>ProjectDevelopmentStream</strong> indicates an independent stream of development. A <strong>ProjectDevelopmentStream</strong> can contain one or more <strong>Applications</strong> each containing one or more <strong>Components</strong>.</p>
+</li>
+<li>
+<p>As described above, starting a new development stream involves creating a large amount of <strong>Application</strong>, <strong>Component</strong>, and other resources. The Project Controller helps to streamline that by allowing to create a <strong>ProjectDevelopmentStreamTemplate</strong> resource that specifies the resources to be created and allows for using variables to customize them. Using a template, many similar development streams can be created quickly.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using-the-project-controller"><a class="anchor" href="#using-the-project-controller"></a>Using the Project Controller</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the sections below we will describe how to use the custom resources supported by the Project Controller to manage multiple software versions and generate Application, Component, and other resources.</p>
+</div>
+<div class="sect2">
+<h3 id="before-you-begin"><a class="anchor" href="#before-you-begin"></a>Before you begin</h3>
+<div class="paragraph">
+<p>The typical process of onboarding a component to Konflux includes having the Konflux Build Service generate a PR to the component Git repository which includes the Tekton Pipeline-as-Code (PaC) pipeline definition for building that component. As a part of this process various other resources such as the PaC Repository resource and Secret resources for accessing the repository are also created.</p>
+</div>
+<div class="paragraph">
+<p>When using the Project Controller to create components the process of generating the PR is skipped because in this document we assume the branches being created in the component Git repositories already contain PaC pipeline files. Each Git repository, however, needs to undergo this process at least once, therefore it is recommended to onboard at least one component from each repository from the UI or by other means before attempting to manage components in that repository via the Project Controller.</p>
+</div>
+<div class="paragraph">
+<p>The rest of this document is going to assume that process is being followed and would, on occasion request that data would be copied from the component that was already on-boarded by other means.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-a-project"><a class="anchor" href="#creating-a-project"></a>Creating a Project</h3>
+<div class="paragraph">
+<p>Create a project resource by applying YAML like the following:</p>
+</div>
+<div class="listingblock">
+<div class="title">project.yaml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: projctl.konflux.dev/v1beta1
+kind: Project
+metadata:
+  name: multi-version-konflux-sample
+spec:
+  displayName: "Multi-version demonstration sample project"
+  description: |
+    A sample project to demonstrate how to use the projects API.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-a-projectdevelopmentstreamtemplate"><a class="anchor" href="#creating-a-projectdevelopmentstreamtemplate"></a>Creating a ProjectDevelopmentStreamTemplate</h3>
+<div class="paragraph">
+<p>To enable quickly creating multiple development streams, we must create a template for them.</p>
+</div>
+<div class="listingblock">
+<div class="title">template.yaml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: projctl.konflux.dev/v1beta1
+kind: ProjectDevelopmentStreamTemplate
+metadata:
+  name: multi-version-konflux-sample-template
+spec:
+  project: multi-version-konflux-sample
+  variables:
+  - name: version
+    description: A version number for a new development stream
+  - name: versionName
+    description: A K8s-compliant name for the version
+    defaultValue: "{{hyphenize .version}}"
+
+  resources:
+  - apiVersion: appstudio.redhat.com/v1alpha1
+    kind: Application
+    metadata:
+      name: "multi-version-konflux-sample-{{.versionName}}"
+    spec:
+      displayName: "multi-version-konflux-sample-{{.versionName}}"
+
+  - apiVersion: appstudio.redhat.com/v1alpha1
+    kind: Component
+    metadata:
+      annotations:
+        build.appstudio.openshift.io/pipeline: '{"name":"docker-build","bundle":"latest"}'
+        build.appstudio.openshift.io/status: '{"pac":{"state":"enabled","merge-url":"https://github.com/konflux-ci/multi-version-konflux-sample/pull/1","configuration-time":"Wed, 07 Aug 2024 08:59:18 UTC"},"message":"done"}'
+      name: multi-version-konflux-sample-{{.versionName}}
+    spec:
+      application: "multi-version-konflux-sample-{{.versionName}}"
+      componentName: "multi-version-konflux-sample-{{.versionName}}"
+      source:
+        git:
+          context: ./
+          dockerfileUrl: Dockerfile
+          revision: "{{.version}}"
+          url: https://github.com/konflux-ci/multi-version-konflux-sample.git
+
+  - apiVersion: appstudio.redhat.com/v1alpha1
+    kind: ImageRepository
+    metadata:
+      name: multi-version-konflux-sample-{{.versionName}}
+      labels:
+        appstudio.redhat.com/application: multi-version-konflux-sample-{{.versionName}}
+        appstudio.redhat.com/component: multi-version-konflux-sample-{{.versionName}}
+    spec:
+      image:
+        name: konflux-samples-tenant/multi-version-konflux-sample-{{.versionName}}
+        visibility: public
+      notifications:
+        - config:
+            url: 'https://bombino.preprod.api.redhat.com/v1/sbom/quay/push'
+          event: repo_push
+          method: webhook
+          title: SBOM-event-to-Bombino</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <strong>resources</strong> section for the template may be created by looking at the YAML for existing resources and copying it while removing generated and unnecessary data and adding variable references where needed.</p>
+</div>
+<div class="paragraph">
+<p>The following kinds of resources are currently supported. Please do not attempt to create other kinds as that would prevent the template from being applied successfully.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 16.6666%;">
+<col style="width: 50.0001%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">apiVersion</th>
+<th class="tableblock halign-left valign-top">kind</th>
+<th class="tableblock halign-left valign-top">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">appstudio.redhat.com/v1alpha1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">appstudio.redhat.com/v1alpha1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">appstudio.redhat.com/v1alpha1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ImageRepository</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every component should have an accompanying <code>ImageRepository</code> resource</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">appstudio.redhat.com/v1beta2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IntegrationTestScenario</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Note the <code>v1beta2</code> API version. Make sure to use the right version when querying the cluster, otherwise important data may be missing from the results you get.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">appstudio.redhat.com/v1alpha1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ReleasePlan</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Note:</strong> When in doubt - the source of truth about what the YAML for your resources should look like is the version you can find on the Konflux clusters. We try to keep the examples here up to date, but with this being a static document there may be a gap between what you see here and what you should configure in your system. It is recommended that you follow the process of creating the template by copying the YAML of the resources you have and cleaning it as described below, and not by copying the sample you see here.</p>
+</div>
+<div class="paragraph">
+<p>Here are specific examples for how to clean up and use the YAML for certain resource kinds:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For any kind of resource specified in the ProjectDevelopmentStreamTemplate, the <code>namespace</code>, <code>creationTimestamp</code>, <code>generation</code>, <code>resourceVersion</code>, <code>uid</code>, <code>ownerReferences</code>, and <code>finalizers</code> metadata fields should be removed as well as the <code>status</code> section.</p>
+</li>
+<li>
+<p>For <strong>Application</strong> resources the <code>metadata.name</code> and <code>spec.displayName</code> fields should contain variable references.</p>
+</li>
+<li>
+<p>For <strong>Component</strong> resources:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The following deprecated annotations should be removed:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>image.redhat.com/image</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The <code>spec.containerImage</code> field should be removed.</p>
+</li>
+<li>
+<p>The following fields should probably contain variable references:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>spec.application</code></p>
+</li>
+<li>
+<p><code>spec.componentName</code></p>
+</li>
+<li>
+<p><code>source.git.revision</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The <code>build.appstudio.openshift.io/status</code> annotation is in place to make the UI present the component&#8217;s pipeline as customized. It&#8217;s not mandatory if you can ignore the pipeline status being misrepresented in the UI. Note that this annotation&#8217;s value needs to contain a reference to a merged PR that added the PaC pipeline files. There is no harm in having multiple components reference the same PR, if the <code>pac.component.appstudio.openshift.io/finalizer</code> finalizer is not added to the component&#8217;s finalizers list.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>For <strong>ImageRepository</strong> resources:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The labels referring to the owning component and application should probably contain variable references.</p>
+</li>
+<li>
+<p>To allow for correct ownership configuration between Component and ImageRepository resources, every component that has its built image pushed to the default registry organization that is managed automatically by Konflux needs to have a dedicated ImageRepository resource. This implies each component has its own container image repository.</p>
+</li>
+<li>
+<p>To meet the above requirement the <code>spec.image.name</code> field should contain a variable reference.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>For <strong>IntegrationTestScenario</strong> resources:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Make sure you query for the <code>v1beta2</code> version of those resources, and that you specify that version in your template.</p>
+</li>
+<li>
+<p>The <code>spec.application</code> field should probably contain variable references.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>For <strong>ReleasePlan</strong> resources:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>spec.application</code> field should probably contain variable references.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Some notes about using template variables:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You can use the <a href="https://pkg.go.dev/text/template">Go text/template</a> syntax to place template variable values into various resource attributes as well as variable default values.</p>
+</li>
+<li>
+<p>You can use the custom <code>hyphenize</code> template function to create a value suitable for use in resource names.</p>
+</li>
+<li>
+<p>It&#8217;s advisable to quote strings that contain variable references and other template syntax elements to prevent the curly braces from being parsed as JSON embedded into YAML.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-a-projectdevelopmentstream"><a class="anchor" href="#creating-a-projectdevelopmentstream"></a>Creating a ProjectDevelopmentStream</h3>
+<div class="paragraph">
+<p>Once the <strong>Project</strong> and <strong>ProjectDevelopmentStreamTemplate</strong> resources are in place, we can create <strong>ProjectDevelopmentStream</strong> resources.</p>
+</div>
+<div class="listingblock">
+<div class="title">devstream.yaml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: projctl.konflux.dev/v1beta1
+kind: ProjectDevelopmentStream
+metadata:
+  name: multi-version-konflux-sample-v1-0-0
+spec:
+  project: multi-version-konflux-sample
+  template:
+    name: multi-version-konflux-sample-template
+    values:
+    - name: version
+      value: "v1.0.0"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Creating this <strong>ProjectDevelopmentStream</strong> resource will cause the resources specified by the referenced <strong>ProjectDevelopmentStreamTemplate</strong> resource to get created. Since we&#8217;ve used the <code>version</code> template variable in the <code>spec.git.revision</code> field of the component resources, each component version will use a different branch of the component repository.</p>
+</div>
+<div class="paragraph">
+<p>When you look at your components in the Konflux UI, you may see notifications that PRs were sent to configure pipelines for them. In addition the source code links in the UI will not work until corresponding branches are actually created in your Git repository. To overcome those issues, create and push a branch with the appropriate name for each new component and then create and merge a PR into it that will cause the push pipeline to run for that branch. For the pipeline to run you need to adjust the Tekton PaC pipeline YAML code as described blow. We recommend that the first PR you send into a branch would include those adjustments.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="branching-your-component-repositories"><a class="anchor" href="#branching-your-component-repositories"></a>Branching your component repositories</h3>
+<div class="paragraph">
+<p>Beyond creating new Git branches for your components in order to maintain different versions, you must also adjust the <code>.tekton/*.yaml</code> files within those branches in order to make the pipelines run and target the right components.</p>
+</div>
+<div class="paragraph">
+<p>In particular the following changes must be made each time a new branch is created in each of the pipeline YAML files:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>pipelinesascode.tekton.dev/on-cel-expression</code> annotation should be adjusted to specify and filter by the right branch name. For example, for a pull request pipeline that resides in the <code>v1.0.0</code> branch the annotation value would be:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">event == "pull_request" &amp;&amp; target_branch == "v1.0.0"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For a push pipeline in the same branch the value would be:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">event == "push" &amp;&amp; target_branch == "v1.0.0"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>The <code>appstudio.openshift.io/application</code> and <code>appstudio.openshift.io/component</code> labels must be adjusted to specify the right Application and Component respectively. Failing to do this will cause builds of the pipeline to be associated with the wrong application or component.</p>
+</li>
+<li>
+<p>The value for the <code>output-image</code> parameter should be set to match the value of the <code>spec.image.name</code> field of the <code>ImageRepository</code> resource that corresponds to the component the pipeline would build.</p>
+<div class="paragraph">
+<p>If your template is setup in such a way that the repo branch name would appear in the image name, you can use the <code>target_branch</code> PaC variable like so:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">  - name: output-image
+    value: quay.io/redhat-user-workloads/my-tenant/my-app-{{target_branch}}/my-comp-{{target_branch}}:{{revision}}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please note that the examples in this document do not allow for this setup because the image names contain the hyphenated version value while the branch names contain the unhyphenated value.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="known-limitations"><a class="anchor" href="#known-limitations"></a>Known limitations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following limitations exist in the current controller implementation and are likely to be resolved in the future.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If a resource created by a template is modified, the configuration is not aligned back with the template unless either:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The controller gets restarted</p>
+</li>
+<li>
+<p>The <strong>ProjectDevelopmentStream</strong>, <strong>ProjectDevelopmentStreamTemplate</strong> or the <strong>Project</strong> resources that generated the resource are modified</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A <strong>ProjectDevelopmentStream</strong> that isn&#8217;t referring a template may be modified to refer to a template. Similarly, the template <strong>ProjectDevelopmentStream</strong> it&#8217;s referring to may be changed. In both those cases, resources owned by the <strong>ProjectDevelopmentStream</strong> but not defined by the new template do not get deleted.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="troubleshooting"><a class="anchor" href="#troubleshooting"></a>Troubleshooting</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>When a <strong>ProjectDevelopmentStream</strong> that refers to a
+<strong>ProjectDevelopmentStreamTemplate</strong> is created or modified, and the resources
+defined by the template fail to be created, the issues with the template
+application process may be seen by inspecting the Events associated with the
+<strong>ProjectDevelopmentStream</strong> object. The events can be seen by running the
+ <code>kubectl describe</code> or <code>oc describe</code> commands on the
+<strong>ProjectDevelopmentStream</strong> resource.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../keep-remote-pipelines-up-to-date/">Remote pipeline definitions</a></span>
+  <span class="next"><a href="../managing-monorepo-applications/">Managing monorepo Applications</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer" style="text-align: center;">
+   <a href="https://github.com/konflux-ci/docs" target="_blank">Source on GitHub</a>
+   | <a href="https://github.com/konflux-ci/community?tab=readme-ov-file#welcome-to-the-konflux-community" target="_blank">Join the community</a>
+   | <a href="https://github.com/konflux-ci/.github/blob/main/SECURITY.md" target="_blank">Report a security issue</a>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>

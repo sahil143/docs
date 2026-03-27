@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Creating a custom integration test :: Konflux Documentation</title>
+    <link rel="canonical" href="https://sahil143.github.io/docs/testing/integration/creating/">
+    <link rel="prev" href="../adding/">
+    <link rel="next" href="../editing/">
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/main.css">
+<link rel="stylesheet" href="../../../_/css/main.css">
+<link rel="stylesheet" href="../../../_/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+<script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <button class="navbar-burger" data-target="topbar-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <img src="../../../_/img/logo.svg" class="navbar-logo" alt="Konflux logo">
+            <a href="https://sahil143.github.io/docs/">Documentation</a>
+          </div>
+        </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+              <div class="button"><a href="https://konflux-ci.dev/" target="_blank">Home</a></div>
+              <div class="button"><a href="https://github.com/konflux-ci/docs/issues/new?body=Page:%20/testing/integration/creating/" target="_blank">Raise an
+                  issue</a></div>
+        <div class="navbar-item search hide-for-print">
+          <div id="search-field" class="field">
+            <input id="search-input" type="text" placeholder="Search the docs">
+            <label class="filter checkbox">
+              <input type="checkbox" data-facet-filter="component:ROOT"> In this project
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../../">Konflux-CI</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../../">Why Konflux?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../getting-started/">Getting started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../share-with-community/">Share Tenant with Community</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../building/">Building</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Getting started</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../building/creating/">Creating applications and components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../building/creating-github/">Onboarding a component from GitHub with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../building/creating-gitlab/">Onboarding a component from GitLab with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../building/creating-forgejo/">Onboarding a component from Forgejo with the CLI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/deleting/">Deleting applications and components</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/running/">Running build pipelines</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build configuration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/customizing-the-build/">Customizing the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/configuration-as-code/">Configuration as code</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/reconfiguring-build-pipeline/">Reconfiguring the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/imagerepository/">Customizing ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/labels-and-annotations/">Using labels and annotations</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/build-with-args/">Passing buildah arguments</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Secrets</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../building/secrets/">Creating secrets for your builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../building/secrets/creating-task-input-secrets/">Creating task input secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../building/secrets/creating-registry-pull-secrets/">Creating registry pull secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../building/secrets/creating-scm-secrets/">Creating source control management secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../building/secrets/referencing-secrets-in-containerfile/">Referencing Secrets in a Containerfile</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../building/secrets/secrets-from-external-vaults/">Secrets from external vaults</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build optimization</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/hermetic-builds/">Enabling hermetic builds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/caching-proxy/">Enabling caching proxy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/prefetching-dependencies/">Prefetching package manager dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/using-trusted-artifacts/">Using trusted artifacts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/redundant-rebuilds/">Preventing redundant rebuilds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/overriding-compute-resources/">Overriding compute resources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Image management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/accessing-private-images/">Accessing private image repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/custom-tags/">Using custom tags</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/build-binaries/">Building binaries</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/pulp-access/">Getting access to Pulp storage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Advanced</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/component-nudges/">Defining component relationships</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/scheduled-builds/">Scheduled builds with CronJobs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/activation-keys-subscription/">Using Red Hat subscription content</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../building/apply-task-migrations/">Applying task migrations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../">Testing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../build/">Build-time tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../build/snyk/">Enabling Snyk</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../">Integration tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../adding/">Adding an integration test</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="./">Creating a custom integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../editing/">Editing integration tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../debugging/">Debugging an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../rerunning/">Rerunning an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../canceling/">Canceling an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../choosing-contexts/">Choosing when to run certain Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../disable-integration-comment/">Disabling Integration Test Comments</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../accessing-private-repositories/">Accessing Private Repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../periodic-integration-tests/">Triggering Periodic Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../standardized-outputs/">Standardized outputs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../logs-to-quay/">Export Pipeline Logs to Quay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../snapshots/">Snapshots</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../snapshots/working-with-snapshots/">Working with Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../snapshots/override-snapshots/">Creating an override snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../snapshots/group-snapshots/">Creating a group snapshot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Third Parties</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../third-parties/jenkins/">Testing with Jenkins</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../third-parties/testing-farm/">Testing with Testing Farm</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../third-parties/rapidast/">Testing with RapiDAST</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../third-parties/openshift-ci/">Testing with Openshift CI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../metadata/">Inspecting provenance and attestations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../metadata/discover/">Discovering the associated metadata</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../metadata/sboms/">Inspecting SBOMs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../metadata/attestations/">Inspecting artifact attestations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../metadata/scan-results/">Inspecting artifact scan results</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../compliance/">Compliance</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../compliance/customizing-policy/">Customizing Policy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../compliance/policy-evaluations/">Policy Evaluations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../releasing/">Releasing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../releasing/create-release-plan/">Creating a release plan</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../releasing/create-release-plan-admission/">Creating a release plan admission</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../releasing/create-release/">Creating a release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../releasing/retrigger-release/">Re-trigger a release manually</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../releasing/tenant-release-pipelines/">Tenant Release Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../releasing/adjusting-timeouts-resources/">Adjusting timeouts and resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../releasing/using-collectors/">Using collectors</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../mintmaker/user/">Dependency Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../mintmaker/user/">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../mintmaker/user/#configuration">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../mintmaker/user/#available-managers">Available managers</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../mintmaker/user/#scheduling">Scheduling</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../mintmaker/user/#advanced-topics">Advanced topics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../mintmaker/security-updates/">Security updates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../mintmaker/rpm-lockfile/">RPM lockfiles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../mintmaker/default-config/">Default configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../mintmaker/support/">Support matrix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../patterns/">How-to guides</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../patterns/git-submodules/">Building upstream project with git submodules</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../patterns/running-user-scripts-on-the-build-pipeline/">Running user scripts on the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../patterns/managing-pipeline-changes/">Evolving build pipeline management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../patterns/centralize-pipeline-definitions/">Centralizing Tekton pipeline definitions in your repository</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../../patterns/keep-remote-pipelines-up-to-date/">Remote pipeline definitions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Application management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../patterns/managing-multiple-versions/">Managing multiple software versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../patterns/managing-monorepo-applications/">Managing monorepo Applications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../patterns/maintaining-references-before-release/">Maintaining valid image references before a release</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Release and testing patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../patterns/testing-releasing-single-component/">Testing and releasing a single Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../patterns/gitops-for-manual-releases/">GitOps for Releases</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../patterns/managing-security-fix/">Managing a security fix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Integrations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../patterns/github-merge-queues/">GitHub merge queues</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../patterns/slack-notifications/">Slack Webhook Notifications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../patterns/mapping-tags-to-labels/">Maintaining parity between tags and labels</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">End-to-end guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../end-to-end/building-olm/">Building an OLM operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../end-to-end/building-tekton-tasks/">Building Tekton tasks</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Installation</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../installing/">Installing Konflux</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../installing/enabling-builds/">Enabling build pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../installing/github-app/">GitHub App</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Troubleshooting</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../troubleshooting/builds/">Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../troubleshooting/releases/">Releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../troubleshooting/registries/">Registry Issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../troubleshooting/service-accounts/">Service Account Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../../glossary/">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../reference/">Reference</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../reference/sample-repositories/">Sample repositories</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../reference/kube-apis/">Konflux Kubernetes APIs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-application">Application</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-component">Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-snapshot">Snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/conforma/#k8s-api-github-com-conforma-crds-api-v1alpha1-enterprisecontractpolicy">EnterpriseContractPolicy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/image-controller/#k8s-api-github-com-konflux-ci-image-controller-api-v1alpha1-imagerepository">ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/integration-service/#k8s-api-github-com-konflux-ci-integration-service-api-v1alpha1-integrationtestscenario">IntegrationTestScenario</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-release">Release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplan">ReleasePlan</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplanadmission">ReleasePlanAdmission</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseserviceconfig">ReleaseServiceConfig</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/mintmaker/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-dependencyupdatecheck">DependencyUpdateCheck</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-project">Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstream">ProjectDevelopmentStream</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstreamtemplate">ProjectDevelopmentStreamTemplate</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Konflux-CI</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../../">Konflux-CI</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../../" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../../">Konflux-CI</a></li>
+    <li><a href="../../">Testing</a></li>
+    <li><a href="../">Integration tests</a></li>
+    <li><a href="./">Creating a custom integration test</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="file:///Users/sbudhwar/workspace/github/konflux/docs/./modules/testing/pages/integration/creating.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Creating a custom integration test</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In Konflux, you can create your own integration tests to run on all components of a given application before they are deployed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="procedure"><a class="anchor" href="#procedure"></a>Procedure</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To create any custom test, complete the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In your preferred IDE, create a Tekton pipeline in a <code>.yaml</code> file.</p>
+</li>
+<li>
+<p>Within that pipeline, create tasks, which define the actual steps of the test that Konflux executes against images before deploying them.</p>
+</li>
+<li>
+<p>Commit the <code>.yaml</code> file to a GitHub repo and add it as an integration test in Konflux.</p>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="procedure-with-example"><a class="anchor" href="#procedure-with-example"></a>Procedure with example</h3>
+<div class="paragraph">
+<p>To create a custom test that checks the built component image in snapshot, complete the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In your preferred IDE, create a new <code>.yaml</code> file, with a name of your choosing.</p>
+</li>
+<li>
+<p>Define a new Tekton pipeline. The following example is the beginning of a pipeline.</p>
+</li>
+<li>
+<p>NOTE: Browse the <a href="https://github.com/konflux-ci/tekton-integration-catalog">tekton-integration-catalog</a> for reusable pipelines, tasks, and step actions to help you get started.</p>
+<div class="paragraph">
+<p>Example pipeline file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kind: Pipeline
+apiVersion: tekton.dev/v1beta1
+metadata:
+  name: example-pipeline
+spec:
+  params:
+    - description: 'Snapshot of the application'
+      name: SNAPSHOT
+      default: '{"components": [{"name":"test-app", "containerImage": "quay.io/example/repo:latest"}]}'
+      type: string
+  tasks:</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the <code>.pipeline.spec</code> path, declare a new task that lists all containerImage and git source for all components in snapshot. More steps can be added to inspect the git source and containerImage.</p>
+<div class="paragraph">
+<p>Example task declaration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">tasks:
+  - name: task-1
+    description: Placeholder task that prints the Snapshot and outputs standard TEST_OUTPUT
+    params:
+      - name: SNAPSHOT
+        value: $(params.SNAPSHOT)
+    taskSpec:
+      params:
+      - name: SNAPSHOT
+      results:
+      - name: TEST_OUTPUT
+        description: Test output
+      steps:
+      - name: test-snapshot-component
+        image: registry.redhat.io/openshift4/ose-cli:latest
+        workingDir: /workspace
+        env:
+        - name: SNAPSHOT
+          value: $(params.SNAPSHOT)
+        script: |
+          #!/bin/bash
+          set -e
+          dnf -y install jq
+          snapshotComponents=$(jq -c '.components[]' &lt;&lt;&lt; "${SNAPSHOT}")
+
+          echo -e "Example test task for the Snapshot:\n ${SNAPSHOT}"
+          # Run custom tests for the given Snapshot here
+          while read componentEntry
+          do
+            # Variables
+            componentName=$(echo "${componentEntry}" | jq -r '.name')
+            componentUrl=$(echo "${componentEntry}" | jq -r '.source.git.url')
+            componentUrlWithoutSuffix=$(echo $componentUrl | sed 's/\.git$//')
+            componentSha=$(echo "${componentEntry}" | jq -r '.source.git.revision')
+
+            echo "Print the infomation for component ${componentName} included in snapshot, more test can be added to inspect git source and containerImage in component:"
+            echo "${componentName}"
+            echo "${componentUrl}"
+            echo "${componentUrlWithoutSuffix}"
+            echo "${componentSha}"
+          done &lt; &lt;(echo "$snapshotComponents")
+
+          # After the tests finish, record the overall result in the RESULT variable
+          RESULT="SUCCESS"
+
+          # Output the standardized TEST_OUTPUT result in JSON form
+          TEST_OUTPUT=$(jq -rc --arg date $(date -u --iso-8601=seconds) --arg RESULT "${RESULT}" --null-input \
+            '{result: $RESULT, timestamp: $date, failures: 0, successes: 1, warnings: 0}')
+          echo -n "${TEST_OUTPUT}" | tee $(results.TEST_OUTPUT.path)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Save the <code>.yaml</code> file.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If you haven’t already, commit this file to a GitHub repository that Konflux can access.</p>
+<div class="paragraph">
+<p>Complete example file:</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kind: Pipeline
+apiVersion: tekton.dev/v1beta1
+metadata:
+  name: example-pipeline
+spec:
+  params:
+    - description: 'Snapshot of the application'
+      name: SNAPSHOT
+      default: '{"components": [{"name":"test-app", "containerImage": "quay.io/example/repo:latest"}]}'
+      type: string
+  tasks:
+    - name: task-1
+      description: Placeholder task that prints the Snapshot and outputs standard TEST_OUTPUT
+      params:
+        - name: SNAPSHOT
+          value: $(params.SNAPSHOT)
+      taskSpec:
+        params:
+        - name: SNAPSHOT
+        results:
+        - name: TEST_OUTPUT
+          description: Test output
+        steps:
+        - image: registry.redhat.io/openshift4/ose-cli:latest
+          env:
+          - name: SNAPSHOT
+            value: $(params.SNAPSHOT)
+          script: |
+          #!/bin/bash
+          set -e
+          dnf -y install jq
+          snapshotComponents=$(jq -c '.components[]' &lt;&lt;&lt; "${SNAPSHOT}")
+
+          echo -e "Example test task for the Snapshot:\n ${SNAPSHOT}"
+          # Run custom tests for the given Snapshot here
+          while read componentEntry
+          do
+            # Variables
+            componentName=$(echo "${componentEntry}" | jq -r '.name')
+            componentUrl=$(echo "${componentEntry}" | jq -r '.source.git.url')
+            componentUrlWithoutSuffix=$(echo $componentUrl | sed 's/\.git$//')
+            componentSha=$(echo "${componentEntry}" | jq -r '.source.git.revision')
+
+            echo "Print the infomation for component ${componentName} included in snapshot, more test can be added to inspect git source and containerImage in component::"
+            echo "${componentName}"
+            echo "${componentUrl}"
+            echo "${componentUrlWithoutSuffix}"
+            echo "${componentSha}"
+          done &lt; &lt;(echo "$snapshotComponents")
+
+          # After the tests finish, record the overall result in the RESULT variable
+          RESULT="SUCCESS"
+
+          # Output the standardized TEST_OUTPUT result in JSON form
+          TEST_OUTPUT=$(jq -rc --arg date $(date -u --iso-8601=seconds) --arg RESULT "${RESULT}" --null-input \
+            '{result: $RESULT, timestamp: $date, failures: 0, successes: 1, warnings: 0}')
+          echo -n "${TEST_OUTPUT}" | tee $(results.TEST_OUTPUT.path)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add your new custom test as an integration test in Konflux.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>For additional instructions on adding an integration test, see Adding an integration test.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="customize-pipelinerun-definition"><a class="anchor" href="#customize-pipelinerun-definition"></a>Customize pipelineRun definition</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Integration service provides customization for both pipeline and pipelineRun definitions.
+There are certain attributes that can be defined only for pipelineRuns such as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>pipeline timeouts</p>
+</li>
+<li>
+<p>service accounts</p>
+</li>
+<li>
+<p>workspaces</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If this is your case, you need to set <strong><code>Spec.ResolverRef.ResourceKind</code></strong> to
+pipelinerun(lower case <code>r</code>) within your integration test scenario definition(pipeline is being set by default).</p>
+</div>
+<div class="paragraph">
+<p>Example file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+apiVersion: appstudio.redhat.com/v1beta2
+kind: IntegrationTestScenario
+metadata:
+  name: example-pass
+  namespace: default
+spec:
+  application: application-sample
+  contexts:
+    - description: Application testing
+      name: application
+  resolverRef:
+    resolver: git
+    resourceKind: pipelinerun
+    params:
+      - name: url
+        value: https://github.com/konflux-ci/integration-examples
+      - name: revision
+        value: main
+      - name: pathInRepo
+        value: pipelineruns/integration_pipelinerun_pass.yaml
+---</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="passing-snapshot-parameters-by-name"><a class="anchor" href="#passing-snapshot-parameters-by-name"></a>Passing snapshot parameters by name</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The parameter value of a Tekton task has a size limit. If a snapshot contains a large list of <code>snapshotComponents</code>, a Tekton task that uses the <code>Snapshot</code> parameter might fail with an <code>argument list too long</code> error.</p>
+</div>
+<div class="paragraph">
+<p>To support a long list of <code>snapshotComponents</code> in a snapshot, you can pass the name of the snapshot as the value of the <code>Snapshot</code> parameter to the integration PipelineRun by annotating the <code>IntegrationTestScenario</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ kubectl annotate integrationTestScenario &lt;its-name&gt; test.appstudio.openshift.io/snapshot-param-as-name=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can then get the <code>.spec</code> of the snapshot in your Tekton task by using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ kubectl get snapshot &lt;snapshot-name&gt; -n &lt;namespace&gt; -o json | jq -c '.spec'
+{"application":"application-sample","artifacts":{},"components":[{"containerImage":"quay.io/redhat-user-workloads/test-namespace/&lt;application-example&gt;&gt;/&lt;component-sample&gt;&gt;@sha256:0db0a473a6abf5c15c424ab07cfbd5c40c06622fe648d4fe6a6b6abc224a0d0c","name":"component-sample","source":{"git":{"revision":"4242510959e20b2422e71f71b886aef6c40a5ead","url":"https://github.com/sample-org/sample-repo"}}}]}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, use the <a href="https://github.com/konflux-ci/tekton-integration-catalog/tree/main/stepactions/get-snapshot-json/0.1">get-snapshot-json step action</a> within your task to create a file containing the snapshot spec..</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="data-injected-into-the-pipelinerun-of-the-integration-test"><a class="anchor" href="#data-injected-into-the-pipelinerun-of-the-integration-test"></a>Data injected into the PipelineRun of the integration test</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you create a custom integration test, Konflux automatically adds certain parameters and labels to the PipelineRun of the integration test. This section explains what those parameters and labels are, and how they can help you.</p>
+</div>
+<div class="paragraph">
+<p>Parameters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>SNAPSHOT</code></strong>: contains the snapshot of the whole application as a JSON string. This JSON string provides useful information about the test, such as which components Konflux is testing, and what git repository and commit Konflux is using to build those components. For information about snapshot JSON string, see <a href="https://github.com/konflux-ci/integration-examples/blob/main/examples/snapshot_json_string_example">an example snapshot JSON string</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Labels:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>appstudio.openshift.io/application</code></strong>: contains the name of the application.</p>
+</li>
+<li>
+<p><strong><code>appstudio.openshift.io/component</code></strong>: contains the name of the component.</p>
+</li>
+<li>
+<p><strong><code>appstudio.openshift.io/snapshot</code></strong>: contains the name of the snapshot.</p>
+</li>
+<li>
+<p><strong><code>test.appstudio.openshift.io/optional</code></strong>: contains the optional flag, which specifies whether or not components must pass the integration test before release.</p>
+</li>
+<li>
+<p><strong><code>test.appstudio.openshift.io/scenario</code></strong>: contains the name of the integration test (this label ends with "scenario," because each test is technically a custom resource called an <code>IntegrationTestScenario</code>).</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It is also possible to set custom labels or annotations in the build pipelineRun, and those will be copied over
+to all integration pipelineRuns associated with that build. The labels/annotations have to have the
+<code>custom.appstudio.openshift.io</code> prefix in order to be copied in this manner.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="utilizing-the-labels-and-annotations-within-the-integration-pipeline-run"><a class="anchor" href="#utilizing-the-labels-and-annotations-within-the-integration-pipeline-run"></a>Utilizing the labels and annotations within the integration pipeline run</h3>
+<div class="paragraph">
+<p>It is possible to use the injected metadata within the integration PipelineRun itself in order to influence the testing behavior.
+This can be done by exposing the pipelineRun labels as environment variables within a Task and then referencing them within the Task logic.</p>
+</div>
+<div class="paragraph">
+<p>Example of extracting the component name and finding its image within the SNAPSHOT parameter&#8217;s JSON data:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: test-metadata
+spec:
+  params:
+    - name: SNAPSHOT
+      description: The JSON string of the Snapshot under test
+  steps:
+    - name: find-component-image
+      image: quay.io/konflux-ci/konflux-test:stable
+      workingDir: /workspace
+      env:
+        - name: SNAPSHOT
+          value: $(params.SNAPSHOT)
+        - name: COMPONENT_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['appstudio.openshift.io/component']
+      script: |
+        #!/bin/sh
+
+        # Extract the component container image from the SNAPSHOT JSON data
+        COMPONENT_CONTAINER_IMAGE=$(jq -r --arg component_name "${COMPONENT_NAME}" '.components[] | select(.name == $component_name) | .containerImage' &lt;&lt;&lt; "${SNAPSHOT}")
+
+        # Log the extracted variable
+        echo "  COMPONENT_CONTAINER_IMAGE: ${COMPONENT_CONTAINER_IMAGE}"</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For more examples of available labels and how they can be used within the integration tests, consult the
+<a href="https://github.com/konflux-ci/integration-examples/blob/main/tasks/test_metadata.yaml">example test-metadata task</a> as well as the
+<a href="https://github.com/konflux-ci/integration-examples/blob/main/pipelines/integration_resolver_pipeline_pass_metadata.yaml">example integration pipeline</a>
+which uses the information from that task&#8217;s results to influence its workflow.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="timeouts"><a class="anchor" href="#timeouts"></a>Timeouts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Setting custom timeouts can be done as described in the <code>Timeouts</code> section of <a href="../editing/" class="xref page">editing a custom integration test</a> guide.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="verification"><a class="anchor" href="#verification"></a>Verification</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After adding the integration test to an application, you need to trigger a new build of its components to make Konflux run the integration test. Make a commit to the GitHub repositories of your components to trigger a new build.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For information on other ways to trigger a new build, refer to the <a href="../rerunning/" class="xref page">Retriggering Integration Tests</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When the new build is finished, complete the following steps in the Konflux console:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to the <strong>Integration tests</strong> tab and select the highlighted name of your test.</p>
+</li>
+<li>
+<p>Go to the <strong>Pipeline runs</strong> tab of that test and select the most recent run.</p>
+</li>
+<li>
+<p>On the <strong>Details</strong> page, see if the test succeeded for that component. Select the other tabs to view more details.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If you used our example script, switch to the <strong>Logs</strong> tab and verify that the test printed “Hello world!”.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="standardized-test-result"><a class="anchor" href="#standardized-test-result"></a>Standardized test result</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In examples above, you can see TEST_OUTPUT result being used as standardized output. This is a tekton result test outcome in json format.
+TEST_OUTPUT example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">{"result":"SUCCESS","timestamp":"2025-04-02T01:45:00+00:00","note":"Task clair-scan completed: Refer to Tekton task result SCAN_OUTPUT for vulnerabilities scanned by Clair.","namespace":"default","successes":1,"failures":0,"warnings":0}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more information about standardized tekton results in konflux, please visit
+link: <a href="https://konflux-ci.dev/architecture/ADR/0030-tekton-results-naming-convention.html">Tekton Results Naming Convention</a>
+or
+<a href="../standardized-outputs/" class="xref page">Standardized outputs</a></p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../adding/">Adding an integration test</a></span>
+  <span class="next"><a href="../editing/">Editing integration tests</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer" style="text-align: center;">
+   <a href="https://github.com/konflux-ci/docs" target="_blank">Source on GitHub</a>
+   | <a href="https://github.com/konflux-ci/community?tab=readme-ov-file#welcome-to-the-konflux-community" target="_blank">Join the community</a>
+   | <a href="https://github.com/konflux-ci/.github/blob/main/SECURITY.md" target="_blank">Report a security issue</a>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>

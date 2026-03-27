@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Configuring Applications and Components as Code with Kustomize :: Konflux Documentation</title>
+    <link rel="canonical" href="https://sahil143.github.io/docs/building/configuration-as-code/">
+    <link rel="prev" href="../customizing-the-build/">
+    <link rel="next" href="../reconfiguring-build-pipeline/">
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <button class="navbar-burger" data-target="topbar-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <img src="../../_/img/logo.svg" class="navbar-logo" alt="Konflux logo">
+            <a href="https://sahil143.github.io/docs/">Documentation</a>
+          </div>
+        </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+              <div class="button"><a href="https://konflux-ci.dev/" target="_blank">Home</a></div>
+              <div class="button"><a href="https://github.com/konflux-ci/docs/issues/new?body=Page:%20/building/configuration-as-code/" target="_blank">Raise an
+                  issue</a></div>
+        <div class="navbar-item search hide-for-print">
+          <div id="search-field" class="field">
+            <input id="search-input" type="text" placeholder="Search the docs">
+            <label class="filter checkbox">
+              <input type="checkbox" data-facet-filter="component:ROOT"> In this project
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../">Konflux-CI</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../">Why Konflux?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../getting-started/">Getting started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../share-with-community/">Share Tenant with Community</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../">Building</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Getting started</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../creating/">Creating applications and components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../creating-github/">Onboarding a component from GitHub with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../creating-gitlab/">Onboarding a component from GitLab with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../creating-forgejo/">Onboarding a component from Forgejo with the CLI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../deleting/">Deleting applications and components</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../running/">Running build pipelines</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build configuration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../customizing-the-build/">Customizing the build pipeline</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="./">Configuration as code</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reconfiguring-build-pipeline/">Reconfiguring the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../imagerepository/">Customizing ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../labels-and-annotations/">Using labels and annotations</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../build-with-args/">Passing buildah arguments</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Secrets</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../secrets/">Creating secrets for your builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/creating-task-input-secrets/">Creating task input secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/creating-registry-pull-secrets/">Creating registry pull secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/creating-scm-secrets/">Creating source control management secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/referencing-secrets-in-containerfile/">Referencing Secrets in a Containerfile</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/secrets-from-external-vaults/">Secrets from external vaults</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build optimization</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../hermetic-builds/">Enabling hermetic builds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../caching-proxy/">Enabling caching proxy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../prefetching-dependencies/">Prefetching package manager dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../using-trusted-artifacts/">Using trusted artifacts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../redundant-rebuilds/">Preventing redundant rebuilds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../overriding-compute-resources/">Overriding compute resources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Image management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../accessing-private-images/">Accessing private image repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../custom-tags/">Using custom tags</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../build-binaries/">Building binaries</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../pulp-access/">Getting access to Pulp storage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Advanced</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../component-nudges/">Defining component relationships</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../scheduled-builds/">Scheduled builds with CronJobs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../activation-keys-subscription/">Using Red Hat subscription content</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apply-task-migrations/">Applying task migrations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/">Testing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/build/">Build-time tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/build/snyk/">Enabling Snyk</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/">Integration tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/adding/">Adding an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/creating/">Creating a custom integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/editing/">Editing integration tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/debugging/">Debugging an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/rerunning/">Rerunning an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/canceling/">Canceling an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/choosing-contexts/">Choosing when to run certain Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/disable-integration-comment/">Disabling Integration Test Comments</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/accessing-private-repositories/">Accessing Private Repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/periodic-integration-tests/">Triggering Periodic Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/standardized-outputs/">Standardized outputs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/logs-to-quay/">Export Pipeline Logs to Quay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/snapshots/">Snapshots</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/working-with-snapshots/">Working with Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/override-snapshots/">Creating an override snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/group-snapshots/">Creating a group snapshot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Third Parties</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/jenkins/">Testing with Jenkins</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/testing-farm/">Testing with Testing Farm</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/rapidast/">Testing with RapiDAST</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/openshift-ci/">Testing with Openshift CI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../metadata/">Inspecting provenance and attestations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/discover/">Discovering the associated metadata</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/sboms/">Inspecting SBOMs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/attestations/">Inspecting artifact attestations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/scan-results/">Inspecting artifact scan results</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../compliance/">Compliance</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/customizing-policy/">Customizing Policy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/policy-evaluations/">Policy Evaluations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../releasing/">Releasing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan/">Creating a release plan</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan-admission/">Creating a release plan admission</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release/">Creating a release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/retrigger-release/">Re-trigger a release manually</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/tenant-release-pipelines/">Tenant Release Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/adjusting-timeouts-resources/">Adjusting timeouts and resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/using-collectors/">Using collectors</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../mintmaker/user/">Dependency Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#configuration">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#available-managers">Available managers</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#scheduling">Scheduling</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#advanced-topics">Advanced topics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/security-updates/">Security updates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/rpm-lockfile/">RPM lockfiles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/default-config/">Default configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/support/">Support matrix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../patterns/">How-to guides</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/git-submodules/">Building upstream project with git submodules</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/running-user-scripts-on-the-build-pipeline/">Running user scripts on the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../patterns/managing-pipeline-changes/">Evolving build pipeline management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../patterns/centralize-pipeline-definitions/">Centralizing Tekton pipeline definitions in your repository</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../patterns/keep-remote-pipelines-up-to-date/">Remote pipeline definitions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Application management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-multiple-versions/">Managing multiple software versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-monorepo-applications/">Managing monorepo Applications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/maintaining-references-before-release/">Maintaining valid image references before a release</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Release and testing patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/testing-releasing-single-component/">Testing and releasing a single Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/gitops-for-manual-releases/">GitOps for Releases</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-security-fix/">Managing a security fix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Integrations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/github-merge-queues/">GitHub merge queues</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/slack-notifications/">Slack Webhook Notifications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/mapping-tags-to-labels/">Maintaining parity between tags and labels</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">End-to-end guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-olm/">Building an OLM operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-tekton-tasks/">Building Tekton tasks</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Installation</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/">Installing Konflux</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/enabling-builds/">Enabling build pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/github-app/">GitHub App</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Troubleshooting</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/builds/">Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/releases/">Releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/registries/">Registry Issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/service-accounts/">Service Account Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../glossary/">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/">Reference</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../reference/sample-repositories/">Sample repositories</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/kube-apis/">Konflux Kubernetes APIs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-application">Application</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-component">Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-snapshot">Snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/conforma/#k8s-api-github-com-conforma-crds-api-v1alpha1-enterprisecontractpolicy">EnterpriseContractPolicy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/image-controller/#k8s-api-github-com-konflux-ci-image-controller-api-v1alpha1-imagerepository">ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/integration-service/#k8s-api-github-com-konflux-ci-integration-service-api-v1alpha1-integrationtestscenario">IntegrationTestScenario</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-release">Release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplan">ReleasePlan</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplanadmission">ReleasePlanAdmission</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseserviceconfig">ReleaseServiceConfig</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/mintmaker/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-dependencyupdatecheck">DependencyUpdateCheck</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-project">Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstream">ProjectDevelopmentStream</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstreamtemplate">ProjectDevelopmentStreamTemplate</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Konflux-CI</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../">Konflux-CI</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../">Konflux-CI</a></li>
+    <li><a href="../">Building</a></li>
+    <li>Build configuration</li>
+    <li><a href="./">Configuration as code</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="file:///Users/sbudhwar/workspace/github/konflux/docs/./modules/building/pages/configuration-as-code.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Configuring Applications and Components as Code with Kustomize</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you need to define a large application with many components, easily duplicate or update components, or ensure consistent component and application states, consider configuring your Konflux applications and components as code using Kustomize. This document provides an overview of a basic application and component configuration that can be replicated and duplicated using Kustomize bases and overlays.</p>
+</div>
+<div class="paragraph">
+<p>For more information about Kustomize, visit the <a href="https://kustomize.io/">Kustomize official site</a>. This document is based on the configuration defined in the <a href="https://github.com/konflux-ci/casc-gpt">Konflux CI repository</a>, where you can see the configuration first-hand.</p>
+</div>
+<div class="paragraph">
+<p>Key steps include:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Create a basic file structure for your bases and overlays:</strong> Prepare a space and structure for your application and component bases and overlays.</p>
+</li>
+<li>
+<p><strong>Create a base for your components:</strong> Prepare a base that contains all the default or common values for every component you create.</p>
+</li>
+<li>
+<p><strong>Create a base for your application:</strong> Prepare a base that contains all the default or common values for every application you create.</p>
+</li>
+<li>
+<p><strong>Create an overlay for each component:</strong> Prepare an overlay that patches in component-specific data for each component in your application.</p>
+</li>
+<li>
+<p><strong>Create an overlay for your application:</strong> Prepare an overlay that patches in specific data for each application you want to create.</p>
+</li>
+<li>
+<p><strong>Create patches for application-specific component configurations:</strong> Prepare application-specific patches for all components in a given application, accommodating variations in specific patches.</p>
+</li>
+<li>
+<p><strong>Bonus - Duplicating or expanding your application:</strong> Discuss the general philosophy of Configuration-as-Code and how to extend, duplicate, or customize your application, components, and tenant namespace as code.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Throughout this document, substitute your application and component names for placeholder values like <code>application-a</code>, <code>application-b</code>, <code>component-a</code>, etc.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-a-file-structure"><a class="anchor" href="#create-a-file-structure"></a>Create a File Structure</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As with many Kustomize projects, you&#8217;ll need a space to define a <code>base</code> and some <code>overlay</code>(s). Within your <code>overlay</code>(s), define a folder for a base set of components and a folder for each application-specific override for that base set of components.</p>
+</div>
+<div class="paragraph">
+<p>Create a file structure as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">├── base
+│   ├── component.yaml
+│   └── kustomization.yaml
+├── overlay
+│   └── application-a
+│       ├── base
+│       │   ├── application.yaml
+│       │   ├── component-a
+│       │   │   ├── component-a-override.yaml
+│       │   │   └── kustomization.yaml
+│       │   ├── component-b
+│       │   │   ├── component-b-override.yaml
+│       │   │   └── kustomization.yaml
+│       │   └── kustomization.yaml
+│       └── v1-overlay
+│           ├── application-patch.yaml
+│           ├── component-patch.yaml
+│           ├── exception-component-patch-1.yaml
+│           └── kustomization.yaml
+└── README.md</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can omit <code>component-b</code> if you only want to define a single component.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In this file structure, you will find:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>base</code>: A directory housing your base component YAML and a Kustomize file to point to the base.</p>
+</li>
+<li>
+<p><code>overlay</code>: Contains one or more application variants, useful when defining multiple different applications.</p>
+</li>
+<li>
+<p><code>overlay/application-a/base</code>: A base that defines one or more component overrides, one per component in the application, and a base for your application.</p>
+</li>
+<li>
+<p><code>overlay/application-a/v1-overlay</code>: An override for your application and application-specific patches for your component(s).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-a-base-for-your-components"><a class="anchor" href="#create-a-base-for-your-components"></a>Create a Base for Your Components</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you are creating more than one component, it is likely that your components will share some, if not most, of their configuration. These default or global values can be defined in the base component and overridden on a case-by-case basis in your component overlays.</p>
+</div>
+<div class="sect2">
+<h3 id="creating-your-base-component"><a class="anchor" href="#creating-your-base-component"></a>Creating Your Base Component</h3>
+<div class="paragraph">
+<p>Define this base in <code>base/component.yaml</code>. It typically follows a pattern similar to the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: appstudio.redhat.com/v1alpha1
+kind: Component <i class="conum" data-value="1"></i><b>(1)</b>
+metadata:
+  name: &lt;component-name&gt;
+  namespace: &lt;namespace&gt;
+  annotations:
+    build.appstudio.openshift.io/request: configure-pac
+    build.appstudio.openshift.io/pipeline: '{"name":"&lt;name-of-the-pipeline-to-use&gt;","bundle":"latest"}' <i class="conum" data-value="2"></i><b>(2)</b>
+    git-provider: github <i class="conum" data-value="3"></i><b>(3)</b>
+    git-provider-url: https://github.com <i class="conum" data-value="4"></i><b>(4)</b>
+spec:
+  application: &lt;owning-application-name&gt; <i class="conum" data-value="5"></i><b>(5)</b>
+  componentName: &lt;component-name&gt;
+  source:
+    git:
+      url: https://github.com/konflux-ci/testrepo.git <i class="conum" data-value="6"></i><b>(6)</b>
+      revision: main <i class="conum" data-value="7"></i><b>(7)</b>
+      context: ./ <i class="conum" data-value="8"></i><b>(8)</b>
+      dockerfileUrl: Containerfile <i class="conum" data-value="9"></i><b>(9)</b>
+  containerImage: &lt;oci-repository-to-push-image-to&gt; <i class="conum" data-value="10"></i><b>(10)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A component is required to map to a git repository to build.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Optional: If used, it should point to a <a href="../../installing/enabling-builds/#customize-pipelines" class="xref page">configured pipeline</a>. If not specified, the default configured pipeline will be used.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Optional: GitHub provider is default.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Optional: <a href="https://github.com" class="bare">https://github.com</a> is default.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Each component belongs to <em>one</em> application. That application should be defined in the same file if it does not already exist.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>URL for the source repository. This MUST use the <code>https://[&#8230;&#8203;]</code> format for cloning a repository.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Optional: Branch to build in the repository. If not specified, the default branch will be used.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Optional: The context to build within the git repository. If not specified, the default defined in the configured pipeline will be used.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>Optional: Path to the Containerfile within the context. If not specified, the default value of "Dockerfile" will be used.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>Optional: If the <a href="../../installing/enabling-builds/#enable-image-controller" class="xref page">image controller</a> is not deployed, this is required. You must create a <a href="../secrets/creating-registry-pull-secrets/" class="xref page">registry secret</a> that has permissions to push and pull for the specified path. If an ImageRepository is created, this should be omitted.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-your-base-kustomization"><a class="anchor" href="#creating-your-base-kustomization"></a>Creating Your Base Kustomization</h3>
+<div class="paragraph">
+<p>With the base component defined, tell Kustomize it exists for later consumption in overlays. Set up a basic <code>base/kustomization.yaml</code> as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - component.yaml</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-a-base-for-your-application"><a class="anchor" href="#create-a-base-for-your-application"></a>Create a Base for Your Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each application will have its own base and one or more overrides.</p>
+</div>
+<div class="paragraph">
+<p>You can think of each application variant as the base that defines the structure of your application and all components in that application. The concrete application is an implementation of that variant that defines any differentiating specs, such as application name, version, and component branches.</p>
+</div>
+<div class="paragraph">
+<p>Create your base application at <code>overlay/application-a/application-a-base/application.yaml</code> like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: appstudio.redhat.com/v1alpha1
+kind: Application <i class="conum" data-value="1"></i><b>(1)</b>
+metadata:
+  name: &lt;application-name&gt;
+  namespace: &lt;namespace&gt;
+spec:
+  displayName: &lt;application-name&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>At least one application should be created. Multiple applications can be created by adding additional CR specifications.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>And its Kustomization file at <code>overlay/application-a/application-a-base/kustomization.yaml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - application.yaml</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-an-overlay-for-each-component"><a class="anchor" href="#create-an-overlay-for-each-component"></a>Create an Overlay for Each Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For each application, define every component in the application as an overlay. These overlays should contain all component-specific information that is consistent across all versions of the application, in case you have more than one version of the application.</p>
+</div>
+<div class="paragraph">
+<p>For example, you&#8217;ll typically have more than one version defined if you&#8217;re developing a versioned operator and have consistent component names across every version of an application, but different branches (this is the OpenShift / OpenShift CI Model with release-versioned branches).</p>
+</div>
+<div class="paragraph">
+<p>Define these components as folders in <code>overlay/application-a/base</code>. Each folder should be named after its component name, e.g., <code>component-a</code>, and contain an <code>override.yaml</code> and <code>kustomization.yaml</code> that look like:</p>
+</div>
+<div class="paragraph">
+<p><code>overlay/application-a/base/component-a/component-a-override.yaml</code> (replacing name, URL, and Dockerfile):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">- op: replace
+  path: /metadata/name
+  value: component-a-name
+- op: replace
+  path: /spec/componentName
+  value: component-a-name
+- op: replace
+  path: /spec/source/git/url
+  value: https://myvcs.com/myorg/component-a
+- op: replace
+  path: /spec/source/git/dockerfileUrl
+  value: "Dockerfile"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>overlay/application-a/base/component-a/kustomization.yaml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../../../base # Path to base component
+
+patches:
+  - path: component-a-override.yaml # Path to override file
+    target:
+      kind: Component</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can repeat this pattern for every component in your application.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-an-overlay-for-your-application-and-application-specific-component-configuration"><a class="anchor" href="#create-an-overlay-for-your-application-and-application-specific-component-configuration"></a>Create an Overlay for Your Application and Application-Specific Component Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For each version or variant of your application, as configured in the prior steps, define an application overlay and any additional application-specific component patches.</p>
+</div>
+<div class="paragraph">
+<p>Version this concrete application and set of patches in its own overlay folder in the application folder. In this case, <code>overlay/application-a/v1-overlay</code> will hold:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application-patch.yaml</code>: Our application overlay</p>
+</li>
+<li>
+<p><code>component-patch.yaml</code>: A version-specific patch for all components, typically a branch name</p>
+</li>
+<li>
+<p><code>exception-component-patch.yaml</code>: An example version-specific patch for a specific component or set of components</p>
+</li>
+<li>
+<p><code>kustomization.yaml</code>: A Kustomization file that defines how the patches are applied to components</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s start with our <code>application-patch.yaml</code> at <code>overlay/application-a/v1-overlay/application-patch.yaml</code> (replacing values with your own):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">- op: replace
+  path: /metadata/name
+  value: application-a-v1
+- op: replace
+  path: /spec/description
+  value: "Pipeline for application-a v1"
+- op: replace
+  path: /spec/displayName
+  value: "application-a v1"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Followed by our override for components at <code>overlay/application-a/v1-overlay/component-patch.yaml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">- op: replace
+  path: /spec/application
+  value: application-a-v1 # Must match /metadata/name in application-patch.yaml
+- op: replace
+  path: /spec/source/git/revision
+  value: release-v1 # Replace with your target branch for all components</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you have any patches specific to this application revision that only impact a certain component or set of components, define another patch as shown in <code>overlay/application-a/v1-overlay/exception-component-patch-1.yaml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">- op: replace
+  path: /spec/source/git/revision
+  value: main # In this example, one of our components will build off of main, so we set it in a separate patch.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, set up your <code>overlay/application-a/v1-overlay/kustomization.yaml</code> to apply these patches correctly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+nameSuffix: v1 # Add a suffix to all resource names in the application for uniqueness
+resources:
+  - ../base
+
+patches:
+  - target:
+      kind: Application
+    path: application-patch.yaml
+  - target:
+      kind: Component
+    path: component-patch.yaml
+  - target:
+      kind: Component
+      name: component-b
+    path: exception-component-patch-1.yaml</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This Kustomization applies a suffix to all resources. We recommend doing this to ensure uniqueness and make it easier to identify components and applications.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can define more than one exceptional patch and match component names through regular expression.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="defining-multiple-versions-or-variants-of-an-application"><a class="anchor" href="#defining-multiple-versions-or-variants-of-an-application"></a>Defining Multiple Versions or Variants of an Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If multiple versions of an application exist (as in versioned operators) or variants of applications that share some or all components, define multiple application overlays following the same pattern as above.</p>
+</div>
+<div class="paragraph">
+<p>This results in a configuration that looks something like the following, with a folder for each version:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">├── base
+│   ├── component.yaml
+│   └── kustomization.yaml
+├── overlay
+│   └── application-a
+│       ├── base
+│       │   ├── application.yaml
+│       │   ├── component-a
+│       │   │   ├── component-a-override.yaml
+│       │   │   └── kustomization.yaml
+│       │   ├── component-b
+│       │   │   ├── component-b-override.yaml
+│       │   │   └── kustomization.yaml
+│       │   └── kustomization.yaml
+│       ├── v1-overlay
+│       │   ├── application-patch.yaml
+│       │   ├── component-patch.yaml
+│       │   ├── exception-component-patch-1.yaml
+│       │   └── kustomization.yaml
+│       └── v2-overlay
+│           ├── application-patch.yaml
+│           ├── component-patch.yaml
+│           ├── exception-component-patch-1.yaml
+│           └── kustomization.yaml
+└── README.md</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="defining-multiple-applications"><a class="anchor" href="#defining-multiple-applications"></a>Defining Multiple Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you want to define multiple applications with different sets of components and versions for each application, replicate the above configuration for <code>application-a</code> for a second application and include it as an additional application base and overlays in the <code>overlay</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>This approach is preferred for defining multiple applications within an application category (such as operators) or a family/product organization as code. It allows you to make bulk configurations to your base component YAML (such as enabling multi-architecture support or setting labels and ownership) in a single place — the component base — rather than in multiple places.</p>
+</div>
+<div class="paragraph">
+<p>If you follow this method to create an <code>application-b</code> composed of <code>component-c</code> and <code>component-d</code>, then your directory structure will look something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">├── base
+│   ├── component.yaml
+│   └── kustomization.yaml
+├── overlay
+│   ├── application-a
+│   │   ├── base
+│   │   │   ├── application.yaml
+│   │   │   ├── component-a
+│   │   │   │   ├── component-a-override.yaml
+│   │   │   │   └── kustomization.yaml
+│   │   │   ├── component-b
+│   │   │   │   ├── component-b-override.yaml
+│   │   │   │   └── kustomization.yaml
+│   │   │   └── kustomization.yaml
+│   │   ├── v1-overlay
+│   │   │   ├── application-patch.yaml
+│   │   │   ├── component-patch.yaml
+│   │   │   ├── exception-component-patch-1.yaml
+│   │   │   └── kustomization.yaml
+│   │   └── v2-overlay
+│   │       ├── application-patch.yaml
+│   │       ├── component-patch.yaml
+│   │       ├── exception-component-patch-1.yaml
+│   │       └── kustomization.yaml
+│   └── application-b
+│       ├── base
+│       │   ├── application.yaml
+│       │   ├── component-c
+│       │   │   ├── component-c-override.yaml
+│       │   │   └── kustomization.yaml
+│       │   ├── component-d
+│       │   │   ├── component-d-override.yaml
+│       │   │   └── kustomization.yaml
+│       │   └── kustomization.yaml
+│       └── v1-overlay
+│           ├── application-patch.yaml
+│           ├── component-patch.yaml
+│           ├── exception-component-patch-1.yaml
+│           └── kustomization.yaml
+└── README.md</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can also modify the project structure to fit your own needs by moving application bases and component definitions to different levels, but this configuration offers the most layered encapsulation across applications and application versions.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Managing multiple related components and applications can be challenging. Refer <a href="https://redhat-appstudio.github.io/docs.appstudio.io/Documentation/main/how-to-guides/proc_multiversion/" class="bare">https://redhat-appstudio.github.io/docs.appstudio.io/Documentation/main/how-to-guides/proc_multiversion/</a> [Managing multiple software versions] to manage multiple related components and applications.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../customizing-the-build/">Customizing the build pipeline</a></span>
+  <span class="next"><a href="../reconfiguring-build-pipeline/">Reconfiguring the build pipeline</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer" style="text-align: center;">
+   <a href="https://github.com/konflux-ci/docs" target="_blank">Source on GitHub</a>
+   | <a href="https://github.com/konflux-ci/community?tab=readme-ov-file#welcome-to-the-konflux-community" target="_blank">Join the community</a>
+   | <a href="https://github.com/konflux-ci/.github/blob/main/SECURITY.md" target="_blank">Report a security issue</a>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>

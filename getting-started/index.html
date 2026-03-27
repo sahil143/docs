@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Getting started with Konflux :: Konflux Documentation</title>
+    <link rel="canonical" href="https://sahil143.github.io/docs/getting-started/">
+    <link rel="prev" href="../">
+    <link rel="next" href="../share-with-community/">
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="stylesheet" href="../_/css/main.css">
+<link rel="stylesheet" href="../_/css/main.css">
+<link rel="stylesheet" href="../_/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<script>var uiRootPath = '../_'</script>
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <button class="navbar-burger" data-target="topbar-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <img src="../_/img/logo.svg" class="navbar-logo" alt="Konflux logo">
+            <a href="https://sahil143.github.io/docs/">Documentation</a>
+          </div>
+        </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+              <div class="button"><a href="https://konflux-ci.dev/" target="_blank">Home</a></div>
+              <div class="button"><a href="https://github.com/konflux-ci/docs/issues/new?body=Page:%20/getting-started/" target="_blank">Raise an
+                  issue</a></div>
+        <div class="navbar-item search hide-for-print">
+          <div id="search-field" class="field">
+            <input id="search-input" type="text" placeholder="Search the docs">
+            <label class="filter checkbox">
+              <input type="checkbox" data-facet-filter="component:ROOT"> In this project
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../">Konflux-CI</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../">Why Konflux?</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="./">Getting started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../share-with-community/">Share Tenant with Community</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../building/">Building</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Getting started</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../building/creating/">Creating applications and components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../building/creating-github/">Onboarding a component from GitHub with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../building/creating-gitlab/">Onboarding a component from GitLab with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../building/creating-forgejo/">Onboarding a component from Forgejo with the CLI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/deleting/">Deleting applications and components</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/running/">Running build pipelines</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build configuration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/customizing-the-build/">Customizing the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/configuration-as-code/">Configuration as code</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/reconfiguring-build-pipeline/">Reconfiguring the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/imagerepository/">Customizing ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/labels-and-annotations/">Using labels and annotations</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/build-with-args/">Passing buildah arguments</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Secrets</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../building/secrets/">Creating secrets for your builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../building/secrets/creating-task-input-secrets/">Creating task input secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../building/secrets/creating-registry-pull-secrets/">Creating registry pull secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../building/secrets/creating-scm-secrets/">Creating source control management secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../building/secrets/referencing-secrets-in-containerfile/">Referencing Secrets in a Containerfile</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../building/secrets/secrets-from-external-vaults/">Secrets from external vaults</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build optimization</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/hermetic-builds/">Enabling hermetic builds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/caching-proxy/">Enabling caching proxy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/prefetching-dependencies/">Prefetching package manager dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/using-trusted-artifacts/">Using trusted artifacts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/redundant-rebuilds/">Preventing redundant rebuilds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/overriding-compute-resources/">Overriding compute resources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Image management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/accessing-private-images/">Accessing private image repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/custom-tags/">Using custom tags</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/build-binaries/">Building binaries</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/pulp-access/">Getting access to Pulp storage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Advanced</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/component-nudges/">Defining component relationships</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/scheduled-builds/">Scheduled builds with CronJobs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/activation-keys-subscription/">Using Red Hat subscription content</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../building/apply-task-migrations/">Applying task migrations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../testing/">Testing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../testing/build/">Build-time tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing/build/snyk/">Enabling Snyk</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../testing/integration/">Integration tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing/integration/adding/">Adding an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing/integration/creating/">Creating a custom integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing/integration/editing/">Editing integration tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing/integration/debugging/">Debugging an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing/integration/rerunning/">Rerunning an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing/integration/canceling/">Canceling an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing/integration/choosing-contexts/">Choosing when to run certain Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing/integration/disable-integration-comment/">Disabling Integration Test Comments</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing/integration/accessing-private-repositories/">Accessing Private Repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing/integration/periodic-integration-tests/">Triggering Periodic Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing/integration/standardized-outputs/">Standardized outputs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../testing/integration/logs-to-quay/">Export Pipeline Logs to Quay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../testing/integration/snapshots/">Snapshots</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../testing/integration/snapshots/working-with-snapshots/">Working with Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../testing/integration/snapshots/override-snapshots/">Creating an override snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../testing/integration/snapshots/group-snapshots/">Creating a group snapshot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Third Parties</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../testing/integration/third-parties/jenkins/">Testing with Jenkins</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../testing/integration/third-parties/testing-farm/">Testing with Testing Farm</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../testing/integration/third-parties/rapidast/">Testing with RapiDAST</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../testing/integration/third-parties/openshift-ci/">Testing with Openshift CI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../metadata/">Inspecting provenance and attestations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../metadata/discover/">Discovering the associated metadata</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../metadata/sboms/">Inspecting SBOMs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../metadata/attestations/">Inspecting artifact attestations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../metadata/scan-results/">Inspecting artifact scan results</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../compliance/">Compliance</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../compliance/customizing-policy/">Customizing Policy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../compliance/policy-evaluations/">Policy Evaluations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../releasing/">Releasing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../releasing/create-release-plan/">Creating a release plan</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../releasing/create-release-plan-admission/">Creating a release plan admission</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../releasing/create-release/">Creating a release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../releasing/retrigger-release/">Re-trigger a release manually</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../releasing/tenant-release-pipelines/">Tenant Release Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../releasing/adjusting-timeouts-resources/">Adjusting timeouts and resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../releasing/using-collectors/">Using collectors</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../mintmaker/user/">Dependency Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../mintmaker/user/">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../mintmaker/user/#configuration">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../mintmaker/user/#available-managers">Available managers</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../mintmaker/user/#scheduling">Scheduling</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../mintmaker/user/#advanced-topics">Advanced topics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../mintmaker/security-updates/">Security updates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../mintmaker/rpm-lockfile/">RPM lockfiles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../mintmaker/default-config/">Default configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../mintmaker/support/">Support matrix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../patterns/">How-to guides</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../patterns/git-submodules/">Building upstream project with git submodules</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../patterns/running-user-scripts-on-the-build-pipeline/">Running user scripts on the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../patterns/managing-pipeline-changes/">Evolving build pipeline management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../patterns/centralize-pipeline-definitions/">Centralizing Tekton pipeline definitions in your repository</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../patterns/keep-remote-pipelines-up-to-date/">Remote pipeline definitions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Application management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../patterns/managing-multiple-versions/">Managing multiple software versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../patterns/managing-monorepo-applications/">Managing monorepo Applications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../patterns/maintaining-references-before-release/">Maintaining valid image references before a release</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Release and testing patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../patterns/testing-releasing-single-component/">Testing and releasing a single Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../patterns/gitops-for-manual-releases/">GitOps for Releases</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../patterns/managing-security-fix/">Managing a security fix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Integrations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../patterns/github-merge-queues/">GitHub merge queues</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../patterns/slack-notifications/">Slack Webhook Notifications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../patterns/mapping-tags-to-labels/">Maintaining parity between tags and labels</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">End-to-end guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../end-to-end/building-olm/">Building an OLM operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../end-to-end/building-tekton-tasks/">Building Tekton tasks</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Installation</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installing/">Installing Konflux</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installing/enabling-builds/">Enabling build pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installing/github-app/">GitHub App</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Troubleshooting</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/builds/">Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/releases/">Releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/registries/">Registry Issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../troubleshooting/service-accounts/">Service Account Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../glossary/">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../reference/">Reference</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/sample-repositories/">Sample repositories</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../reference/kube-apis/">Konflux Kubernetes APIs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-application">Application</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-component">Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-snapshot">Snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/conforma/#k8s-api-github-com-conforma-crds-api-v1alpha1-enterprisecontractpolicy">EnterpriseContractPolicy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/image-controller/#k8s-api-github-com-konflux-ci-image-controller-api-v1alpha1-imagerepository">ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/integration-service/#k8s-api-github-com-konflux-ci-integration-service-api-v1alpha1-integrationtestscenario">IntegrationTestScenario</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-release">Release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplan">ReleasePlan</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplanadmission">ReleasePlanAdmission</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseserviceconfig">ReleaseServiceConfig</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/mintmaker/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-dependencyupdatecheck">DependencyUpdateCheck</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-project">Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstream">ProjectDevelopmentStream</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstreamtemplate">ProjectDevelopmentStreamTemplate</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Konflux-CI</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../">Konflux-CI</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../">Konflux-CI</a></li>
+    <li><a href="./">Getting started</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="file:///Users/sbudhwar/workspace/github/konflux/docs/./modules/ROOT/pages/getting-started.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Getting started with Konflux</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Adopting new platforms is always challenging.
+While we aim to make use of industry-standard terminology and processes, we may need to introduce additional concepts.
+You can find these definitions in the <a href="../glossary/" class="xref page">glossary</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="key-concepts"><a class="anchor" href="#key-concepts"></a>Key concepts</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="namespace"><a class="anchor" href="#namespace"></a>Namespace</h3>
+<div class="paragraph">
+<p>In Kubernetes, <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">namespaces</a>
+provide a foundational mechanism for isolating groups of resources within a single cluster.
+Konflux scopes all the resources and APIs you interact with to namespaces, including your components, applications, snapshots, secrets, and the Tekton PipelineRuns that perform builds, tests, and releases.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tenant-namespace"><a class="anchor" href="#tenant-namespace"></a>Tenant namespace</h3>
+<div class="paragraph">
+<p>Tenant namespaces are where Tekton Pipelines produce artifacts that more than one individual can access according to their roles and the permissions defined by <a href="https://konflux-ci.dev/architecture/ADR/0011-roles-and-permissions.html">those roles</a>.
+The tenant namespaces can be either for an individual or a team.</p>
+</div>
+<div class="paragraph">
+<p>In Konflux, you operate in a tenant namespace scoped to your team.
+One team can span multiple namespaces if needed, each with many applications and components.
+We recommend that you not share namespaces with many teams.</p>
+</div>
+<div class="paragraph">
+<p>You will use your tenant namespaces to do the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../building/creating/" class="xref page">Create components and applications</a>.</p>
+</li>
+<li>
+<p>Run the <a href="../building/" class="xref page">Tekton PipelineRuns</a> defined in your Git repositories.</p>
+</li>
+<li>
+<p>View and iterate on the <a href="../testing/" class="xref page">results of your IntegrationTestScenarios</a>.</p>
+</li>
+<li>
+<p><a href="../releasing/" class="xref page">Create releases</a> for specific snapshots according to your ReleasePlans.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="managed-namespaces"><a class="anchor" href="#managed-namespaces"></a>Managed Namespaces</h3>
+<div class="paragraph">
+<p>Managed namespaces are where you manage release pipelines and credentials for your organization.
+The primary interaction between a tenant and managed namespaces involves creating a release in a tenant namespace that references a specific snapshot in the managed namespace.
+You can then trigger the release pipeline for that snapshot in the managed namespace.
+See <a href="../releasing/" class="xref page">release documentation</a> for more information.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="oci-artifact"><a class="anchor" href="#oci-artifact"></a>OCI Artifact</h3>
+<div class="paragraph">
+<p>OCI is the <a href="https://github.com/opencontainers">open containers initiative</a>.
+This initiative contains an <a href="https://github.com/opencontainers/image-spec">image spec</a> that permits storing <a href="https://github.com/opencontainers/image-spec/blob/main/artifacts-guidance.md">artifacts other than container images</a> in container registries, which we call <strong>OCI Artifacts</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Konflux pushes artifacts that you build in your tenant namespace to an OCI registry along with their supporting metadata (including <a href="../metadata/" class="xref page">SLSA provenance attestations and SBOMs</a>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="build-pipeline"><a class="anchor" href="#build-pipeline"></a>Build Pipeline</h3>
+<div class="paragraph">
+<p>When you create a component in Konflux, the system pushes a build pipeline to the Git repository in the <code>.tekton</code> directory and installs a webhook.</p>
+</div>
+<div class="paragraph">
+<p>Upon a new push or pull request (<em>pull requests</em> are referred to as <em>merge requests</em> in GitLab&#8217;s terminology), the system runs the pipeline defined in the Git repository.
+This pipeline describes the process necessary to build and test a specific artifact.</p>
+</div>
+<div class="paragraph">
+<p>The build process includes Tekton Tasks such as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Cloning the Git repository.</p>
+</li>
+<li>
+<p>Prefetching dependencies.</p>
+</li>
+<li>
+<p>Building the OCI artifact.</p>
+</li>
+<li>
+<p>Building the source SBOM.</p>
+</li>
+<li>
+<p>Generating the source container.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The test process includes Tekton Tasks such as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Running Snyk scans.</p>
+</li>
+<li>
+<p>Checking for CVEs with <code>clair-in-ci</code>.</p>
+</li>
+<li>
+<p>Running an antivirus scan on the artifact.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Konflux inherits the pattern of defining Tekton build pipelines in Git from its use of <a href="https://pipelinesascode.com/">Pipelines as Code (PaC)</a>.
+PaC enables you to use a Tekton PipelineDefinition within your Git repository, and for the system to trigger that pipeline whenever a team member submits a new commit or pull request to the repository.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="custom-resources"><a class="anchor" href="#custom-resources"></a>Custom Resources</h3>
+<div class="paragraph">
+<p>In Kubernetes, a <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Custom Resource (CR)</a> is an extension of the Kubernetes API.</p>
+</div>
+<div class="paragraph">
+<p>All Konflux APIs are Kubernetes CRs. This setup enables commonplace Kubernetes client tools, such as <a href="https://kubernetes.io/docs/reference/kubectl/">kubectl</a>, to understand and interact with Konflux APIs. If you&#8217;re familiar with common Kubernetes resources such as Pods and Deployments, you&#8217;ll find that Konflux resources appear on the cluster in the same way:</p>
+</div>
+<div class="sect3">
+<h4 id="component"><a class="anchor" href="#component"></a>Component</h4>
+<div class="paragraph">
+<p>A <a href="../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-component" class="xref page">Component CR</a> describes the properties of an OCI artifact.
+These properties include the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The Git repository from which the artifact originates.</p>
+</li>
+<li>
+<p>The latest built commit.</p>
+</li>
+<li>
+<p>Initial build configuration parameters.</p>
+</li>
+<li>
+<p>Relationships to other components.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The CR also contains a reference to the single application that owns it.
+Component names are unique in a namespace, even when you use the components in different applications.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="application"><a class="anchor" href="#application"></a>Application</h4>
+<div class="paragraph">
+<p>An <a href="../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-application" class="xref page">Application CR</a> owns multiple components. It helps to logically group components in the UI.</p>
+</div>
+<div class="paragraph">
+<p>When a new component&#8217;s build pipeline is complete, the Integration Service, which contains the latest Git and OCI references, creates a new snapshot from each of the Component CRs, as well as the just-produced component artifact.
+The IntegrationTestScenarios use this output to run.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="snapshot"><a class="anchor" href="#snapshot"></a>Snapshot</h4>
+<div class="paragraph">
+<p>A <a href="../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-snapshot" class="xref page">Snapshot CR</a> is an immutable set of component references.
+It can be created from push or pull request events.
+A snapshot defines a set of components, which are either tested or released together.</p>
+</div>
+<div class="paragraph">
+<p>Over time, as you produce more builds, your tenant namespace will contain many snapshots.
+Understand that at any point in time, a given snapshot <em>might not necessarily</em> represent the latest built artifacts for all components in your tenant namespace.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="integrationtestscenario"><a class="anchor" href="#integrationtestscenario"></a>IntegrationTestScenario</h4>
+<div class="paragraph">
+<p>An <a href="../reference/kube-apis/integration-service/#k8s-api-github-com-konflux-ci-integration-service-api-v1alpha1-integrationtestscenario" class="xref page">IntegrationTestScenario (ITS) CR</a> is a Tekton Pipeline that defines a test to run against an entire snapshot.
+The Integration Service runs all configured ITSs for the snapshot&#8217;s application.
+The system also creates a default ITS for every new application to enable EnterpriseContractPolicy checks on all components.</p>
+</div>
+<div class="paragraph">
+<p>You can configure each ITS as optional for release. All non-optional tests must pass before the new component build is "promoted" to update the references on the component CR.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="enterprisecontractpolicy"><a class="anchor" href="#enterprisecontractpolicy"></a>EnterpriseContractPolicy</h4>
+<div class="paragraph">
+<p>Building in Konflux follows a "build once, release multiple times" mentality, where each release can have separate requirements on the builds before allowing the action.
+You codify these build requirements in an <a href="../reference/kube-apis/conforma/#k8s-api-github-com-conforma-crds-api-v1alpha1-enterprisecontractpolicy" class="xref page">EnterpriseContractPolicy CR</a>.</p>
+</div>
+<div class="paragraph">
+<p>When Konflux evaluates an ECP against a snapshot, it returns a single result based on the highest violation.
+For example, if all components pass the policy requirements, the policy evaluation is true.
+If a single component in a snapshot fails the policy, however, the overall result is a failure even if all of the rest have clean passes.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="releaseplan"><a class="anchor" href="#releaseplan"></a>ReleasePlan</h4>
+<div class="paragraph">
+<p>A <a href="../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplan" class="xref page">ReleasePlan (RP) CR</a> maps an Application you want to release to a release action.
+It defines the process to release future Snapshots of your Application in the managed namespace.
+It also determines whether automatic releases are enabled and whether you want to provide additional data to each future release pipeline.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="releaseplanadmission"><a class="anchor" href="#releaseplanadmission"></a>ReleasePlanAdmission</h4>
+<div class="paragraph">
+<p>You also need to create a <a href="../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplanadmission" class="xref page">ReleasePlanAdmission (RPA) CR</a> in the managed namespace.
+It defines the specific pipeline to run and a given ECP, which must pass for each snapshot before that pipeline can proceed.
+It also establishes essential details about the delivery of your content that we want to exercise some control over.</p>
+</div>
+<div class="paragraph">
+<p>For example, if your release pipeline uses an <a href="https://Github.com/konflux-ci/release-service-catalog/blob/production/tasks/managed/apply-mapping/apply-mapping.yaml">apply-mapping</a> task, the <code>.spec.data.mapping.components</code> section of this resource will define which destination repositories to push your content to.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="release"><a class="anchor" href="#release"></a>Release</h4>
+<div class="paragraph">
+<p>Every time you want to release newly built artifacts, you will create a <a href="../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-release" class="xref page">Release CR</a> in <strong>your</strong> tenant namespace.
+The Release CR represents your intent to release some content to customers.
+It is an active resource that, when present, will initiate the push of content.</p>
+</div>
+<div class="paragraph">
+<p>A Release CR references a specific Snapshot and ReleasePlan.
+It indicates your intention to ship the content in the Snapshot by way of the referenced ReleasePlan.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It is possible to configure your ReleasePlan with <a href="../releasing/create-release-plan/" class="xref page">auto-release</a>.
+When enabled, the Konflux system will generate your releases for you whenever your snapshots pass all of their IntegrationTestScenarios.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<a href="https://issues.redhat.com/browse/KONFLUX-1364">Future functionality</a>, will allow you to automatically collect dynamic metadata for inclusion in the autogenerated Release CRs.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="konflux-personas"><a class="anchor" href="#konflux-personas"></a>Konflux personas</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Konflux is a platform that helps teams develop applications. How you use Konflux depends on what role you have on your team. Konflux users generally fall into one of two categories:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Platform Engineers (PEs): These are the people whose job isn&#8217;t to engineer applications, but to make it possible for others to do so. They usually own the instance of Konflux. They manage that instance and its users.</p>
+</li>
+<li>
+<p>Developers: These are the people who engineer applications for their organization. They are the typical users of Konflux, who productize their software with it.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Depending on your role, read whichever following section applies best to you, to get more information and links to further documentation.</p>
+</div>
+<div class="sect2">
+<h3 id="platform-engineers"><a class="anchor" href="#platform-engineers"></a>Platform Engineers</h3>
+<div class="paragraph">
+<p>Before anyone can use it, you need to <a href="https://github.com/konflux-ci/konflux-ci?tab=readme-ov-file#konflux-ci">install Konflux</a>.
+After installing Konflux, you can add users and assign them to a Konflux tenant namespace. We use Konflux tenant namespaces for role-based access control (RBAC).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="developers"><a class="anchor" href="#developers"></a>Developers</h3>
+<div class="paragraph">
+<p>The purpose of Konflux is to help your applications get out into the world. Be aware that, in Konflux, we specifically define an application as one or more components that run together. And a component is an image built from a source repository.</p>
+</div>
+<div class="paragraph">
+<p>To access Konflux, your PE needs to give you the URL to your team&#8217;s instance and your user credentials. Once you have that access, you can use Konflux to do many different things. But the actions you can take generally fall into 3 key categories:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Build:</strong> as mentioned, to form an application, you build its components as images from a repository. While building, Konflux also runs certain checks against those images and their source repository.</p>
+</li>
+<li>
+<p><strong>Test:</strong> bring components together and test them as a whole application.</p>
+</li>
+<li>
+<p><strong>Release:</strong> transfer ownership of your application to somewhere outside of Konflux, like a container registry.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="getting-started-with-the-cli"><a class="anchor" href="#getting-started-with-the-cli"></a>Getting started with the CLI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Konflux is built around Kubernetes so the CLI is one of the main interaction models. Once
+you have an instance available to you, contact your Platform Engineer for the best way to
+authenticate with the cluster to start exploring the Custom Resources.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../">Why Konflux?</a></span>
+  <span class="next"><a href="../share-with-community/">Share Tenant with Community</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer" style="text-align: center;">
+   <a href="https://github.com/konflux-ci/docs" target="_blank">Source on GitHub</a>
+   | <a href="https://github.com/konflux-ci/community?tab=readme-ov-file#welcome-to-the-konflux-community" target="_blank">Join the community</a>
+   | <a href="https://github.com/konflux-ci/.github/blob/main/SECURITY.md" target="_blank">Report a security issue</a>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+  </body>
+</html>

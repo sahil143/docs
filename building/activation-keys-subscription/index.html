@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Using Red Hat activation keys to access subscription content :: Konflux Documentation</title>
+    <link rel="canonical" href="https://sahil143.github.io/docs/building/activation-keys-subscription/">
+    <link rel="prev" href="../scheduled-builds/">
+    <link rel="next" href="../apply-task-migrations/">
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <button class="navbar-burger" data-target="topbar-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <img src="../../_/img/logo.svg" class="navbar-logo" alt="Konflux logo">
+            <a href="https://sahil143.github.io/docs/">Documentation</a>
+          </div>
+        </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+              <div class="button"><a href="https://konflux-ci.dev/" target="_blank">Home</a></div>
+              <div class="button"><a href="https://github.com/konflux-ci/docs/issues/new?body=Page:%20/building/activation-keys-subscription/" target="_blank">Raise an
+                  issue</a></div>
+        <div class="navbar-item search hide-for-print">
+          <div id="search-field" class="field">
+            <input id="search-input" type="text" placeholder="Search the docs">
+            <label class="filter checkbox">
+              <input type="checkbox" data-facet-filter="component:ROOT"> In this project
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../">Konflux-CI</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../">Why Konflux?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../getting-started/">Getting started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../share-with-community/">Share Tenant with Community</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../">Building</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Getting started</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../creating/">Creating applications and components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../creating-github/">Onboarding a component from GitHub with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../creating-gitlab/">Onboarding a component from GitLab with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../creating-forgejo/">Onboarding a component from Forgejo with the CLI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../deleting/">Deleting applications and components</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../running/">Running build pipelines</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build configuration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../customizing-the-build/">Customizing the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../configuration-as-code/">Configuration as code</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reconfiguring-build-pipeline/">Reconfiguring the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../imagerepository/">Customizing ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../labels-and-annotations/">Using labels and annotations</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../build-with-args/">Passing buildah arguments</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Secrets</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../secrets/">Creating secrets for your builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/creating-task-input-secrets/">Creating task input secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/creating-registry-pull-secrets/">Creating registry pull secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/creating-scm-secrets/">Creating source control management secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/referencing-secrets-in-containerfile/">Referencing Secrets in a Containerfile</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/secrets-from-external-vaults/">Secrets from external vaults</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build optimization</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../hermetic-builds/">Enabling hermetic builds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../caching-proxy/">Enabling caching proxy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../prefetching-dependencies/">Prefetching package manager dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../using-trusted-artifacts/">Using trusted artifacts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../redundant-rebuilds/">Preventing redundant rebuilds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../overriding-compute-resources/">Overriding compute resources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Image management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../accessing-private-images/">Accessing private image repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../custom-tags/">Using custom tags</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../build-binaries/">Building binaries</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../pulp-access/">Getting access to Pulp storage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Advanced</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../component-nudges/">Defining component relationships</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../scheduled-builds/">Scheduled builds with CronJobs</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="./">Using Red Hat subscription content</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apply-task-migrations/">Applying task migrations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/">Testing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/build/">Build-time tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/build/snyk/">Enabling Snyk</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/">Integration tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/adding/">Adding an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/creating/">Creating a custom integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/editing/">Editing integration tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/debugging/">Debugging an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/rerunning/">Rerunning an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/canceling/">Canceling an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/choosing-contexts/">Choosing when to run certain Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/disable-integration-comment/">Disabling Integration Test Comments</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/accessing-private-repositories/">Accessing Private Repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/periodic-integration-tests/">Triggering Periodic Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/standardized-outputs/">Standardized outputs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/logs-to-quay/">Export Pipeline Logs to Quay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/snapshots/">Snapshots</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/working-with-snapshots/">Working with Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/override-snapshots/">Creating an override snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/group-snapshots/">Creating a group snapshot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Third Parties</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/jenkins/">Testing with Jenkins</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/testing-farm/">Testing with Testing Farm</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/rapidast/">Testing with RapiDAST</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/openshift-ci/">Testing with Openshift CI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../metadata/">Inspecting provenance and attestations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/discover/">Discovering the associated metadata</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/sboms/">Inspecting SBOMs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/attestations/">Inspecting artifact attestations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/scan-results/">Inspecting artifact scan results</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../compliance/">Compliance</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/customizing-policy/">Customizing Policy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/policy-evaluations/">Policy Evaluations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../releasing/">Releasing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan/">Creating a release plan</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan-admission/">Creating a release plan admission</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release/">Creating a release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/retrigger-release/">Re-trigger a release manually</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/tenant-release-pipelines/">Tenant Release Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/adjusting-timeouts-resources/">Adjusting timeouts and resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/using-collectors/">Using collectors</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../mintmaker/user/">Dependency Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#configuration">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#available-managers">Available managers</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#scheduling">Scheduling</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#advanced-topics">Advanced topics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/security-updates/">Security updates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/rpm-lockfile/">RPM lockfiles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/default-config/">Default configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/support/">Support matrix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../patterns/">How-to guides</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/git-submodules/">Building upstream project with git submodules</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/running-user-scripts-on-the-build-pipeline/">Running user scripts on the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../patterns/managing-pipeline-changes/">Evolving build pipeline management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../patterns/centralize-pipeline-definitions/">Centralizing Tekton pipeline definitions in your repository</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../patterns/keep-remote-pipelines-up-to-date/">Remote pipeline definitions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Application management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-multiple-versions/">Managing multiple software versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-monorepo-applications/">Managing monorepo Applications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/maintaining-references-before-release/">Maintaining valid image references before a release</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Release and testing patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/testing-releasing-single-component/">Testing and releasing a single Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/gitops-for-manual-releases/">GitOps for Releases</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-security-fix/">Managing a security fix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Integrations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/github-merge-queues/">GitHub merge queues</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/slack-notifications/">Slack Webhook Notifications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/mapping-tags-to-labels/">Maintaining parity between tags and labels</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">End-to-end guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-olm/">Building an OLM operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-tekton-tasks/">Building Tekton tasks</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Installation</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/">Installing Konflux</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/enabling-builds/">Enabling build pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/github-app/">GitHub App</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Troubleshooting</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/builds/">Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/releases/">Releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/registries/">Registry Issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/service-accounts/">Service Account Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../glossary/">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/">Reference</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../reference/sample-repositories/">Sample repositories</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/kube-apis/">Konflux Kubernetes APIs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-application">Application</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-component">Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-snapshot">Snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/conforma/#k8s-api-github-com-conforma-crds-api-v1alpha1-enterprisecontractpolicy">EnterpriseContractPolicy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/image-controller/#k8s-api-github-com-konflux-ci-image-controller-api-v1alpha1-imagerepository">ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/integration-service/#k8s-api-github-com-konflux-ci-integration-service-api-v1alpha1-integrationtestscenario">IntegrationTestScenario</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-release">Release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplan">ReleasePlan</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplanadmission">ReleasePlanAdmission</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseserviceconfig">ReleaseServiceConfig</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/mintmaker/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-dependencyupdatecheck">DependencyUpdateCheck</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-project">Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstream">ProjectDevelopmentStream</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstreamtemplate">ProjectDevelopmentStreamTemplate</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Konflux-CI</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../">Konflux-CI</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../">Konflux-CI</a></li>
+    <li><a href="../">Building</a></li>
+    <li>Advanced</li>
+    <li><a href="./">Using Red Hat subscription content</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="file:///Users/sbudhwar/workspace/github/konflux/docs/./modules/building/pages/activation-keys-subscription.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Using Red Hat activation keys to access subscription content</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Most Red Hat software requires a subscription to access. Activation keys are the preferred method for using Red Hat subscriptions with Konflux builds and are supported by the all types of container builds, including hermetic builds using the prefetch-dependencies task.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Previously, mounting entitlement certificates directly as secrets was advocated but this is discouraged by Red Hat since those certificates are intended to be regularly revoked and refreshed by the subscription-manager system. Direct use of entitlement certificates is still supported by Konflux but discouraged. Entitlement certificate docs are <a href="../entitlement-subscription/" class="xref page">here</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To learn how to create an activation keys see the <a href="https://docs.redhat.com/en/documentation/subscription_central/1-latest/html/getting_started_with_activation_keys_on_the_hybrid_cloud_console/index">Red Hat documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>When your activation key is created, you will need to create a secret with two values: your "org id" and the name of your activation key.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="adding-activation-keys-to-the-tenant-namespace"><a class="anchor" href="#adding-activation-keys-to-the-tenant-namespace"></a>Adding activation keys to the tenant namespace</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You will need to create one or more secrets in your Konflux namespace (one per activation key). First, decide what to name the secrets and the scope they should have. You can control the scope of the activation key you add with the name.</p>
+</div>
+<div class="sect2">
+<h3 id="adding-subscription-entitlement-for-an-entire-tenant-namespace"><a class="anchor" href="#adding-subscription-entitlement-for-an-entire-tenant-namespace"></a>Adding subscription entitlement for an entire tenant namespace</h3>
+<div class="paragraph">
+<p>Both the <code>buildah</code> and <code>prefetch-dependencies</code> tasks accept an activation key with a default name of <code>activation-key</code>. If you use this name for your secret, all of the builds in your tenant namespace will automatically use the activation key.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-subscription-entitlement-for-a-specific-component-build"><a class="anchor" href="#adding-subscription-entitlement-for-a-specific-component-build"></a>Adding subscription entitlement for a specific component build</h3>
+<div class="paragraph">
+<p>Sometimes, you only want certain builds to have the activation key, particularly when you need to have more than one key with different repository configurations in the same tenant namespace. To do this, choose a different name for your activation key secret (not <code>activation-key</code>). Then, add a parameter to the build task in your component&#8217;s pipeline run yaml:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">kind: PipelineRun
+spec:
+  pipelineSpec:
+    tasks:
+      # ...
+      - name: build-container
+        params:
+        - name: ACTIVATION_KEY
+          value: my-secret-name</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If you want to use the feature to automatically update <a href="../../mintmaker/rpm-lockfile/" class="xref page">RPM lockfiles</a> containing RPMs that require subscription, you have to include additional labels and annotations so that the <a href="../../mintmaker/user/" class="xref page">Dependency Management</a> service can properly match the activation keys with their repositories. How to create such secrets is explained in the next section.</p>
+</li>
+<li>
+<p>The default secret <code>activation-key</code> doesn&#8217;t have such requirements and will be automatically used as a fallback option for all namespace components.</p>
+</li>
+<li>
+<p>Besides correctly setting the secret labels, additional configuration must be performed, as described in <a href="../../mintmaker/rpm-lockfile/#rpm-lockfile-with-rpms-that-require-subscription" class="xref page">RPM lockfile with RPMs that require subscription</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-the-activation-key-secrets"><a class="anchor" href="#create-the-activation-key-secrets"></a>Create the activation key secrets</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="Create-activation-key-through-the-UI"><a class="anchor" href="#Create-activation-key-through-the-UI"></a>Create activation key secret through the UI</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Access the Secrets section in the konflux UI and click on <strong>Add secret</strong>.</p>
+</li>
+<li>
+<p>Set the secret name to activation-key.</p>
+</li>
+<li>
+<p>Add the first key with the name <strong>org</strong> and and set the value to your org id.</p>
+</li>
+<li>
+<p>Add a second key with the name <strong>activationkey</strong> and set the value to the name of your activation key.</p>
+</li>
+<li>
+<p>Save the secret by clicking <strong>Add secret</strong></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Create-activation-key-through-console"><a class="anchor" href="#Create-activation-key-through-console"></a>Create activation key secret through console</h3>
+<div class="paragraph">
+<p>Alternatively, you can create the secret through the CLI. After logging into your cluster and navigating to your namespace, run the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl create secret generic activation-key -n &lt;your-tenant&gt; \
+  --from-literal=org=&lt;your org id&gt; \
+  --from-literal=activationkey=&lt;your activation key name&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Create-custom-activation-key-secret"><a class="anchor" href="#Create-custom-activation-key-secret"></a>Create custom activation key secret</h3>
+<div class="paragraph">
+<p>Create custom activation key secrets with extra labels and annotations so that they can be matched to their repositories.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>This procedure is only necessary if you want to have your RPM lockfiles automatically updated by MintMaker. Otherwise, you can create your custom secrets without the extra labels and annotations.</p>
+</li>
+<li>
+<p>The default <code>activation-key</code> secret doesn&#8217;t need to follow this procedure, it will be applied to all namespaces repositories as a fallback option.</p>
+</li>
+<li>
+<p>Additional configuration must be performed, as described in <a href="../../mintmaker/rpm-lockfile/#rpm-lockfile-with-rpms-that-require-subscription" class="xref page">RPM lockfile with RPMs that require subscription</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>These secrets can only be created through the CLI:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl create -f activation-key-secret.yaml</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml"># activation-key-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: custom-activation-key
+  namespace: &lt;YOUR NAMESPACE&gt;
+  labels:
+    appstudio.redhat.com/credentials: rpm
+    appstudio.redhat.com/scm.host: &lt;source-control-management-host&gt; # for example, gitlab.com
+type: Opaque
+stringData:
+  org: &lt;YOUR ORG ID&gt;
+  activationkey: &lt;YOUR ACTIVATION KEY&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This secret will be matched to all repositories with the same Git host. If you want to narrow the matching to specific repositories, you have to add the <code>appstudio.redhat.com/scm.repository</code> annotation to the secret metadata:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: Secret
+metadata:
+  name: custom-activation-key
+  namespace: &lt;YOUR NAMESPACE&gt;
+  labels:
+    appstudio.redhat.com/credentials: rpm
+    appstudio.redhat.com/scm.host: &lt;source-control-management-host&gt; # for example, gitlab.com
+  annotations:
+    appstudio.redhat.com/scm.repository: my-user/*
+type: Opaque
+stringData:
+  org: &lt;YOUR ORG ID&gt;
+  activationkey: &lt;YOUR ACTIVATION KEY&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This annotation will match the secret to all repositories in <code>my-user</code> organization. If you want to match the secret to a specific repository, the annotation should be defined as such:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: Secret
+metadata:
+  name: custom-activation-key
+  namespace: &lt;YOUR NAMESPACE&gt;
+  labels:
+    appstudio.redhat.com/credentials: rpm
+    appstudio.redhat.com/scm.host: &lt;source-control-management-host&gt; # for example, gitlab.com
+  annotations:
+    appstudio.redhat.com/scm.repository: my-user/my-repository
+type: Opaque
+stringData:
+  org: &lt;YOUR ORG ID&gt;
+  activationkey: &lt;YOUR ACTIVATION KEY&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Multiple repositories can be listed under the <code>appstudio.redhat.com/scm.repository</code> annotation. Separate repository names with commas when listing them. The secret will be used for all repositories that match the specified paths.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Secrets lookup mechanism is searching for the most specific secret first. The secret with a repository annotation will be used first if it matches the component repository path. In none found, then a lookup will try to find a secret with a wildcard, or just the host matching one. As a fallback, the lookup will use the default <code>activation-key</code> secret.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using-subscription-content-in-a-build"><a class="anchor" href="#using-subscription-content-in-a-build"></a>Using subscription content in a build</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="non-hermetic-network-connected-builds"><a class="anchor" href="#non-hermetic-network-connected-builds"></a>Non-hermetic (network connected) builds:</h3>
+<div class="sect3">
+<h4 id="automatic-registration"><a class="anchor" href="#automatic-registration"></a>Automatic registration</h4>
+<div class="paragraph">
+<p>The buildah task will use a provided activation key to register itself with Red Hat subscription manager and mount the necessary certificates to the build environment. Simply add <code>dnf</code> or <code>yum install</code> commands to your Containerfile.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If your activation key includes more than the default <code>BaseOS</code> and <code>AppStream</code> repositories, add the following command inside your Containerfile in order update repository metadata:
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">subscription-manager refresh</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="explicit-registration"><a class="anchor" href="#explicit-registration"></a>Explicit registration</h4>
+<div class="paragraph">
+<p>If you include a <code>subscription-manager register</code>  command in your Containerfile, the buildah task
+will disable automatic subscription service registration.
+You can control subscription-manager directly using the normal commands.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The activation key secret is mounted into the build container. Use the following command to register with <code>subscription-manager</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">subscription-manager register --org "$(cat /activation-key/org)" --activationkey "$(cat /activation-key/activationkey)"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The secret will always be mounted in the same directory <code>/activation-key</code>, even when custom secret name is used.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="hermetic-network-isolated-builds"><a class="anchor" href="#hermetic-network-isolated-builds"></a>Hermetic (network isolated) builds:</h3>
+<div class="paragraph">
+<p>The prefetch-dependencies task can use an activation key to register and fetch RPMs. All repositories configured for the activation key will be enabled for prefetch.
+If the default name was used for the secret (activation-key) no configuration is necessary. Otherwise, provide the ACTIVATION_KEY parameter to the build pipeline as noted above.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuring-an-rpm-lockfile-for-hermetic-builds"><a class="anchor" href="#configuring-an-rpm-lockfile-for-hermetic-builds"></a>Configuring an RPM lockfile for hermetic builds</h3>
+<div class="paragraph">
+<p>The <code>rpm-lockfile-prototype</code> tool uses live dnf metadata to resolve a given <code>rpms.in.yaml</code> file into an <code>rpms.lock.yaml</code> file in which every RPM is pinned to a repository and version. Because it uses live metadata, the configuration of package repositories on the system will influence the results.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s explore a simple scenario that should illustrate all pertinent parts of the process.</p>
+</div>
+<div class="paragraph">
+<p>We will create a lockfile that includes the <code>openshift-clients</code> RPM which:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>requires a subscription to the OpenShift product</p>
+</li>
+<li>
+<p>is not located in the default Red Hat Enterprise Linux repositories</p>
+</li>
+<li>
+<p>is available for multiple architectures</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This RPM is available in the following repositories:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 66.6666%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>architecture</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>repository</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x86_64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rhocp-4.17-for-rhel-9-x86_64-rpms</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">aarch64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rhocp-4.17-for-rhel-9-aarch64-rpms</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="create-the-activation-key"><a class="anchor" href="#create-the-activation-key"></a>Create the activation key</h4>
+<div class="sect4">
+<h5 id="create-a-new-activation-key"><a class="anchor" href="#create-a-new-activation-key"></a>Create a new activation key</h5>
+<div class="paragraph">
+<p>Navigate to <a href="https://console.redhat.com/insights/connector/activation-keys" class="bare">https://console.redhat.com/insights/connector/activation-keys</a> and create a new activation key. Follow the instructions in the wizard.</p>
+</div>
+<div class="paragraph">
+<p>Refer to the <a href="https://docs.redhat.com/en/documentation/subscription_central/1-latest/html/getting_started_with_activation_keys_on_the_hybrid_cloud_console/index">Red Hat documentation</a> for additional information.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add-additional-repositories-to-the-key"><a class="anchor" href="#add-additional-repositories-to-the-key"></a>Add additional repositories to the key</h5>
+<div class="paragraph">
+<p>Once the key is created, click "add repositories". Add all the applicable repositories for all architectures. If you want to build source containers include the corresponding source repositories as well.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/activation-key-choose-repos.png" alt="redhat-activation-key-configuration">
+</div>
+<div class="title">Figure 1. Selecting additional repositories for an activation key</div>
+</div>
+<div class="paragraph">
+<p>When saved, your key should look something like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/activation-key-additional-repos-view.png" alt="redhat-activation-key-additional-repositories">
+</div>
+<div class="title">Figure 2. Activation Key with additional repositories configured</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Note the <strong>name</strong> of the activation key and the <strong>org ID</strong> which can be found in the drop-down under your name in the top right corner of the screen. You will need both in a subsequent step to register the container using <code>subscription-manager</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="configure-rpm-lockfile-prototype"><a class="anchor" href="#configure-rpm-lockfile-prototype"></a>Configure rpm-lockfile-prototype</h4>
+<div class="paragraph">
+<p>The goal of this procedure is to generate an RPM lockfile using the <code>rpm-lockfile-prototype</code> tool. This involves two major conceptual steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Obtaining Repository Config Files:</strong> You need access to <code>.repo</code> files that define the yum/dnf repositories for your target RHEL version and reflect the entitlements granted by your Red Hat subscription (via an activation key).</p>
+</li>
+<li>
+<p><strong>Running the Lockfile Generation Tool:</strong> You need an environment capable of running the <code>rpm-lockfile-prototype</code> tool and providing it with the repository configuration obtained in the first step.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The steps detailed below demonstrate a combined workflow where a single container is used both to generate the necessary <code>.repo</code> file (by registering with <code>subscription-manager</code> using your activation key) and to subsequently run the <code>rpm-lockfile-prototype</code> tool using that generated file. It is important to note that this is not a requirement and the two conceptual steps can be decoupled. For example, you could generate <code>.repo</code> files for RHEL 8 within a UBI 8 container (using an RHEL 8 activation key) and then use those files to run <code>rpm-lockfile-prototype</code> within a UBI 9 container to generate a RHEL 8 lockfile.</p>
+</div>
+<div class="paragraph">
+<p>The container where you run <code>rpm-lockfile-prototype</code> does not need to match the RHEL version of your build&#8212;&#8203;the execution environment only needs to meet the tool&#8217;s runtime prerequisites (e.g., Python &ge; 3.9). The key is to provide the tool with <code>.repo</code> files as input that accurately reflect the repositories of your target RHEL version.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For this step we will assume that you have source code in your current working directory <code>$(pwd)</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Follow these steps for the Combined Workflow:</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Prepare a container environment where you can run both Red Hat <code>subscription-manager</code> and the <code>rpm-lockfile-prototype</code> tool. Ideally this is the same version of Red Hat Enterprise Linux as your build, but as noted above, does not have to be. Mount your source code directory into the container.</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>In this example, we&#8217;ll using the Red Hat Enterprise Linux 9 Universal Base Image (UBI 9).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman run --rm -it -v $(pwd):/source:Z registry.access.redhat.com/ubi9</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Register with your activation key from the previous step:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">subscription-manager register --activationkey="$KEY_NAME" --org="$ORG_ID"</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+You may see a message saying <code>subscription-manager is operating in
+container mode. Use your host system to manage subscriptions.</code>, which is not
+applicable if you&#8217;re running the container on Fedora or MacOS.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Verify that you have the correct repositories and enable missing source repositories.</p>
+<div class="openblock">
+<div class="content">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It is normal to only see the repositories for your current architecture at this stage.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[root@ yum.repos.d]# dnf repolist --enabled
+Updating Subscription Management repositories.
+repo id                                                                                                                           repo name
+rhel-9-for-aarch64-appstream-rpms                                                                                                 Red Hat Enterprise Linux 9 for ARM 64 - AppStream (RPMs)
+rhel-9-for-aarch64-baseos-rpms                                                                                                    Red Hat Enterprise Linux 9 for ARM 64 - BaseOS (RPMs)
+rhocp-4.17-for-rhel-9-aarch64-rpms                                                                                                Red Hat OpenShift Container Platform 4.17 for RHEL 9 ARM 64 (RPMs)
+rhocp-4.17-for-rhel-9-aarch64-source-rpms                                                                                         Red Hat OpenShift Container Platform 4.17 for RHEL 9 ARM 64 (Source RPMs)
+ubi-9-appstream-rpms                                                                                                              Red Hat Universal Base Image 9 (RPMs) - AppStream
+ubi-9-baseos-rpms                                                                                                                 Red Hat Universal Base Image 9 (RPMs) - BaseOS
+ubi-9-codeready-builder                                                                                                           Red Hat Universal Base Image 9 (RPMs) - CodeReady Builder`</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above, the source RPM repositories are not enabled for the following repositories:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">ubi-9-appstream-rpms
+ubi-9-baseos-rpms
+ubi-9-codeready-builder</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To enable the source RPM repositories, locate the appropriate RPM repositories in <code>redhat.repo</code> and change <code>enabled = 0</code> to <code>enabled = 1</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-toml hljs" data-lang="toml">[rhocp-4.16-for-rhel-9-$basearch-rpms]
+name = Red Hat OpenShift Container Platform 4.16 for RHEL 9 $basearch (RPMs)
+baseurl = https://cdn.redhat.com/content/dist/layered/rhel9/$basearch/rhocp/4.16/os
+enabled = 1
+...
+
+[rhocp-4.16-for-rhel-9-$basearch-source-rpms]
+name = Red Hat OpenShift Container Platform 4.16 for RHEL 9 $basearch (Source RPMs)
+baseurl = https://cdn.redhat.com/content/dist/layered/rhel9/$basearch/rhocp/4.16/source/SRPMS
+enabled = 1
+...</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Install the tools needed to run rpm-lockfile-prototype:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">dnf install -y pip skopeo
+pip install --user https://github.com/konflux-ci/rpm-lockfile-prototype/archive/refs/tags/v0.13.1.tar.gz</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can find the latest version of <code>rpm-lockfile-prototype</code> on <a href="https://github.com/konflux-ci/rpm-lockfile-prototype">GitHub</a>, or viewing the repository <a href="https://github.com/konflux-ci/rpm-lockfile-prototype/tags">tags</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Copy the default repository file configured by <code>subscription-manager</code> to the <code>source/</code> directory (the directory mounted from your host filesystem).</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cp /etc/yum.repos.d/redhat.repo /source/redhat.repo</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Substitute the current architecture with <code>$basearch</code> in <code>redhat.repo</code> to facilitate fetching for multiple architectures</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sed -i "s/$(uname -m)/\$basearch/g" redhat.repo</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Authenticate to the Red Hat container registry using your Red Hat Customer Portal credentials:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">skopeo login registry.redhat.io</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Configure <code>rpms.in.yaml</code>. There are three things to configure:</p>
+<div class="openblock">
+<div class="content">
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Add <code>./redhat.repo</code> under <code>contentOrigin.repofiles</code> in <code>rpms.in.yaml</code></p>
+</li>
+<li>
+<p>Add the RPM we want Konflux to prefetch for hermetic builds (<code>openshift-clients</code>)</p>
+</li>
+<li>
+<p>Configure the enabled architectures</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following is an example of what your <code>rpms.in.yaml</code> file should look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">contentOrigin:
+  # Define at least one source of packages, but you can have as many as you want.
+  repofiles:
+     - ./redhat.repo
+
+packages:
+  # list of rpm names to resolve
+  - openshift-clients
+
+#reinstallPackages: []
+  # list of rpms already provided in the base image, but which should be
+  # reinstalled
+
+arches:
+  # The list of architectures can be set in the config file. Any `--arch` option set
+  # on the command line will override this list.
+  - aarch64
+  - x86_64
+  # - s390x
+  # - ppc64le
+
+context:
+    # Alternative to setting command line options. Usually you will only want
+    # to include one of these options, with the exception of `flatpak` that
+    # can be combined with `image` and `containerfile`
+    containerfile: Containerfile</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In the source directory for this example there is a Containerfile named <code>Containerfile</code> which starts with the line <code>FROM registry.access.redhat.com/ubi9/ubi</code>, which is the reason why we&#8217;re using a RHEL 9 UBI image to generate the lock file.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Create the lock file</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd /source; rpm-lockfile-prototype -f Containerfile rpms.in.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you encounter SSL errors (<code>Problem with the local SSL certificates</code>), make
+sure the <code>sslclientkey</code> and <code>sslclientcert</code> options in <code>redhat.repo</code>
+resolve to the correct path on the file system. These options point to
+certificates and keys that use a unique identifier (e.g., <code>sslclientcert =
+/etc/pki/entitlement/$ID.pem</code>). You may see SSL issues if you copied a
+repository configuration file from a different system/container registered with a
+different entitlement or activation key.</p>
+</div>
+<div class="paragraph">
+<p>If successful, you should see a <code>rpms.lock.yaml</code> file in the source directory:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">lockfileVersion: 1
+lockfileVendor: redhat
+arches:
+- arch: x86_64
+  packages:
+  - url: https://cdn.redhat.com/content/dist/layered/rhel9/x86_64/rhocp/4.16/os/Packages/o/openshift-clients-4.16.0-202410172045.p0.gcf533b5.assembly.stream.el9.x86_64.rpm
+    repoid: rhocp-4.16-for-rhel-9-x86_64-rpms
+    size: 54912665
+    checksum: sha256:0ffd7347620fd10bb75774520e571702361a6d0352de9112979693d003964038
+    name: openshift-clients
+    evr: 4.16.0-202410172045.p0.gcf533b5.assembly.stream.el9
+    sourcerpm: openshift-clients-4.16.0-202410172045.p0.gcf533b5.assembly.stream.el9.src.rpm
+...</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you see warnings like &#8220;WARNING:root:No sources found for...&#8221; then there is a source repository that still needs to be enabled in your repository configuration. If so, and you need source RPMs, be sure to enable the source RPM repositories in <code>redhat.repo</code> and regenerate the lock file.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Exit the container, and commit the <code>rpms.in.yaml</code>, <code>rpms.lock.yaml</code> and <code>redhat.repo</code> to
+source control. Konflux will use these files to prefetch RPMs for hermetic
+builds.</p>
+</li>
+<li>
+<p>Reminder. You still need to <a href="../prefetching-dependencies/#rpm" class="xref page">enable prefetching for RPMs</a> if this step hasn&#8217;t been done yet.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../scheduled-builds/">Scheduled builds with CronJobs</a></span>
+  <span class="next"><a href="../apply-task-migrations/">Applying task migrations</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer" style="text-align: center;">
+   <a href="https://github.com/konflux-ci/docs" target="_blank">Source on GitHub</a>
+   | <a href="https://github.com/konflux-ci/community?tab=readme-ov-file#welcome-to-the-konflux-community" target="_blank">Join the community</a>
+   | <a href="https://github.com/konflux-ci/.github/blob/main/SECURITY.md" target="_blank">Report a security issue</a>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Prefetching package manager dependencies for hermetic builds :: Konflux Documentation</title>
+    <link rel="canonical" href="https://sahil143.github.io/docs/building/prefetching-dependencies/">
+    <link rel="prev" href="../caching-proxy/">
+    <link rel="next" href="../using-trusted-artifacts/">
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/css/main.css">
+<link rel="stylesheet" href="../../_/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <button class="navbar-burger" data-target="topbar-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <img src="../../_/img/logo.svg" class="navbar-logo" alt="Konflux logo">
+            <a href="https://sahil143.github.io/docs/">Documentation</a>
+          </div>
+        </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+              <div class="button"><a href="https://konflux-ci.dev/" target="_blank">Home</a></div>
+              <div class="button"><a href="https://github.com/konflux-ci/docs/issues/new?body=Page:%20/building/prefetching-dependencies/" target="_blank">Raise an
+                  issue</a></div>
+        <div class="navbar-item search hide-for-print">
+          <div id="search-field" class="field">
+            <input id="search-input" type="text" placeholder="Search the docs">
+            <label class="filter checkbox">
+              <input type="checkbox" data-facet-filter="component:ROOT"> In this project
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../">Konflux-CI</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../">Why Konflux?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../getting-started/">Getting started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../share-with-community/">Share Tenant with Community</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../">Building</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Getting started</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../creating/">Creating applications and components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../creating-github/">Onboarding a component from GitHub with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../creating-gitlab/">Onboarding a component from GitLab with the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../creating-forgejo/">Onboarding a component from Forgejo with the CLI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../deleting/">Deleting applications and components</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../running/">Running build pipelines</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build configuration</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../customizing-the-build/">Customizing the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../configuration-as-code/">Configuration as code</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../reconfiguring-build-pipeline/">Reconfiguring the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../imagerepository/">Customizing ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../labels-and-annotations/">Using labels and annotations</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../build-with-args/">Passing buildah arguments</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Secrets</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../secrets/">Creating secrets for your builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/creating-task-input-secrets/">Creating task input secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/creating-registry-pull-secrets/">Creating registry pull secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/creating-scm-secrets/">Creating source control management secrets</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/referencing-secrets-in-containerfile/">Referencing Secrets in a Containerfile</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../secrets/secrets-from-external-vaults/">Secrets from external vaults</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build optimization</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../hermetic-builds/">Enabling hermetic builds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../caching-proxy/">Enabling caching proxy</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="./">Prefetching package manager dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../using-trusted-artifacts/">Using trusted artifacts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../redundant-rebuilds/">Preventing redundant rebuilds</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../overriding-compute-resources/">Overriding compute resources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Image management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../accessing-private-images/">Accessing private image repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../custom-tags/">Using custom tags</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../build-binaries/">Building binaries</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../pulp-access/">Getting access to Pulp storage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Advanced</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../component-nudges/">Defining component relationships</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../scheduled-builds/">Scheduled builds with CronJobs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../activation-keys-subscription/">Using Red Hat subscription content</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../apply-task-migrations/">Applying task migrations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/">Testing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/build/">Build-time tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/build/snyk/">Enabling Snyk</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/">Integration tests</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/adding/">Adding an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/creating/">Creating a custom integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/editing/">Editing integration tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/debugging/">Debugging an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/rerunning/">Rerunning an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/canceling/">Canceling an integration test</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/choosing-contexts/">Choosing when to run certain Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/disable-integration-comment/">Disabling Integration Test Comments</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/accessing-private-repositories/">Accessing Private Repositories</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/periodic-integration-tests/">Triggering Periodic Integration Tests</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/standardized-outputs/">Standardized outputs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../testing/integration/logs-to-quay/">Export Pipeline Logs to Quay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../testing/integration/snapshots/">Snapshots</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/working-with-snapshots/">Working with Snapshots</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/override-snapshots/">Creating an override snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/snapshots/group-snapshots/">Creating a group snapshot</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Third Parties</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/jenkins/">Testing with Jenkins</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/testing-farm/">Testing with Testing Farm</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/rapidast/">Testing with RapiDAST</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../testing/integration/third-parties/openshift-ci/">Testing with Openshift CI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../metadata/">Inspecting provenance and attestations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/discover/">Discovering the associated metadata</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/sboms/">Inspecting SBOMs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/attestations/">Inspecting artifact attestations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../metadata/scan-results/">Inspecting artifact scan results</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../compliance/">Compliance</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/customizing-policy/">Customizing Policy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../compliance/policy-evaluations/">Policy Evaluations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../releasing/">Releasing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan/">Creating a release plan</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release-plan-admission/">Creating a release plan admission</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/create-release/">Creating a release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/retrigger-release/">Re-trigger a release manually</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/tenant-release-pipelines/">Tenant Release Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/adjusting-timeouts-resources/">Adjusting timeouts and resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../releasing/using-collectors/">Using collectors</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../mintmaker/user/">Dependency Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#configuration">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#available-managers">Available managers</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#scheduling">Scheduling</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/user/#advanced-topics">Advanced topics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/security-updates/">Security updates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/rpm-lockfile/">RPM lockfiles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/default-config/">Default configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../mintmaker/support/">Support matrix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../patterns/">How-to guides</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/git-submodules/">Building upstream project with git submodules</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/running-user-scripts-on-the-build-pipeline/">Running user scripts on the build pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../patterns/managing-pipeline-changes/">Evolving build pipeline management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../patterns/centralize-pipeline-definitions/">Centralizing Tekton pipeline definitions in your repository</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../patterns/keep-remote-pipelines-up-to-date/">Remote pipeline definitions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Application management</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-multiple-versions/">Managing multiple software versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-monorepo-applications/">Managing monorepo Applications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/maintaining-references-before-release/">Maintaining valid image references before a release</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Release and testing patterns</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/testing-releasing-single-component/">Testing and releasing a single Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/gitops-for-manual-releases/">GitOps for Releases</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/managing-security-fix/">Managing a security fix</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Integrations</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/github-merge-queues/">GitHub merge queues</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/slack-notifications/">Slack Webhook Notifications</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../patterns/mapping-tags-to-labels/">Maintaining parity between tags and labels</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">End-to-end guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-olm/">Building an OLM operator</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../end-to-end/building-tekton-tasks/">Building Tekton tasks</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Installation</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/">Installing Konflux</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/enabling-builds/">Enabling build pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../installing/github-app/">GitHub App</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Troubleshooting</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/builds/">Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/releases/">Releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/registries/">Registry Issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../troubleshooting/service-accounts/">Service Account Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../glossary/">Glossary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/">Reference</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../reference/sample-repositories/">Sample repositories</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../reference/kube-apis/">Konflux Kubernetes APIs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-application">Application</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-component">Component</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/application-api/#k8s-api-github-com-konflux-ci-application-api-api-v1alpha1-snapshot">Snapshot</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/conforma/#k8s-api-github-com-conforma-crds-api-v1alpha1-enterprisecontractpolicy">EnterpriseContractPolicy</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/image-controller/#k8s-api-github-com-konflux-ci-image-controller-api-v1alpha1-imagerepository">ImageRepository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/integration-service/#k8s-api-github-com-konflux-ci-integration-service-api-v1alpha1-integrationtestscenario">IntegrationTestScenario</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-release">Release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplan">ReleasePlan</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseplanadmission">ReleasePlanAdmission</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/release-service/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-releaseserviceconfig">ReleaseServiceConfig</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/mintmaker/#k8s-api-github-com-konflux-ci-release-service-api-v1alpha1-dependencyupdatecheck">DependencyUpdateCheck</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-project">Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstream">ProjectDevelopmentStream</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../reference/kube-apis/project-controller/#k8s-api-github-com-konflux-ci-project-controller-api-v1beta1-projectdevelopmentstreamtemplate">ProjectDevelopmentStreamTemplate</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Konflux-CI</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../">Konflux-CI</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../">Konflux-CI</a></li>
+    <li><a href="../">Building</a></li>
+    <li>Build optimization</li>
+    <li><a href="./">Prefetching package manager dependencies</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="file:///Users/sbudhwar/workspace/github/konflux/docs/./modules/building/pages/prefetching-dependencies.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Prefetching package manager dependencies for hermetic builds</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In Konflux, you can run a hermetic build by restricting network access to the build; but without network access, a build will not be able to fetch component dependencies from remote repositories, and might fail. To avoid that, Konflux can prefetch dependencies for your hermetic builds using <a href="https://hermetoproject.github.io/hermeto">Hermeto</a>.</p>
+</div>
+<div class="paragraph">
+<p>For every build, Hermeto generates a software bill of materials (SBOM) where all dependencies are properly declared and pinned to specific versions. Also, Hermeto ensures that arbitrary code is never executed during the prefetch, meaning, for example, that the build doesn&#8217;t pull any undeclared dependencies. This results in very accurate SBOMs and improved build reproducibility. For more information about SBOMs, see <a href="../../metadata/sboms/" class="xref page">Inspecting SBOMs</a>.</p>
+</div>
+<table id="available-package-managers" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Available package managers</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Package manager</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Programming language</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#gomod">gomod</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Go</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#pip">pip</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Python</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#npm">npm</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JavaScript</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#yarn">yarn</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JavaScript</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#bundler">bundler</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Ruby</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#cargo">cargo</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Rust</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#rpm">rpm</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>N/A</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#generic">generic</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>N/A</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="procedure"><a class="anchor" href="#procedure"></a>Procedure</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To prefetch dependencies for a component build, complete the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to the <code>.tekton</code> directory and find the <code>.yaml</code> files related to the <code><strong>pull request</strong></code> and <code><strong>push</strong></code> processes.</p>
+</li>
+<li>
+<p>Configure the hermetic pipeline by adding the following parameters in both <code>.yaml</code> files:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">pipelineSpec:
+  params:
+    ...
+    - name: hermetic
+      type: string
+      description: Execute the build with network isolation
+      default: "true"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
+  params:
+    ...
+    - name: prefetch-input
+      value: '{"type": "&lt;package_manager&gt;", "path": ".", "some_other_key": "some_other_value"}' <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The prefetch-input parameter specifies the path to the directory of the project. In this example, the <code>.</code> indicates the repository root. If you have multiple directories, you can provide the path to those directories in the JSON array format: <code>[{"type": "&lt;package_manager&gt;", "path": "."}, {"type": "&lt;package_manager&gt;", "path": "subpath/to/the/other/directory"}]</code>. Additionally, you can add other keys and values to the JSON object supported by specific package managers.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Create a pull request by committing your changes to the repository of the component.</p>
+</li>
+<li>
+<p>Review and merge the pull request.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Refer to the <a href="https://hermetoproject.github.io/hermeto/usage">hermetic build walkthrough</a> for more detail on configuration and usage.</p>
+</div>
+<div class="paragraph">
+<p>Note that while there are many similarities between running <code>hermeto</code> as a command-line tool, and as part of a pipeline (i.e. in Konflux), the most important <strong>difference</strong> is:</p>
+</div>
+<div class="paragraph">
+<p><strong>Always</strong> use the JSON-formatted input when running as part of a pipeline, and give special attention to the extra options allowed by JSON input.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="verification"><a class="anchor" href="#verification"></a>Verification</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>From the Konflux <strong>Applications</strong> view, go to <strong>Activity &gt; Pipeline runs</strong>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Go to the pipeline run with <strong>Build</strong> in the <strong>Type</strong> column and confirm that the <code>prefetch-dependencies</code> stage displays a green checkmark. This indicates that the build process successfully fetched all dependencies.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>From the Konflux <strong>Applications</strong> view, go to <strong>Activity &gt; Latest commits</strong>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="troubleshooting"><a class="anchor" href="#troubleshooting"></a>Troubleshooting</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If your build fails, be sure to look at your logs:
+In Konflux, from the <strong>Applications</strong> view, select the application build you want to troubleshoot, then from the resulting <strong>Overview</strong> page, select the <strong>Activity</strong> tab. From there, under <strong>Activity By</strong>, select <strong>Pipeline runs</strong>. From the <strong>Name</strong> column, select the build whose logs you want to check, then from the resulting <strong>Pipeline run details</strong> view, do one of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Select the <strong>Logs</strong> tab.</p>
+</li>
+<li>
+<p>Alternatively, you can click <strong>build-container</strong>. When the right panel opens, select the <strong>Logs</strong> tab to see a partial view of the log for that build.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-prefetch-builds-for-gomod"><a class="anchor" href="#enabling-prefetch-builds-for-gomod"></a><a id="gomod"></a>Enabling prefetch builds for <code>gomod</code></h2>
+<div class="sectionbody">
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You have a <code>go.mod</code> file in your repository that lists all the dependencies.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="prefetching-go-modules-from-private-repos"><a class="anchor" href="#prefetching-go-modules-from-private-repos"></a><a id="go-private"></a>Prefetching Go modules from private repos</h3>
+<div class="paragraph">
+<p>To enable downloading modules from private repos, Go supports authentication via <code>.netrc</code>.
+You can create a netrc Secret for your pipeline as described <a href="#netrc">below</a>.
+For more Go-specific <code>.netrc</code> details, see the <a href="https://go.dev/doc/faq#git_https">Go docs</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gomod-walkthrough"><a class="anchor" href="#gomod-walkthrough"></a><a id="go-walkthrough"></a><code>gomod</code> walkthrough</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Refer to the <a href="https://hermetoproject.github.io/hermeto/gomod#example">gomod hermetic build walkthrough</a> for more detail on configuration and usage.</p>
+</div>
+<div class="paragraph">
+<p>Note that while there are many similarities between running <code>hermeto</code> as a command-line tool, and as part of a pipeline (i.e. in Konflux), the most important <strong>difference</strong> is:</p>
+</div>
+<div class="paragraph">
+<p><strong>Always</strong> use the JSON-formatted input when running as part of a pipeline, and give special attention to the extra options allowed by JSON input.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-prefetch-builds-for-pip"><a class="anchor" href="#enabling-prefetch-builds-for-pip"></a><a id="pip"></a>Enabling prefetch builds for <code>pip</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hermeto supports pip by parsing of <code>pip</code> requirements files, including but not limited to, <code>requirements.txt</code> files placed in the root of your repository. By generically parsing <code>pip</code> requirements files, Hermeto downloads the specified dependencies.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+These requirements files function as lockfiles, encompassing all transitive dependencies. You must actively pin each transitive dependency listed in the requirements file to a specific version. Check the <a href="https://hermetoproject.github.io/hermeto/pip/#requirementstxt">Hermeto documentation</a> for more information on how to generate the requirements file.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="building-from-source"><a class="anchor" href="#building-from-source"></a>Building from source</h3>
+<div class="paragraph">
+<p>By default, Hermeto will only fetch the source distribution from each dependency present in the requirements file. This is to force <code>pip</code> to build every dependency from source instead of relying on pre-built wheels, bringing a greater transparency to the content that will be made available to the build.</p>
+</div>
+<div class="paragraph">
+<p>In many cases, it is necessary to include additional build dependencies that are not automatically added by <code>pip-compile</code> on the requirements file. To overcome this limitation, we recommend the use of the <a href="https://pybuild-deps.readthedocs.io/en/latest/index.html">pybuild-deps</a> tool. This tool will generate a <code>requirements-build.txt</code> that contains all the build dependencies that are needed to build the project from source.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="procedure-2"><a class="anchor" href="#procedure-2"></a>Procedure</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To prefetch dependencies for a component build, complete the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to the <code>.tekton</code> directory and find the <code>.yaml</code> files related to the <code><strong>pull request</strong></code> and <code><strong>push</strong></code> processes.</p>
+</li>
+<li>
+<p>Configure the hermetic pipeline by adding the following parameters in both <code>.yaml</code> files:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
+    params:
+        -   ...
+        -   name: prefetch-input
+            value: '{"type": "pip", "path": "."}'</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>By default, Hermeto processes <code>requirements.txt</code> and <code>requirements-build.txt</code> at a specified path.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Optional: In case the requirements files do not use the standard names, or in case more than a single requirements or requirements-build file is needed, you can use the following additional parameters:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
+    params:
+        -   ...
+        -   name: prefetch-input
+            value: '{"type": "pip", "path": ".", "requirements_files": ["requirements.txt", "requirements-extras.txt", "tests/requirements.txt", "requirements_build_files": ["other-build-requirements.txt"]}'</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To troubleshoot any issues you might experience when you enable prefetch builds for <code>pip</code> with source dependencies, see the <a href="https://hermetoproject.github.io/hermeto/pip/#troubleshooting">Hermeto documentation</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="building-by-enabling-the-prefetching-of-wheels"><a class="anchor" href="#building-by-enabling-the-prefetching-of-wheels"></a>Building by enabling the prefetching of wheels</h3>
+<div class="paragraph">
+<p>In case you don&#8217;t want to build every dependency from source, Hermeto can be configured to also fetch wheels alongside the source distributions:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
+    params:
+        -   ...
+        -   name: prefetch-input
+            value: '{"type": "pip", "path": ".", "allow_binary": true}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that you don&#8217;t need to generate a <code>requirements-build.txt</code> file as described in the section above in case the prefetching of wheels is enabled.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="prefetching-pip-dependencies-from-custom-index-servers"><a class="anchor" href="#prefetching-pip-dependencies-from-custom-index-servers"></a><a id="custom-index-servers"></a>Prefetching <code>pip</code> dependencies from custom index servers</h3>
+<div class="paragraph">
+<p>Hermeto supports pip&#8217;s <a href="https://pip.pypa.io/en/stable/cli/pip_install/#install-index-url">--index-url</a> option.
+You can add this option to your <code>requirements.txt</code> file(s), instructing Hermeto to download packages from the specified
+index server. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">--index-url=https://example.pypi.org/simple/
+requests==2.32.2 \
+    --hash=sha256:dd951ff5ecf3e3b3aa26b40703ba77495dab41da839ae72ef3c8e5d8e2433289 \
+    --hash=sha256:fc06670dd0ed212426dfeb94fc1b983d917c4f9847c863f313c9dfaaffb7c23c
+
+# ...other packages</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Do not include credentials in the index URL. If needed, provide authentication through a <code>.netrc</code> file (as described <a href="#netrc">below</a>).
+For more pip-specific details on netrc files, review the <a href="https://pip.pypa.io/en/stable/topics/authentication/#netrc-support">pip documentation for netrc support</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="pip-walkthrough"><a class="anchor" href="#pip-walkthrough"></a><a id="pip-walkthrough"></a><code>pip</code> walkthrough</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Refer to the <a href="https://hermetoproject.github.io/hermeto/pip#example">pip hermetic build walkthrough</a> for more detail on configuration and usage.</p>
+</div>
+<div class="paragraph">
+<p>Note that while there are many similarities between running <code>hermeto</code> as a command-line tool, and as part of a pipeline (i.e. in Konflux), the most important <strong>difference</strong> is:</p>
+</div>
+<div class="paragraph">
+<p><strong>Always</strong> use the JSON-formatted input when running as part of a pipeline, and give special attention to the extra options allowed by JSON input.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-prefetch-builds-for-npm"><a class="anchor" href="#enabling-prefetch-builds-for-npm"></a><a id="npm"></a>Enabling prefetch builds for <code>npm</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hermeto supports <code>npm</code> by fetching any dependencies you declare in your <code>package.json</code> and <code>package-lock.json</code> project files. The npm CLI manages the <code>package-lock.json</code> file automatically, and Hermeto fetches any dependencies and enables your build to install them without network access.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You have an up-to-date <a href="https://docs.npmjs.com/cli/v9/configuring-npm/package-lock-json"><code>package-lock.json</code></a> file, newer than version 1, in your source repository. To make sure that you have the latest <code>package-lock.json</code> file, or to create a lockfile, run the <a href="https://docs.npmjs.com/cli/v9/commands/npm-install?v=true"><code>npm-install</code></a> command. You can also look at the <code>lockfileVersion</code> attribute in your <code>package-lock.json</code> file to make sure its value is a number greater than <code><strong>1</strong></code>.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="npm-walkthrough"><a class="anchor" href="#npm-walkthrough"></a><a id="npm-walkthrough"></a><code>npm</code> walkthrough</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Refer to the <a href="https://hermetoproject.github.io/hermeto/npm#example">npm hermetic build walkthrough</a> for more detail on configuration and usage.</p>
+</div>
+<div class="paragraph">
+<p>Note that while there are many similarities between running <code>hermeto</code> as a command-line tool, and as part of a pipeline (i.e. in Konflux), the most important <strong>difference</strong> is:</p>
+</div>
+<div class="paragraph">
+<p><strong>Always</strong> use the JSON-formatted input when running as part of a pipeline, and give special attention to the extra options allowed by JSON input.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-prefetch-builds-for-yarn"><a class="anchor" href="#enabling-prefetch-builds-for-yarn"></a><a id="yarn"></a>Enabling prefetch builds for <code>yarn</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Supported versions: 1.x, 3.x, and 4.x. Hermeto automatically detects the version of <code>yarn</code> and fetches any dependencies you declare in your <code>package.json</code> and <code>yarn.lock</code> project files.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You have an up-to-date <code>yarn.lock</code> file in your source repository. To ensure you have the latest <code>yarn.lock</code> file or to create it, run the <code>yarn install</code> command. If <code>yarn.lock</code> is not up-to-date, Hermeto will not fetch the dependencies.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="yarn-walkthrough"><a class="anchor" href="#yarn-walkthrough"></a><a id="yarn-walkthrough"></a><code>yarn</code> walkthrough</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Refer to the <a href="https://hermetoproject.github.io/hermeto/yarn#example">yarn hermetic build walkthrough</a> for more detail on configuration and usage.</p>
+</div>
+<div class="paragraph">
+<p>Note that while there are many similarities between running <code>hermeto</code> as a command-line tool, and as part of a pipeline (i.e. in Konflux), the most important <strong>difference</strong> is:</p>
+</div>
+<div class="paragraph">
+<p><strong>Always</strong> use the JSON-formatted input when running as part of a pipeline, and give special attention to the extra options allowed by JSON input.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-prefetch-builds-for-bundler"><a class="anchor" href="#enabling-prefetch-builds-for-bundler"></a><a id="bundler"></a>Enabling prefetch builds for <code>bundler</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">Prerequisites</div>
+<p>You have a <code>Gemfile</code> and a <code>Gemfile.lock</code> file in your repository that lists all the dependencies. The <code>Gemfile.lock</code> is generated from the <code>Gemfile</code> and contains all transitive dependencies pinned to specific versions.</p>
+</div>
+<div class="sect2">
+<h3 id="bundler-walkthrough"><a class="anchor" href="#bundler-walkthrough"></a><a id="bundler-walkthrough"></a><code>bundler</code> walkthrough</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Refer to the <a href="https://hermetoproject.github.io/hermeto/bundler#hermetic-build">bundler hermetic build walkthrough</a> for more detail on configuration and usage.</p>
+</div>
+<div class="paragraph">
+<p>Note that while there are many similarities between running <code>hermeto</code> as a command-line tool, and as part of a pipeline (i.e. in Konflux), the most important <strong>difference</strong> is:</p>
+</div>
+<div class="paragraph">
+<p><strong>Always</strong> use the JSON-formatted input when running as part of a pipeline, and give special attention to the extra options allowed by JSON input.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-prefetch-builds-for-cargo"><a class="anchor" href="#enabling-prefetch-builds-for-cargo"></a><a id="cargo"></a>Enabling prefetch builds for <code>cargo</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<div class="title">Prerequisites</div>
+<p>You have a <code>Cargo.lock</code> file in your repository that lists all the dependencies. The <code>Cargo.lock</code> file is generated by running the <code>cargo generate-lockfile</code> command and contains all transitive dependencies pinned to specific versions.</p>
+</div>
+<div class="sect2">
+<h3 id="cargo-walkthrough"><a class="anchor" href="#cargo-walkthrough"></a><a id="cargo-walkthrough"></a><code>cargo</code> walkthrough</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Refer to the <a href="https://hermetoproject.github.io/hermeto/cargo#hermetic-build">cargo hermetic build walkthrough</a> for more detail on configuration and usage.</p>
+</div>
+<div class="paragraph">
+<p>Note that while there are many similarities between running <code>hermeto</code> as a command-line tool, and as part of a pipeline (i.e. in Konflux), the most important <strong>difference</strong> is:</p>
+</div>
+<div class="paragraph">
+<p><strong>Always</strong> use the JSON-formatted input when running as part of a pipeline, and give special attention to the extra options allowed by JSON input.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-prefetch-builds-for-rpm"><a class="anchor" href="#enabling-prefetch-builds-for-rpm"></a><a id="rpm"></a>Enabling prefetch builds for <code>rpm</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hermeto has a package manager capable of fetching <code>rpm</code> dependencies. This requires the use of a pair of <code>rpms.in.yaml</code> and <code>rpms.lock.yaml</code> files to be committed to your repository. You write a <code>rpms.in.yaml</code> file and the <a href="https://github.com/konflux-ci/rpm-lockfile-prototype?tab=readme-ov-file#what-is-this">rpm-lockfile-prototype</a> CLI tool resolves that to produce a <code>rpms.lock.yaml</code> file. Hermeto fetches those specific rpms and enables your build to install them without network access.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You have an up-to-date installation of <a href="https://github.com/konflux-ci/rpm-lockfile-prototype?tab=readme-ov-file#installation">rpm-lockfile-prototype</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To prefetch dependencies for a component build, complete the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Have a Containerfile, for example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-Dockerfile hljs" data-lang="Dockerfile">FROM quay.io/fedora/fedora:rawhide
+RUN dnf -y install cargo
+WORKDIR /workdir
+ENTRYPOINT ["cargo", "--version"]</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create a <code>rpms.in.yaml</code> file in your git repository, with the following contents:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">packages: [cargo] <i class="conum" data-value="1"></i><b>(1)</b>
+contentOrigin:
+  repofiles: ["./fedora.repo"] <i class="conum" data-value="2"></i><b>(2)</b>
+arches: [x86_64, aarch64] <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code><strong>packages</strong></code> list is the list of packages you want to install in your Container. You don&#8217;t have to declare transitive dependencies here. The rpm-lockfile-prototype tool will resolve them for you.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>This should be a reference to a repo file, like those found in <code>/etc/yum.repos.d/</code>. This tells the tooling where to find your rpm and its dependencies.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The <code>arches</code> array allows you to specify which architectures the dependencies should be downloaded for. If you&#8217;re building a multi-arch container this array is mandatory, otherwise the build task will fail.
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The description of all options available for <code>rpms.in.yaml</code> can be found
+<a href="https://github.com/konflux-ci/rpm-lockfile-prototype?tab=readme-ov-file#whats-the-input_file">here</a>.
+</td>
+</tr>
+</table>
+</div></td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Copy any necessary yum/dnf repo files into your git repository. For example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ BASE_IMAGE=quay.io/fedora/fedora:rawhide
+$ podman run -it $BASE_IMAGE cat /etc/yum.repos.d/fedora.repo &gt; fedora.repo</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>(Optional) If you&#8217;re installing the RPMs into a custom install root, e.g. <code>dnf install --installroot</code>, be sure to import the required GPG keys into the custom install root first:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-Dockerfile hljs" data-lang="Dockerfile">RUN rpmkeys --import /etc/pki/rpm-gpg/RPM-GPG-KEY-* --root "${NEWROOT}"
+RUN dnf install -y "--installroot=${NEWROOT}" bash</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For every repository defined in your set of repo files, make sure to add the corresponding sources repo (or make sure to enable them, if they&#8217;re already present). Otherwise, the lockfile generator will not include any SRPMs in your lockfile, Hermeto won&#8217;t download any SRPMs, and the source container for your build will be incomplete.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Run the following command to resolve your <code>rpms.in.yaml</code> file and produce a <code>rpms.lock.yaml</code> file.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ BASE_IMAGE=quay.io/fedora/fedora:rawhide
+$ rpm-lockfile-prototype --image $BASE_IMAGE rpms.in.yaml <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The produced <code>rpms.lock.yaml</code> file will include only your requested dependency plus its transitive dependencies, minus any rpms that are already installed in the provided base image.
+<div class="paragraph">
+<p>Example of generated lockfile:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">lockfileVersion: 1
+lockfileVendor: fedora
+arches:
+- arch: aarch64
+  packages:
+    - ...
+  module_metadata: []
+- arch: x86_64
+  packages:
+    - ...
+  module_metadata: []</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The list of <code>arches.packages</code> is omitted for brevity.
+</td>
+</tr>
+</table>
+</div></td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Add/Update the prefetch-input param in the PipelineRun YAML so that the prefetch-task for RPMs is enabled. Update the path if the RPM files are not in the default directory.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
+  params:
+    ...
+    - name: prefetch-input
+      value: '{"type": "rpm", "path": "."}' <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>You can specify additional DNF repository configuration options (see <code>dnf.conf</code> man page) that will be set for a particular repository in the generated <code>hermeto.repo</code> files</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "type": "rpm",
+  "path": ".",
+  "options": {
+    "dnf": {                            // These need to be set **per-repository**
+      "my-repo-id": {                   // Repository ID from the lockfile
+        "gpgcheck": "0",                // Disable GPG signature checking
+        "enabled": "1",                 // Enable the repository
+        "priority": "10",               // Set repository priority
+        "sslverify": "false"            // Disable TLS verification for this repo
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Konflux also supports prefetching RPM content which requires a Red Hat subscription. For more information see <a href="../activation-keys-subscription/#hermetic-network-isolated-builds" class="xref page">Using Red Hat activation keys to access subscription content</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="rpm-walkthrough"><a class="anchor" href="#rpm-walkthrough"></a><a id="rpm-walkthrough"></a><code>rpm</code> walkthrough</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Refer to the <a href="https://hermetoproject.github.io/hermeto/rpm#example">rpm hermetic build walkthrough</a> for more detail on configuration and usage.</p>
+</div>
+<div class="paragraph">
+<p>Note that while there are many similarities between running <code>hermeto</code> as a command-line tool, and as part of a pipeline (i.e. in Konflux), the most important <strong>difference</strong> is:</p>
+</div>
+<div class="paragraph">
+<p><strong>Always</strong> use the JSON-formatted input when running as part of a pipeline, and give special attention to the extra options allowed by JSON input.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-prefetch-builds-for-generic-fetcher"><a class="anchor" href="#enabling-prefetch-builds-for-generic-fetcher"></a><a id="generic"></a>Enabling prefetch builds for <code>generic fetcher</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you need to prefetch arbitrary files for your build, Hermeto supports <code>generic fetcher</code> for that purpose. It uses a custom lockfile named <code>artifacts.lock.yaml</code> to achieve this. This file needs to be either commited in the source repository, or explicitly specified as an absolute path. The latter is useful in case you for some reason need the lockfile to be dynamic and committing it to the repository would be problematic. For more information on supported types of artifacts, see the <a href="https://hermetoproject.github.io/hermeto/generic">Hermeto documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>To prefetch dependencies for a component build, complete the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create an <code>artifacts.lock.yaml</code> file in your git repository, with a list of files to prefetch, their checksums, and optionally their filenames. See the <a href="https://hermetoproject.github.io/hermeto/generic">Hermeto documentation</a> for complete overview of the lockfile format.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+metadata: <i class="conum" data-value="1"></i><b>(1)</b>
+  version: "1.0"
+artifacts:
+  - download_url: "https://github.com/jeremylong/DependencyCheck/releases/download/v11.1.0/dependency-check-11.1.0-release.zip"
+    checksum: "sha256:c5b5b9e592682b700e17c28f489fe50644ef54370edeb2c53d18b70824de1e22" <i class="conum" data-value="2"></i><b>(2)</b>
+    filename: "dependency-check.zip" <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>metadata</code> section is required and needs to specify lockfile version</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>checksum</code> is expected to be specified as <code>algorith:hash</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>If no <code>filename</code> is specified, it will be derived from the URL.</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="using-your-prefetched-generic-assets"><a class="anchor" href="#using-your-prefetched-generic-assets"></a>Using your prefetched generic assets</h3>
+<div class="paragraph">
+<p>You can find your generic prefetched assets in <code>/cachi2/output/deps/generic/&lt;filename&gt;</code> and access them in your <code>Containerfile</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-Dockerfile hljs" data-lang="Dockerfile">RUN cp /cachi2/output/deps/generic/&lt;filename&gt; &lt;location&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generic-fetcher-walkthrough"><a class="anchor" href="#generic-fetcher-walkthrough"></a><a id="generic-walkthrough"></a><code>generic fetcher</code> walkthrough</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Refer to the <a href="https://hermetoproject.github.io/hermeto/generic/#example">generic fetcher hermetic build walkthrough</a> for more detail on configuration and usage.</p>
+</div>
+<div class="paragraph">
+<p>Note that while there are many similarities between running <code>hermeto</code> as a command-line tool, and as part of a pipeline (i.e. in Konflux), the most important <strong>difference</strong> is:</p>
+</div>
+<div class="paragraph">
+<p><strong>Always</strong> use the JSON-formatted input when running as part of a pipeline, and give special attention to the extra options allowed by JSON input.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating-the-netrc-secret"><a class="anchor" href="#creating-the-netrc-secret"></a><a id="netrc"></a>Creating the netrc secret</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>prefetch-dependencies</code> task supports <a href="https://everything.curl.dev/usingcurl/netrc.html">.netrc</a> files for authentication.
+For example, it is useful for:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#custom-index-servers">pip packages from private index servers</a></p>
+</li>
+<li>
+<p><a href="#go-private">Go modules from private repos</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To create a netrc Secret for use in your pipelines:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create the <code>.netrc</code> file locally. See the <a href="https://everything.curl.dev/usingcurl/netrc.html">.netrc</a> docs for more details on the file format.</p>
+</li>
+<li>
+<p>Create a key/value secret (see <a href="../secrets/" class="xref page">creating secrets for your builds</a>).
+Set <code>.netrc</code> as the key. Upload the content of your <code>.netrc</code> file as the value.</p>
+</li>
+<li>
+<p>In your <code>.tekton/</code> PipelineRun files, add the newly created secret to the <code>.spec.workspaces</code> section:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spec:
+  # ...
+  workspaces:
+    # ...
+    - name: netrc
+      secret:
+        secretName: my-netrc  # the name you assigned to the secret in step 2</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the <code>.spec.pipelineSpec.tasks</code> section, find the entry with <code>name: prefetch-dependencies</code>.
+Add the <code>netrc</code> workspace to the list of workspaces (if not present):</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    tasks:
+      # ...
+      - name: prefetch-dependencies
+        # ...
+        workspaces:
+          # ...
+          - name: netrc
+            workspace: netrc</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../caching-proxy/">Enabling caching proxy</a></span>
+  <span class="next"><a href="../using-trusted-artifacts/">Using trusted artifacts</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer" style="text-align: center;">
+   <a href="https://github.com/konflux-ci/docs" target="_blank">Source on GitHub</a>
+   | <a href="https://github.com/konflux-ci/community?tab=readme-ov-file#welcome-to-the-konflux-community" target="_blank">Join the community</a>
+   | <a href="https://github.com/konflux-ci/.github/blob/main/SECURITY.md" target="_blank">Report a security issue</a>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/lunr.js"></script>
+<script src="../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../.." data-snippet-length="100" data-stylesheet="../../_/css/search.css"></script>
+<script async src="../../search-index.js"></script>
+  </body>
+</html>
